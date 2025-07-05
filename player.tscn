@@ -1,0 +1,195 @@
+[gd_scene load_steps=3 format=3 uid="uid://b8sl2v33ac0o1"]
+
+[sub_resource type="GDScript" id="GDScript_sh265"]
+script/source = "extends CharacterBody3D
+
+
+# Базовые параметры передвижения
+@export var mouse_sensitivity: float = 0.2  # Чувствительность мыши
+@export var base_speed: float = 7.0  # Базовая скорость передвижения
+@export var stealth_speed: float = 3.0  # Скорость в режиме скрытности
+@export var sprint_speed: float = 13.0  # Скорость при беге
+@export var jump_velocity: float = 15.0  # Высота прыжка
+@export var base_gravity: float = 1.8 * ProjectSettings.get_setting(\"physics/3d/default_gravity\")  # Гравитация
+@export var acceleration: float = 50.0  # Насколько быстро ускоряется персонаж
+@export var deceleration: float = 70.0  # Насколько быстро замедляется персонаж
+@export var blink_distance: float = 5.0  # Расстояние рывка
+@export var blink_duration: float = 0.1  # Длительность рывка
+@export var interact_distance := 2.0  # Дистанция взаимодействия
+
+
+
+
+
+var blink_timer: float = -1.0  # Таймер для рывка, начинается с -1, чтобы рывок не был активирован сразу
+var current_gravity: float
+var current_speed: float  # Текущая скорость передвижения
+var is_sprinting: bool = false
+
+var is_stealth: bool = false
+var character_mesh: Node  # Переменная для хранения объекта с мешем
+var camera_pivot  # Узел CameraPivot
+var camera  # Узел Camera3D
+var rotation_x = 0.0  # Угол наклона камеры вверх-вниз
+
+
+
+var blink_velocity = Vector3.ZERO
+
+func _ready():
+	# Создаем персонажа с мешем
+	#character_mesh = preload(\"res://scripts/player/CharacterMesh.gd\").new()
+	#add_child(character_mesh)  # Добавляем персонажа в сцену
+	current_speed = base_speed  # по олчанию стандартная скорость
+	current_gravity = base_gravity  # Изначально гравитация стандартная
+	camera_pivot = %CameraMount  # Получаем узел CameraPivot
+	camera = %Camera3D # Получаем узел Camera3D
+	#Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)  # Скрываем и блокируем курсор
+	add_to_group(\"physics_bodies\")
+func _input(event):
+	# Управление мышью
+	if event is InputEventMouseMotion:
+		rotation_x -= event.relative.y * mouse_sensitivity
+		rotation_x = clamp(rotation_x, -75, 75)  # Ограничиваем наклон камеры
+		camera_pivot.rotation_degrees.x = rotation_x
+	
+		rotation_degrees.y -= event.relative.x * mouse_sensitivity  # Поворот персонажа
+	
+	#if event is InputEventKey and Input.is_action_pressed(\"spawn\"):
+		#spawn_poop()
+	#if event is InputEventKey and Input.is_action_pressed(\"LKM\"):
+		#attack()	
+	#if event.is_action_pressed(\"interact\"):
+		#try_pickup_item()
+
+		
+	
+	# Включаем блинк при нажатии клавиши
+	if Input.is_action_just_pressed(\"blink\") and blink_timer < 0.0:
+		perform_blink()
+		
+func _on_body_entered(body):
+	if body is RigidBody3D:
+		var push_dir = (body.global_position - global_position).normalized()
+		body.apply_impulse(push_dir * 5.0)  # Добавляем толчок
+func _physics_process(delta):
+	_apply_gravity(delta)
+	_handle_movement(delta)
+	print(velocity)
+	if blink_timer >= 0.0:
+		blink_timer += delta
+		if blink_timer < blink_duration:
+			velocity = blink_velocity  # Устанавливаем скорость
+			
+		else:
+			#velocity = Vector3.ZERO  # Останавливаем персонажа после блинка
+			blink_timer = -1.0
+	move_and_slide()
+func _apply_gravity(delta):
+	# Применяем гравитацию, если не стоим на земле
+	if not is_on_floor():
+		velocity.y -= current_gravity * delta
+
+func _handle_movement(delta):
+	# Получаем входные данные (направление движения)
+	var input_dir = Input.get_vector(\"ui_left\", \"ui_right\", \"ui_up\", \"ui_down\")
+	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+
+	# Проверяем нажатие кнопок и изменяем скорость
+	if Input.is_action_pressed(\"sprint\") and is_on_floor():  # Ctrl - ускорение
+		is_sprinting = true
+		is_stealth = false
+	elif Input.is_action_pressed(\"stealth\") and is_on_floor():  # Shift - скрытность
+		is_stealth = true
+		is_sprinting = false
+	else:
+		is_sprinting = false
+		is_stealth = false
+
+	# Устанавливаем скорость в зависимости от режима
+	if is_sprinting:
+		current_speed = sprint_speed
+	elif is_stealth:
+		current_speed = stealth_speed
+	else:
+		current_speed = base_speed
+
+	# Применяем ускорение / замедление для плавного движения
+	if direction:
+		velocity.x = move_toward(velocity.x, direction.x * current_speed, acceleration * delta)
+		velocity.z = move_toward(velocity.z, direction.z * current_speed, acceleration * delta)
+	else:
+		velocity.x = move_toward(velocity.x, 0, deceleration * delta)
+		velocity.z = move_toward(velocity.z, 0, deceleration * delta)
+	
+	# Прыжок на пробел
+	if Input.is_action_just_pressed(\"jump\"):
+		velocity.y = jump_velocity
+	
+# Функция для быстрого блинка
+func perform_blink():
+	blink_timer = 0.0
+	var blink_direction = -camera.global_transform.basis.z.normalized()
+	blink_velocity = blink_direction * (blink_distance / blink_duration)
+	blink_velocity.y = velocity.y  # Сохраняем вертикальную скорость
+func set_gravity(new_gravity: float):
+	current_gravity = new_gravity  # Меняем гравитацию в зависимости от обуви или других факторов
+
+
+# Вставляем логику рывка в _process или _physics_process
+
+
+
+func on_item_equipped(item):
+	if item.name == \"heavy_boots\":
+		set_gravity(12.0)  # Увеличиваем гравитацию для тяжелой обуви
+	elif item.name == \"light_boots\":
+		set_gravity(6.0)  # Уменьшаем гравитацию для легкой обуви 
+
+
+#func try_pickup_item():
+	#var space_state = get_world_3d().direct_space_state
+	#var origin = global_transform.origin
+	#var direction = -global_transform.basis.z  # Перед игроком
+	#var query = PhysicsRayQueryParameters3D.create(origin, origin + direction * interact_distance)
+	#var result = space_state.intersect_ray(query)
+#
+	#if result and result.collider is Item:
+		#result.collider.on_picked_up(self)
+		#
+	## Дополнительно можно добавить эффект блинка, например, с анимацией или эффектами
+
+	
+	
+	
+
+func attack():
+	var area = $AttackArea  # Берём Area3D
+	for body in area.get_overlapping_bodies():  # Проверяем все объекты в зоне удара
+		if body is RigidBody3D:
+			var force = 10
+			var direction = -global_transform.basis.z  # Вперёд
+			body.apply_impulse(direction * force)
+
+			print(\"Толкаем\", body.name)
+"
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0uu2i"]
+
+[node name="Player" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.33022, 0)
+
+[node name="Visual" type="Node3D" parent="."]
+
+[node name="Model" type="Node3D" parent="."]
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="Model"]
+floor_max_angle = 1.29329
+script = SubResource("GDScript_sh265")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Model/CharacterBody3D"]
+shape = SubResource("CapsuleShape3D_0uu2i")
+
+[node name="CameraMount" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="CameraMount"]
