@@ -1,8 +1,9 @@
-[gd_scene load_steps=158 format=4 uid="uid://cs3guckxlcjyi"]
+[gd_scene load_steps=165 format=4 uid="uid://cs3guckxlcjyi"]
 
 [ext_resource type="Script" uid="uid://dclhi3hbhkos5" path="res://drone_engine.gd" id="1_e2o6t"]
 [ext_resource type="AudioStream" uid="uid://bt8wqhs8owrj7" path="res://Drone Noise Test - DJI Avata vs DJI FPV vs DJI Mavic 3 vs DJI Air 2S.mp3" id="2_fc0e3"]
 [ext_resource type="Script" uid="uid://bnl211kgeotsn" path="res://label_interact.gd" id="2_feb5d"]
+[ext_resource type="Shader" uid="uid://lf72luioho2j" path="res://vhscamera3.gdshader" id="4_fc0e3"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_e2o6t"]
 noise_type = 3
@@ -2181,6 +2182,42 @@ size = Vector3(0.3, 0.3, 0.3)
 [sub_resource type="BoxMesh" id="BoxMesh_fc0e3"]
 size = Vector3(0.3, 0.3, 0.3)
 
+[sub_resource type="SystemFont" id="SystemFont_fc0e3"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_7jktm"]
+font = SubResource("SystemFont_fc0e3")
+font_size = 20
+font_color = Color(0.768763, 0.596305, 0.234444, 1)
+
+[sub_resource type="Gradient" id="Gradient_fc0e3"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_7jktm"]
+noise_type = 0
+seed = 4
+frequency = 0.0004
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ryrav"]
+color_ramp = SubResource("Gradient_fc0e3")
+noise = SubResource("FastNoiseLite_7jktm")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_eow3j"]
+shader = ExtResource("4_fc0e3")
+shader_parameter/vhs_resolution = Vector2(320, 240)
+shader_parameter/samples = 2
+shader_parameter/crease_noise = 1.0
+shader_parameter/crease_opacity = 0.5
+shader_parameter/filter_intensity = 0.1
+shader_parameter/tape_crease_smear = 0.2
+shader_parameter/tape_crease_intensity = 0.2
+shader_parameter/tape_crease_jitter = 0.1
+shader_parameter/tape_crease_speed = 0.5
+shader_parameter/tape_crease_discoloration = 1.0
+shader_parameter/bottom_border_thickness = 6.0
+shader_parameter/bottom_border_jitter = 6.0
+shader_parameter/noise_intensity = 0.1
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_ryrav")
+
 [node name="game" type="Node3D"]
 
 [node name="Drone" type="CharacterBody3D" parent="."]
@@ -2471,6 +2508,7 @@ skeleton = NodePath("")
 
 [node name="Camera3D" type="Camera3D" parent="Drone/CameraMount"]
 transform = Transform3D(1, 0, 0, 0, 0.981627, 0.190809, 0, -0.190809, 0.981627, 0, 0.458997, 0.930722)
+current = true
 
 [node name="Camera3D2" type="Camera3D" parent="Drone/CameraMount"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.192003, 0.0256689)
@@ -2558,6 +2596,20 @@ offset_right = 693.0
 offset_bottom = 534.0
 text = "Grabbed Nothing"
 
+[node name="Current_camera" type="Label" parent="."]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -182.0
+offset_top = -48.0
+offset_bottom = 48.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "Camera1"
+label_settings = SubResource("LabelSettings_7jktm")
+
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 offset_left = 15.0
 offset_top = 823.0
@@ -2584,5 +2636,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.40522, 3.48563, 0)
 operation = 2
 size = Vector3(1, 1, 0.2)
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-0.147177, -0.566299, 0.810953, -0.0406055, 0.822649, 0.567097, -0.988276, 0.0505343, -0.14407, 9.99173, 16.9594, 6.07598)
+[node name="Camera3" type="Camera3D" parent="."]
+transform = Transform3D(-0.253216, -0.539726, 0.802856, -0.162344, 0.841841, 0.514732, -0.953691, 0, -0.300789, 9.21201, 15.1995, 2.95471)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_eow3j")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

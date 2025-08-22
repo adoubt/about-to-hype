@@ -10,16 +10,18 @@ extends CharacterBody3D
 
 @onready var camera1 := $CameraMount/Camera3D
 @onready var camera2 := $CameraMount/Camera3D2
-@onready var camera3 := $"../Camera3D"
+@onready var camera3 := $"../Camera3"
+@onready var vhs_shader:= $"../ColorRect"
 @onready var label_hint := $"../drop/Label_Interact"
 @onready var label_status := $"../label2"
+@onready var current_camera_status := $"../Current_camera"
 @onready var grab_area := $Area3D
 @onready var blade1 := $Model/Blade1pivot
 @onready var blade2 := $Model/Blade2pivot
 @onready var blade3 := $Model/Blade3pivot
 @onready var blade4 := $Model/Blade4pivot
 @onready var blade_sound := $BladeSound
-
+var current_camera_index := 1  # 1 = camera1, 2 = camera2, 3 = camera3
 var joint: PinJoint3D = null
 var current_tilt := Vector3.ZERO
 var grabbed_box: RigidBody3D = null
@@ -122,15 +124,26 @@ func _physics_process(delta):
 
 func _process(delta):
 	if Input.is_action_just_pressed("drone_camera_switch"):
-		if camera1.current:
+		if current_camera_index == 1:
 			camera2.make_current()
+			current_camera_index = 2
+			current_camera_status.text = 'Camera2'
 		else:
 			camera1.make_current()
+			current_camera_index = 1
+			current_camera_status.text = 'Camera1'
+
 	if Input.is_action_just_pressed("camera3"):
-		if camera3.current:
+		if current_camera_index == 3:
 			camera1.make_current()
+			current_camera_index = 1
+			current_camera_status.text = 'Camera1'
+			vhs_shader.visible = false
 		else:
 			camera3.make_current()
+			current_camera_index = 3
+			current_camera_status.text = 'Camera3'
+			vhs_shader.visible = true
 	if mouse_joystick_active:
 		rotate_object_local(Vector3.UP, -deg_to_rad(mouse_delta.x * mouse_sensitivity))
 		mouse_delta = Vector2.ZERO
