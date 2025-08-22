@@ -1,6 +1,7 @@
-[gd_scene load_steps=157 format=4 uid="uid://cs3guckxlcjyi"]
+[gd_scene load_steps=158 format=4 uid="uid://cs3guckxlcjyi"]
 
 [ext_resource type="Script" uid="uid://dclhi3hbhkos5" path="res://drone_engine.gd" id="1_e2o6t"]
+[ext_resource type="AudioStream" uid="uid://bt8wqhs8owrj7" path="res://Drone Noise Test - DJI Avata vs DJI FPV vs DJI Mavic 3 vs DJI Air 2S.mp3" id="2_fc0e3"]
 [ext_resource type="Script" uid="uid://bnl211kgeotsn" path="res://label_interact.gd" id="2_feb5d"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_e2o6t"]
@@ -2487,6 +2488,13 @@ collision_mask = 4
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.189192, 0)
 shape = SubResource("SphereShape3D_e2o6t")
 
+[node name="BladeSound" type="AudioStreamPlayer3D" parent="Drone"]
+stream = ExtResource("2_fc0e3")
+attenuation_model = 1
+volume_db = -35.789
+playback_type = 1
+emission_angle_enabled = true
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_7jktm")
 
@@ -2575,3 +2583,6 @@ size = Vector3(10, 15, 0.2)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.40522, 3.48563, 0)
 operation = 2
 size = Vector3(1, 1, 0.2)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.147177, -0.566299, 0.810953, -0.0406055, 0.822649, 0.567097, -0.988276, 0.0505343, -0.14407, 9.99173, 16.9594, 6.07598)
