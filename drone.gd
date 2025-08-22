@@ -2,7 +2,7 @@ extends CharacterBody3D
 
 @export var move_speed: float = 2.0
 @export var ascend_speed: float = 1.0
-@export var rotation_speed: float = 100.0 # градусов в секунду
+@export var rotation_speed: float = 180.0 # градусов в секунду
 @export var tilt_amount: float = 20.0     # Макс угол наклона
 @export var tilt_smoothness: float = 5.0  # Скорость интерполяции наклона
 
@@ -22,6 +22,7 @@ var joint: PinJoint3D = null
 var grabbed_box: RigidBody3D = null
 var is_grabbing := false
 var grab_offset = Vector3(0, -0.5, 0) # положение коробки относительно дрона
+
 
 #@onready var blade1 = $Model/blade1
 #@onready var blade2 = $Model/blade2
