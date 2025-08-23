@@ -1,9 +1,20 @@
-[gd_scene load_steps=165 format=4 uid="uid://cs3guckxlcjyi"]
+[gd_scene load_steps=176 format=4 uid="uid://cs3guckxlcjyi"]
 
+[ext_resource type="Script" uid="uid://ctrfp37708not" path="res://game.gd" id="1_80cx4"]
 [ext_resource type="Script" uid="uid://dclhi3hbhkos5" path="res://drone_engine.gd" id="1_e2o6t"]
 [ext_resource type="AudioStream" uid="uid://bt8wqhs8owrj7" path="res://Drone Noise Test - DJI Avata vs DJI FPV vs DJI Mavic 3 vs DJI Air 2S.mp3" id="2_fc0e3"]
 [ext_resource type="Script" uid="uid://bnl211kgeotsn" path="res://label_interact.gd" id="2_feb5d"]
 [ext_resource type="Shader" uid="uid://lf72luioho2j" path="res://vhscamera3.gdshader" id="4_fc0e3"]
+[ext_resource type="PackedScene" uid="uid://cgopdhiu475k1" path="res://city.tscn" id="5_lc2xo"]
+[ext_resource type="PackedScene" uid="uid://duwxjydyux16" path="res://addons/kaykit_city_builder_bits/Assets/gltf/building_A.gltf" id="6_215e1"]
+[ext_resource type="PackedScene" uid="uid://b2jrmspw5hpr6" path="res://addons/kaykit_city_builder_bits/Assets/gltf/building_B.gltf" id="7_7sc4i"]
+[ext_resource type="PackedScene" uid="uid://bcq3cqbwjw3xl" path="res://addons/kaykit_city_builder_bits/Assets/gltf/building_C.gltf" id="8_80cx4"]
+[ext_resource type="PackedScene" uid="uid://j1tp8jo44bmh" path="res://addons/kaykit_city_builder_bits/Assets/gltf/building_D.gltf" id="9_e8heu"]
+[ext_resource type="PackedScene" uid="uid://cac4rgwayljbc" path="res://addons/kaykit_city_builder_bits/Assets/gltf/building_E.gltf" id="10_rvswv"]
+[ext_resource type="PackedScene" uid="uid://30f5pbdigma0" path="res://addons/kaykit_city_builder_bits/Assets/gltf/building_F.gltf" id="11_boyg6"]
+[ext_resource type="PackedScene" uid="uid://dw7mcha5k0bi7" path="res://addons/kaykit_city_builder_bits/Assets/gltf/building_G.gltf" id="12_e36ub"]
+[ext_resource type="PackedScene" uid="uid://bb0yd1x23ifjr" path="res://addons/kaykit_city_builder_bits/Assets/gltf/building_H.gltf" id="13_hb5m1"]
+[ext_resource type="PackedScene" uid="uid://2n8tbm3osyqw" path="res://esc_menu.tscn" id="15_e8heu"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_e2o6t"]
 noise_type = 3
@@ -2159,7 +2170,7 @@ fog_enabled = true
 fog_sky_affect = 0.02
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_e2o6t"]
-size = Vector3(50, 0.335236, 50)
+size = Vector3(500, 0.335, 500)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e2o6t"]
 
@@ -2174,7 +2185,7 @@ albedo_color = Color(0.284793, 0.517547, 0.506249, 1)
 albedo_texture = SubResource("NoiseTexture2D_e2o6t")
 
 [sub_resource type="QuadMesh" id="QuadMesh_feb5d"]
-size = Vector2(50, 50)
+size = Vector2(500, 500)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_feb5d"]
 size = Vector3(0.3, 0.3, 0.3)
@@ -2219,6 +2230,9 @@ shader_parameter/noise_intensity = 0.1
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_ryrav")
 
 [node name="game" type="Node3D"]
+script = ExtResource("1_80cx4")
+
+[node name="Escape" parent="." instance=ExtResource("15_e8heu")]
 
 [node name="Drone" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.317434, 2.50035)
@@ -2529,7 +2543,7 @@ shape = SubResource("SphereShape3D_e2o6t")
 [node name="BladeSound" type="AudioStreamPlayer3D" parent="Drone"]
 stream = ExtResource("2_fc0e3")
 attenuation_model = 1
-volume_db = -35.789
+volume_db = -54.419
 playback_type = 1
 emission_angle_enabled = true
 
@@ -2647,3 +2661,29 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="City" parent="." instance=ExtResource("5_lc2xo")]
+
+[node name="building_A2" parent="City" instance=ExtResource("6_215e1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.81434, 2.62031, -15.7312)
+
+[node name="building_B2" parent="City" instance=ExtResource("7_7sc4i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.0158, 1.24676, -17.0284)
+
+[node name="building_C2" parent="City" instance=ExtResource("8_80cx4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.6144, 1.24676, -16.6629)
+
+[node name="building_D2" parent="City" instance=ExtResource("9_e8heu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.3029, 1.24676, -16.4275)
+
+[node name="building_E2" parent="City" instance=ExtResource("10_rvswv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.2081, 1.24676, -16.0299)
+
+[node name="building_F2" parent="City" instance=ExtResource("11_boyg6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.5769, 1.24676, -15.9932)
+
+[node name="building_G2" parent="City" instance=ExtResource("12_e36ub")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 28.4235, 0, -5)
+
+[node name="building_H2" parent="City" instance=ExtResource("13_hb5m1")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 39.4931, 0, -5)
