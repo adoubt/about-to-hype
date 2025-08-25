@@ -2620,7 +2620,6 @@ offset_bottom = 534.0
 text = "Grabbed Nothing"
 
 [node name="Current_camera" type="Label" parent="."]
-visible = false
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
@@ -2698,9 +2697,12 @@ shape = SubResource("SphereShape3D_boyg6")
 [node name="PromptLabel" type="Label3D" parent="Laptop"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.17174, 0.0216842)
 pixel_size = 0.004
+billboard = 1
 text = "Press [E]"
+script = ExtResource("2_feb5d")
 
 [node name="Label" type="Label" parent="Laptop/PromptLabel"]
+visible = false
 offset_right = 40.0
 offset_bottom = 23.0
 

@@ -142,7 +142,7 @@ func _start_wait(amount: float, seller: Dictionary):
 
 func _process(delta: float) -> void:
 	if current_deal and wait_panel.visible:
-		var game = get_tree().current_scene
+		
 		var now = Time.get_ticks_msec()
 		var left = int(ceil((current_deal["wait_ms"] - (now - current_deal["start_time"])) / 1000.0))
 		if left > 0 and current_deal["status"] == "pending":
