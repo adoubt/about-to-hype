@@ -8,10 +8,11 @@ extends CharacterBody3D
 @export var tilt_smoothness := 5.0
 @export var vertical_smoothness := 5.0
 
+@onready var ui_manager = $"../UIManager"
+
 @onready var camera1 := $CameraMount/Camera3D
 @onready var camera2 := $CameraMount/Camera3D2
-@onready var camera3 := $"../Camera3"
-@onready var vhs_shader:= $"../ColorRect"
+
 @onready var label_hint := $"../drop/Label_Interact"
 @onready var label_status := $"../label2"
 @onready var current_camera_status := $"../Current_camera"
@@ -21,41 +22,63 @@ extends CharacterBody3D
 @onready var blade3 := $Model/Blade3pivot
 @onready var blade4 := $Model/Blade4pivot
 @onready var blade_sound := $BladeSound
-var current_camera_index := 1  # 1 = camera1, 2 = camera2, 3 = camera3
+
 var joint: PinJoint3D = null
+var current_camera_index: int = 1
 var current_tilt := Vector3.ZERO
 var grabbed_box: RigidBody3D = null
 var is_grabbing := false
 var grab_offset := Vector3(0, -0.5, 0)
-var engine_enabled := true
+var engine_enabled := false
 var mouse_joystick_active := false
 var mouse_delta := Vector2.ZERO
 var mouse_sensitivity := 0.2
 var pitch := 0.0
-var pitch_limit := 45.0
 var default_pitch := 0.0
 var blade_speed := 0.0
+var moving := false
+var input_enabled: bool = false
 var target_volume_db := -80.0  # тихо, когда мотор выключен
 var max_volume_db := 0.0       # громко, когда мотор включен
 var fade_speed := 2.0          # скорость изменения громкости
 var min_volume_db := -80.0
 var max_pitch := 1.5
 var min_pitch := 0.3
-var moving := false  # true, если есть вход от WASD или вверх/вниз
 func _ready():
 	grab_area.body_entered.connect(_on_grab_area_body_entered)
 	grab_area.body_exited.connect(_on_grab_area_body_exited)
 	label_hint.visible = false
 	label_status.visible = false
+	# Регистрируемся в менеджере
+	
 
+
+func set_input_enabled(state: bool) -> void:
+	input_enabled = state
+	
+func toggle_camera() -> void:
+	if current_camera_index == 1:
+		camera2.make_current()
+		current_camera_index = 2
+	else:
+		camera1.make_current()
+		current_camera_index = 1
+		
+func get_active_camera() -> Camera3D:
+	return camera1 if current_camera_index == 1 else camera2
+		
 func _input(event):
+	if not input_enabled:
+		return
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_MIDDLE and event.pressed:
 		mouse_joystick_active = not mouse_joystick_active
 		if mouse_joystick_active:
 			pitch = $Model.rotation_degrees.x
 	elif event is InputEventMouseMotion and mouse_joystick_active:
 		mouse_delta = event.relative
-
+	
+	
+	
 func _on_grab_area_body_entered(body):
 	if body.is_in_group("grabbable") and not is_grabbing:
 		grabbed_box = body
@@ -67,9 +90,12 @@ func _on_grab_area_body_exited(body):
 		label_hint.visible = false
 
 func _physics_process(delta):
+	if not input_enabled:
+		return
+
+	moving = false
 	var input_dir := Vector3.ZERO
-	moving = false  # сбрасываем флаг
-	
+
 	if Input.is_action_pressed("drone_forward"):
 		input_dir -= transform.basis.z
 		engine_enabled = true
@@ -104,9 +130,11 @@ func _physics_process(delta):
 	elif not engine_enabled:
 		target_y = -9.8
 	velocity.y = lerp(velocity.y, target_y, vertical_smoothness * delta)
+	#if ui_manager.ui_open:
+		#return  # блокируем движение и физику дрона
 	move_and_slide()
 
-	var yaw_input := Input.get_action_strength("drone_turn_right") - Input.get_action_strength("drone_turn_left")
+	var yaw_input = Input.get_action_strength("drone_turn_right") - Input.get_action_strength("drone_turn_left")
 	if yaw_input != 0.0:
 		rotate_object_local(Vector3.UP, deg_to_rad(rotation_speed * yaw_input * delta))
 
@@ -122,28 +150,8 @@ func _physics_process(delta):
 		var direction = (global_transform.origin + grab_offset) - grabbed_box.global_transform.origin
 		grabbed_box.linear_velocity = direction * 10.0
 
-func _process(delta):
-	if Input.is_action_just_pressed("drone_camera_switch"):
-		if current_camera_index == 1:
-			camera2.make_current()
-			current_camera_index = 2
-			current_camera_status.text = 'Camera2'
-		else:
-			camera1.make_current()
-			current_camera_index = 1
-			current_camera_status.text = 'Camera1'
 
-	if Input.is_action_just_pressed("camera3"):
-		if current_camera_index == 3:
-			camera1.make_current()
-			current_camera_index = 1
-			current_camera_status.text = 'Camera1'
-			vhs_shader.visible = false
-		else:
-			camera3.make_current()
-			current_camera_index = 3
-			current_camera_status.text = 'Camera3'
-			vhs_shader.visible = true
+	# Вращение мышью
 	if mouse_joystick_active:
 		rotate_object_local(Vector3.UP, -deg_to_rad(mouse_delta.x * mouse_sensitivity))
 		mouse_delta = Vector2.ZERO
@@ -155,7 +163,8 @@ func _process(delta):
 	if Input.is_action_pressed("rotate_camera_down"):
 		_rotate_camera(1)
 
-	if Input.is_action_just_pressed("grab") and grabbed_box:
+	# Захват предметов
+	if Input.is_action_just_pressed("Interact") and grabbed_box:
 		is_grabbing = not is_grabbing
 		if is_grabbing:
 			label_hint.visible = false
@@ -176,6 +185,7 @@ func _process(delta):
 	if Input.is_action_just_pressed("drone_engine_toggle"):
 		engine_enabled = not engine_enabled
 
+	# Лопасти и звук
 	var target_blade_speed = 13000.0 if engine_enabled else 0.0
 	blade_speed = lerp(blade_speed, target_blade_speed, delta * 5.0)
 	var rotation_amount = deg_to_rad(blade_speed * delta)
@@ -203,6 +213,7 @@ func _process(delta):
 	# останавливаем звук, когда двигатель выключен и громкость почти минимальна
 	if not engine_enabled and blade_sound.volume_db <= min_volume_db + 1.0 and blade_sound.playing:
 		blade_sound.stop()
+
 func _rotate_camera(direction: int):
 	var new_rot = camera2.rotation.x + deg_to_rad(direction * rotation_speed * get_process_delta_time())
 	new_rot = clamp(new_rot, deg_to_rad(-90), deg_to_rad(45))

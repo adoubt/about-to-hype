@@ -1,4 +1,5 @@
 extends Control
+class_name EscapeMenu   # чтобы UIManager мог зарегистрировать
 
 @onready var vbox = $VBoxContainer
 
@@ -13,13 +14,21 @@ var corner_radius: float = 14.0
 var hover_scale: Vector2 = Vector2(1.15, 1.15)
 var pressed_scale: Vector2 = Vector2(0.95, 0.95)
 var anim_time: float = 0.32
-
+@onready var ui_manager = $".."
 func _ready():
-	visible = false
+	visible = false  # панели всегда стартуют скрытыми
 	for btn in vbox.get_children():
 		if btn is Button:
 			_apply_style(btn)
 			_connect_animation(btn)
+
+	# Подключаем кнопки к действиям
+	$VBoxContainer/Continue.pressed.connect(
+		func(): ui_manager.close_escape_menu()
+	)
+	#$VBoxContainer/Restart.pressed.connect(_on_restart_pressed)
+	#$VBoxContainer/Menu.pressed.connect(_on_menu_pressed)
+	#$VBoxContainer/Exit.pressed.connect(_on_exit_pressed)
 
 func _apply_style(btn: Button) -> void:
 	var style_normal = StyleBoxFlat.new()
@@ -48,14 +57,10 @@ func _connect_animation(btn: Button) -> void:
 	btn.button_up.connect(Callable(self, "_tween_scale").bind(btn, hover_scale))
 
 func _tween_scale(btn: Button, target_scale: Vector2) -> void:
-	# В Godot 4.4+ создаем Tween через create_tween()
 	var tween = create_tween()
 	tween.tween_property(btn, "scale", target_scale, anim_time).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 
-# --- Кнопки меню ---
-func _on_continue_pressed() -> void:
-	visible = false
-
+# --- Кнопки ---
 func _on_restart_pressed() -> void:
 	get_tree().change_scene_to_file("res://Game.tscn")
 

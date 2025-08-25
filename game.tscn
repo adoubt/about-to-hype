@@ -1,4 +1,4 @@
-[gd_scene load_steps=176 format=4 uid="uid://cs3guckxlcjyi"]
+[gd_scene load_steps=185 format=4 uid="uid://cs3guckxlcjyi"]
 
 [ext_resource type="Script" uid="uid://ctrfp37708not" path="res://game.gd" id="1_80cx4"]
 [ext_resource type="Script" uid="uid://dclhi3hbhkos5" path="res://drone_engine.gd" id="1_e2o6t"]
@@ -15,6 +15,13 @@
 [ext_resource type="PackedScene" uid="uid://dw7mcha5k0bi7" path="res://addons/kaykit_city_builder_bits/Assets/gltf/building_G.gltf" id="12_e36ub"]
 [ext_resource type="PackedScene" uid="uid://bb0yd1x23ifjr" path="res://addons/kaykit_city_builder_bits/Assets/gltf/building_H.gltf" id="13_hb5m1"]
 [ext_resource type="PackedScene" uid="uid://2n8tbm3osyqw" path="res://esc_menu.tscn" id="15_e8heu"]
+[ext_resource type="PackedScene" uid="uid://l8p1552i1cd4" path="res://laptop.tscn" id="16_e8heu"]
+[ext_resource type="Script" uid="uid://db4o41je6fqbp" path="res://laptop.gd" id="17_rvswv"]
+[ext_resource type="Script" uid="uid://bgnapcb7ii40x" path="res://ui_manager.gd" id="18_e36ub"]
+[ext_resource type="Script" uid="uid://rlqnl5vb5p2b" path="res://player.gd" id="18_rvswv"]
+[ext_resource type="PackedScene" uid="uid://buk8u6pxakrg6" path="res://wallet_usdt.tscn" id="19_boyg6"]
+[ext_resource type="Script" uid="uid://vrc5fp43jlho" path="res://controller_manager.gd" id="21_hb5m1"]
+[ext_resource type="Script" uid="uid://deg13n8ftofyk" path="res://StreetCam.gd" id="22_x5p1p"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_e2o6t"]
 noise_type = 3
@@ -2200,6 +2207,11 @@ font = SubResource("SystemFont_fc0e3")
 font_size = 20
 font_color = Color(0.768763, 0.596305, 0.234444, 1)
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_boyg6"]
+radius = 3.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_boyg6"]
+
 [sub_resource type="Gradient" id="Gradient_fc0e3"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
@@ -2232,9 +2244,7 @@ shader_parameter/noise_texture = SubResource("NoiseTexture2D_ryrav")
 [node name="game" type="Node3D"]
 script = ExtResource("1_80cx4")
 
-[node name="Escape" parent="." instance=ExtResource("15_e8heu")]
-
-[node name="Drone" type="CharacterBody3D" parent="."]
+[node name="Drone" type="CharacterBody3D" parent="." groups=["controllable", "drone"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.317434, 2.50035)
 collision_layer = 2
 collision_mask = 13
@@ -2543,7 +2553,6 @@ shape = SubResource("SphereShape3D_e2o6t")
 [node name="BladeSound" type="AudioStreamPlayer3D" parent="Drone"]
 stream = ExtResource("2_fc0e3")
 attenuation_model = 1
-volume_db = -54.419
 playback_type = 1
 emission_angle_enabled = true
 
@@ -2611,6 +2620,7 @@ offset_bottom = 534.0
 text = "Grabbed Nothing"
 
 [node name="Current_camera" type="Label" parent="."]
+visible = false
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
@@ -2650,18 +2660,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.40522, 3.48563, 0)
 operation = 2
 size = Vector3(1, 1, 0.2)
 
-[node name="Camera3" type="Camera3D" parent="."]
-transform = Transform3D(-0.253216, -0.539726, 0.802856, -0.162344, 0.841841, 0.514732, -0.953691, 0, -0.300789, 9.21201, 15.1995, 2.95471)
-
-[node name="ColorRect" type="ColorRect" parent="."]
-visible = false
-material = SubResource("ShaderMaterial_eow3j")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
 [node name="City" parent="." instance=ExtResource("5_lc2xo")]
 
 [node name="building_A2" parent="City" instance=ExtResource("6_215e1")]
@@ -2687,3 +2685,88 @@ transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 28.4235, 0, -5)
 
 [node name="building_H2" parent="City" instance=ExtResource("13_hb5m1")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 39.4931, 0, -5)
+
+[node name="Laptop" parent="." instance=ExtResource("16_e8heu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.7007, 0.0415716, -8.0014)
+script = ExtResource("17_rvswv")
+
+[node name="Area3D" type="Area3D" parent="Laptop"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Laptop/Area3D"]
+shape = SubResource("SphereShape3D_boyg6")
+
+[node name="PromptLabel" type="Label3D" parent="Laptop"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.17174, 0.0216842)
+pixel_size = 0.004
+text = "Press [E]"
+
+[node name="Label" type="Label" parent="Laptop/PromptLabel"]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Player" type="CharacterBody3D" parent="." groups=["controllable", "player"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.8099, 0, 0)
+script = ExtResource("18_rvswv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1017, 0)
+shape = SubResource("CapsuleShape3D_boyg6")
+
+[node name="Head" type="Node3D" parent="Player"]
+
+[node name="Camera3D" type="Camera3D" parent="Player/Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.87524, 0)
+current = true
+
+[node name="CardBalance" type="Label" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -39.485
+offset_top = -62.755
+offset_right = 0.515015
+offset_bottom = -39.755
+grow_horizontal = 0
+grow_vertical = 0
+text = "$0"
+
+[node name="UIManager" type="Node" parent="."]
+script = ExtResource("18_e36ub")
+
+[node name="Escape" parent="UIManager" instance=ExtResource("15_e8heu")]
+visible = false
+visibility_layer = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Wallet_USDT" parent="UIManager" instance=ExtResource("19_boyg6")]
+visible = false
+mouse_filter = 2
+
+[node name="Shop" type="Control" parent="UIManager"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ControllerManager" type="Node" parent="."]
+script = ExtResource("21_hb5m1")
+
+[node name="StreetCam" type="Node3D" parent="."]
+script = ExtResource("22_x5p1p")
+
+[node name="ColorRect" type="ColorRect" parent="StreetCam"]
+visible = false
+material = SubResource("ShaderMaterial_eow3j")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Camera3" type="Camera3D" parent="StreetCam"]
+transform = Transform3D(-0.253216, -0.539726, 0.802856, -0.162344, 0.841841, 0.514732, -0.953691, -5.15616e-07, -0.300789, 9.64344, 13.3286, 5.49728)
+
+[editable path="Laptop"]
