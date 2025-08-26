@@ -1,4 +1,4 @@
-[gd_scene load_steps=185 format=4 uid="uid://cs3guckxlcjyi"]
+[gd_scene load_steps=187 format=4 uid="uid://cs3guckxlcjyi"]
 
 [ext_resource type="Script" uid="uid://ctrfp37708not" path="res://game.gd" id="1_80cx4"]
 [ext_resource type="Script" uid="uid://dclhi3hbhkos5" path="res://drone_engine.gd" id="1_e2o6t"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://bb0yd1x23ifjr" path="res://addons/kaykit_city_builder_bits/Assets/gltf/building_H.gltf" id="13_hb5m1"]
 [ext_resource type="PackedScene" uid="uid://2n8tbm3osyqw" path="res://esc_menu.tscn" id="15_e8heu"]
 [ext_resource type="PackedScene" uid="uid://l8p1552i1cd4" path="res://laptop.tscn" id="16_e8heu"]
+[ext_resource type="PackedScene" uid="uid://dq8yu0fuuqepg" path="res://cig.tscn" id="17_qhcbd"]
 [ext_resource type="Script" uid="uid://db4o41je6fqbp" path="res://laptop.gd" id="17_rvswv"]
 [ext_resource type="Script" uid="uid://bgnapcb7ii40x" path="res://ui_manager.gd" id="18_e36ub"]
 [ext_resource type="Script" uid="uid://rlqnl5vb5p2b" path="res://player.gd" id="18_rvswv"]
@@ -2212,6 +2213,8 @@ radius = 3.0
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_boyg6"]
 
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_f1jbl"]
+
 [sub_resource type="Gradient" id="Gradient_fc0e3"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
@@ -2719,6 +2722,15 @@ shape = SubResource("CapsuleShape3D_boyg6")
 [node name="Camera3D" type="Camera3D" parent="Player/Head"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.87524, 0)
 current = true
+
+[node name="Model" type="Node3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player/Model"]
+mesh = SubResource("CapsuleMesh_f1jbl")
+
+[node name="Cig" parent="Player" instance=ExtResource("17_qhcbd")]
+transform = Transform3D(1, 0, 0, 0, -0.262307, -0.964984, 0, 0.964984, -0.262307, -0.19841, 2.30788, -4.50341)
 
 [node name="CardBalance" type="Label" parent="."]
 anchors_preset = 3

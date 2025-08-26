@@ -1,0 +1,48 @@
+[gd_scene load_steps=9 format=3 uid="uid://dq8yu0fuuqepg"]
+
+[ext_resource type="PackedScene" uid="uid://cm51nrmsjhtc3" path="res://cig.glb" id="1_7866a"]
+[ext_resource type="Shader" uid="uid://b0ypl6trllgeg" path="res://cig.gdshader" id="2_37v6d"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_37v6d"]
+render_priority = 0
+shader = ExtResource("2_37v6d")
+shader_parameter/noiseForce = 0.2
+shader_parameter/burnColor = Color(1, 0.3, 0, 1)
+shader_parameter/borderWidth = 0.1
+shader_parameter/direction = 180.0
+shader_parameter/burn_axis = 1.0
+shader_parameter/cylindrical_burn = true
+shader_parameter/ash_alpha = 0.3
+shader_parameter/ash_color = Color(0.3, 0.3, 0.3, 1)
+
+[sub_resource type="Gradient" id="Gradient_vsbuu"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_q0l40"]
+gradient = SubResource("Gradient_vsbuu")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_k2kx7"]
+spread = 0.0
+initial_velocity_max = 1.0
+scale_min = 0.1
+scale_max = 0.2
+color_ramp = SubResource("GradientTexture1D_q0l40")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vsbuu"]
+albedo_color = Color(1, 1, 1, 0.662745)
+
+[sub_resource type="BoxMesh" id="BoxMesh_q0l40"]
+material = SubResource("StandardMaterial3D_vsbuu")
+
+[node name="Cig" instance=ExtResource("1_7866a")]
+
+[node name="Cylinder_002" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.36937, 0)
+surface_material_override/1 = SubResource("ShaderMaterial_37v6d")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.40646, 0)
+visible = false
+lifetime = 2.57
+process_material = SubResource("ParticleProcessMaterial_k2kx7")
+draw_pass_1 = SubResource("BoxMesh_q0l40")
