@@ -28,6 +28,8 @@ func close_escape_menu():
 
 func open_panel(name: String):
 	if panels.has(name):
+		if panels[name] == $Wallet_USDT:
+			$Wallet_USDT.open_wallet()
 		panels[name].visible = true
 		_update_ui_state()
 

@@ -3,13 +3,13 @@ extends Node3D
 
 @onready var card_balance = $CardBalance
 var wallet_usdt: float = 100.0
-var card_usd: float = 0.0
+@onready var card_usd: float 
 var pending_deals: Array = []
 @onready var mgr = $ControllerManager
 func _ready():
 	_update_ui()
 	mgr.register($Player)   
-	mgr.register($Drone)     
+	mgr.register($Base_Drone)     
 	mgr.register($StreetCam,false)
 	
 func _update_ui():
@@ -22,32 +22,35 @@ func _input(event):
 
 
 
-func request_deal(amount: float, seller: Dictionary, card: String) -> Dictionary:
-	if amount <= 0 or amount > wallet_usdt:
-		return {}
-	
-	# списали крипту
-	wallet_usdt -= amount
-	
-	var deal = {
-		"amount": amount,
-		"rate": seller["rate"],
-		"seller": seller,
-		"card": card,
-		"start_time": Time.get_ticks_msec(),
-		"wait_ms": 10000, # 10 сек
-		"status": "pending"  # pending / success / fail
-	}
-	
-	pending_deals.append(deal)
-	_update_ui()
-	return deal  # вернём, чтобы ноутбук знал про него
+#func request_deal(amount: float, seller: Dictionary, card: String) -> Dictionary:
+	#if amount <= 0 or amount > wallet_usdt:
+		#return {}
+	#
+	## списали крипту
+	#wallet_usdt -= amount
+	#
+	##var deal = {
+		##"amount": amount,
+		##"rate": seller["rate"],
+		##"seller": seller,
+		##"card": card,
+		##"start_time": Time.get_ticks_msec(),
+		##"wait_ms": 10000, # 10 сек
+		##"status": "pending"  # pending / success / fail
+	##}
+	##
+	##pending_deals.append(deal)
+	#_update_ui()
+	#return deal  # вернём, чтобы ноутбук знал про него
 
 func _process(delta: float) -> void:
-	var now = Time.get_ticks_msec()
-	for deal in pending_deals:
-		if deal["status"] == "pending" and now - deal["start_time"] >= deal["wait_ms"]:
-			_finish_deal(deal)
+	print(card_usd)
+	_update_ui()
+	card_usd = $UIManager/Wallet_USDT.card_usd
+	#var now = Time.get_ticks_msec()
+	#for deal in pending_deals:
+		#if deal["status"] == "pending" and now - deal["start_time"] >= deal["wait_ms"]:
+			#_finish_deal(deal)
 
 func _finish_deal(deal: Dictionary) -> void:
 	var seller = deal["seller"]

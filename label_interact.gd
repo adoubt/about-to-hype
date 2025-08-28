@@ -9,4 +9,3 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	cam = controller_manager.get_active()
 	look_at(cam.global_transform.origin, Vector3.UP)
-	pass

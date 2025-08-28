@@ -8,7 +8,7 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("switch_next"):
 		switch_next() 
 	elif event.is_action_pressed("drone_select"):
-		_handle_object_hotkey("Drone") 
+		_handle_object_hotkey("Base_Drone") 
 	elif event.is_action_pressed("player_select"):
 		_handle_object_hotkey("Player") 
 	elif event.is_action_pressed("streetcam_select"):
