@@ -2264,7 +2264,7 @@ environment = SubResource("Environment_i2p71")
 camera_attributes = SubResource("CameraAttributesPractical_xa8c5")
 
 [node name="Base_Drone" type="CharacterBody3D" parent="." groups=["controllable", "drone"]]
-transform = Transform3D(-0.0159865, 0, -0.999872, 0, 1, 0, 0.999872, 0, -0.0159865, -2.34897, 0.317434, 2.50035)
+transform = Transform3D(-0.225631, 0, 0.974213, 0, 1, 0, -0.974213, 0, -0.225631, 7.20418, 13.261, 2.50035)
 collision_layer = 2
 collision_mask = 13
 script = ExtResource("1_e2o6t")
