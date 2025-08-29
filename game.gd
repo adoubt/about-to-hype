@@ -10,7 +10,7 @@ func _ready():
 	_update_ui()
 	mgr.register($Player)   
 	mgr.register($Base_Drone)     
-	mgr.register($StreetCam,false)
+	mgr.register($StreetCam)
 	
 func _update_ui():
 	card_balance.text = "Card: %.2f USD" % card_usd
