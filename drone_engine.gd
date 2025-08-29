@@ -1,13 +1,19 @@
 extends CharacterBody3D
 
+
+const GRAVITY := -50 # м/с², на глаз или через тесты
+const MAX_FALL_SPEED := 50.0
+
+@export var base_mass := 1.0  # масса пустого дрона
+var current_mass := base_mass  # масса с учётом груза
 @export var move_speed := 40.0
-@export var time_to_max_speed := 2.0
-@export var ascend_speed := 5.0
+@export var time_to_max_speed := 4.0
+@export var ascend_speed := 15.0
 @export var rotation_speed := 360.0
 @export var tilt_amount := 30.0
 @export var tilt_smoothness := 5.0
-@export var vertical_smoothness := 5.0
-@export var factor_stop = 0.4 #чем больше тем плавнее остановка
+@export var vertical_smoothness := 2.0
+@export var factor_stop = 0.4 #чем больше тем плавнее остановка 0.4
 @onready var ui_manager = $"../UIManager"
 
 @onready var camera_pivot = $CameraPivot
@@ -31,14 +37,14 @@ extends CharacterBody3D
 var camera_yaw := 0.0
 @export var camera_lag := 1.7
 # дистанции (отрицательная Z — камера позади pivot)
-var base_distance := 1.6    # нормальная дистанция (настроится в _ready)
-@export var far_distance := 20.0   # насколько дальше отойти при max speed
-@export var zoom_speed := 15.0      # скорость интерполяции дистанции
+var base_distance : float    # нормальная дистанция (настроится в _ready)
+@export var far_distance := 3.0   # насколько дальше отойти при max speed
+@export var zoom_speed := 5.0      # скорость интерполяции дистанции
 
 # альтернативы: изменение FOV
 @export var use_fov := true
-@export var base_fov := 70.0
-@export var far_fov := 130.0
+@export var base_fov : float
+@export var far_fov : float
 
 
 var joint: PinJoint3D = null
@@ -54,15 +60,15 @@ var mouse_delta := Vector2.ZERO
 var mouse_sensitivity := 0.2
 var pitch := 0.0
 var default_pitch := 0.0
-var blade_speed := 0.0
+var blade_speed := 0.9
 var moving := false
 var input_enabled: bool = false
 var target_volume_db := -80.0  # тихо, когда мотор выключен
 var max_volume_db := 0.0       # громко, когда мотор включен
-var fade_speed := 2.0          # скорость изменения громкости
+var fade_speed := 1.5          # скорость изменения громкости
 var min_volume_db := -80.0
-var max_pitch := 1.5
-var min_pitch := 0.3
+var max_pitch := 1.3
+var min_pitch := 0.4
 func _ready():
 	grab_area.body_entered.connect(_on_grab_area_body_entered)
 	grab_area.body_exited.connect(_on_grab_area_body_exited)
@@ -72,7 +78,8 @@ func _ready():
 	camera_pivot.rotation.y = camera_yaw
 	base_distance = camera1.position.z
 	if use_fov:
-		camera1.fov = base_fov
+		base_fov = camera1.fov	
+		far_fov = base_fov + 90
 
 
 
@@ -119,71 +126,77 @@ func _rotate_camera(direction: int):
 	
 func _physics_process(delta):
 	# --- Физика дрона всегда работает ---
-	_apply_physics(delta)
 
+	_apply_physics(delta)
+	
 	# --- Управление дроном только если input_enabled ---
 	if input_enabled:
-		_process_movement(delta)
+		
 		_process_rotation_and_tilt(delta)
 		_process_mouse_camera(delta)
 		_process_interaction(delta)
 		_process_engine_and_blades(delta)
-	
+	_process_movement(delta)
 	# --- тут обрабатываем камеру ---
 	_update_camera_follow(delta)
 func _apply_physics(delta):
-	if not input_enabled:
-		engine_enabled = false
-	# вертикальная скорость
-	var target_y := 0.0
-	if Input.is_action_pressed("drone_up") and input_enabled:
-		engine_enabled = true
-		target_y = ascend_speed
-	elif Input.is_action_pressed("drone_down") and input_enabled:
-		engine_enabled = true
-		target_y = -ascend_speed
-	elif not engine_enabled:
-		target_y = -9.8
 	
-	velocity.y = lerp(velocity.y, target_y, vertical_smoothness * delta)
-	
-	# движение
+	if not engine_enabled:
+		velocity.y +=GRAVITY * delta
+		velocity.y = max(velocity.y, -MAX_FALL_SPEED)
+		
 	move_and_slide()
-
-	# удерживаемые объекты
-	if is_grabbing and grabbed_box:
-		var direction = (global_transform.origin + grab_offset) - grabbed_box.global_transform.origin
-		grabbed_box.linear_velocity = direction * 10.0
+	
 
 func _process_movement(delta):
 	moving = false
-	
+	print('ggggg')
 	input_dir = Vector3.ZERO
-	if Input.is_action_pressed("drone_forward"):
-		input_dir -= model.global_transform.basis.z
-		engine_enabled = true
-		moving = true
-	if Input.is_action_pressed("drone_back"):
-		input_dir += model.global_transform.basis.z
-		engine_enabled = true
-		moving = true
-	if Input.is_action_pressed("drone_left"):
-		input_dir -= model.global_transform.basis.x
-		engine_enabled = true
-		moving = true
-	if Input.is_action_pressed("drone_right"):
-		input_dir += model.global_transform.basis.x
-		engine_enabled = true
-		moving = true
-
+	var target_velocity_y := 0.0	
+	if input_enabled:
+		if Input.is_action_pressed("drone_forward"):
+			input_dir -= model.global_transform.basis.z
+			engine_enabled = true
+			moving = true
+		if Input.is_action_pressed("drone_back"):
+			input_dir += model.global_transform.basis.z
+			engine_enabled = true
+			moving = true
+		if Input.is_action_pressed("drone_left"):
+			input_dir -= model.global_transform.basis.x
+			engine_enabled = true
+			moving = true
+		if Input.is_action_pressed("drone_right"):
+			input_dir += model.global_transform.basis.x
+			engine_enabled = true
+			moving = true
+		
+		if Input.is_action_pressed("drone_up"):
+			target_velocity_y = +ascend_speed
+			engine_enabled = true
+			moving = true
+		if Input.is_action_pressed("drone_down"):
+			target_velocity_y = -ascend_speed
+			engine_enabled = true
+			moving = true
+		
+	
+	# целевые скорости
 	input_dir = input_dir.normalized()
+	
 	var target_velocity_x = input_dir.x * move_speed
 	var target_velocity_z = input_dir.z * move_speed
+	
+	# сглаживание
 	var accel_factor = delta / time_to_max_speed
 	if input_dir == Vector3.ZERO:
-		accel_factor = delta / factor_stop  # почти мгновенная остановка
+		accel_factor = delta / factor_stop
+	var accel_factor_y =  delta / factor_stop if model.global_transform.basis.y !=Vector3.ZERO else accel_factor
+	
 	velocity.x = lerp(velocity.x, target_velocity_x, accel_factor)
-	velocity.z = lerp(velocity.z, target_velocity_z, accel_factor)
+	velocity.y = lerp(velocity.y, target_velocity_y, vertical_smoothness *delta)
+	velocity.z = lerp(velocity.z, target_velocity_z, accel_factor)	
+	
 	
 	
 func _process_rotation_and_tilt(delta):
@@ -240,6 +253,10 @@ func _process_interaction(delta):
 		flashlight.visible = !flashlight.visible
 	if Input.is_action_just_pressed("drone_engine_toggle"):
 		engine_enabled = not engine_enabled
+	# удерживаемые объекты
+	if is_grabbing and grabbed_box:
+		var direction = (global_transform.origin + grab_offset) - grabbed_box.global_transform.origin
+		grabbed_box.linear_velocity = direction * 10.0
 
 func _process_engine_and_blades(delta):
 	
@@ -254,10 +271,10 @@ func _process_engine_and_blades(delta):
 	if engine_enabled and not blade_sound.playing:
 		blade_sound.play()
 
-	var target_volume_db = max_volume_db if moving else (-10.0 if engine_enabled else min_volume_db)
+	var target_volume_db = max_volume_db if moving else (-30.0 if engine_enabled else min_volume_db)
 	blade_sound.volume_db = lerp(blade_sound.volume_db, target_volume_db, delta * fade_speed)
 
-	var target_pitch = (max_pitch if moving else 1.0) if engine_enabled else min_pitch
+	var target_pitch = (max_pitch if moving else 0.7) if engine_enabled else min_pitch
 	blade_sound.pitch_scale = lerp(blade_sound.pitch_scale, target_pitch, delta * fade_speed)
 
 	if not engine_enabled and blade_sound.volume_db <= min_volume_db + 1.0 and blade_sound.playing:
@@ -273,7 +290,7 @@ func _update_camera_follow(delta):
 		camera_pivot.rotation.y = camera_yaw
 
 		# --- вычисляем нормализованную скорость (0..1) по горизонтали ---
-		var horiz_speed = Vector3(velocity.x, 0.0, velocity.z).length()
+		var horiz_speed = Vector3(velocity.x, velocity.y, velocity.z).length()
 		var t = clamp(horiz_speed / move_speed, 0.0, 1.0)
 
 		if use_fov:
