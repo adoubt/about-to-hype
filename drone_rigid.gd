@@ -1,18 +1,18 @@
-extends CharacterBody3D
+extends RigidBody3D
 
 
-const GRAVITY := -50 # м/с², на глаз или через тесты
+const GRAVITY := -1 # м/с², на глаз или через тесты
 const MAX_FALL_SPEED := 50.0
 
 @export var base_mass := 1.0  # масса пустого дрона
 var current_mass := base_mass  # масса с учётом груза
 @export var move_speed := 40.0
-@export var time_to_max_speed := 4.0
-@export var ascend_speed := 15.0
+@export var time_to_max_speed := 2.0
+@export var ascend_speed := 15.0 #правность горизонтального разгона
 @export var rotation_speed := 360.0
-@export var tilt_amount := 30.0
-@export var tilt_smoothness := 5.0
-@export var vertical_smoothness := 2.0
+@export var tilt_amount := 30.0 #угол наклона
+@export var tilt_smoothness := 5.0 #правлность наклона
+@export var vertical_smoothness := 2.0 #правлность ветикального разгона
 @export var factor_stop = 0.4 #чем больше тем плавнее остановка 0.4
 @onready var ui_manager = $"../UIManager"
 
@@ -140,19 +140,22 @@ func _physics_process(delta):
 	# --- тут обрабатываем камеру ---
 	_update_camera_follow(delta)
 func _apply_physics(delta):
-	
-	if not engine_enabled:
-		velocity.y +=GRAVITY * delta
-		velocity.y = max(velocity.y, -MAX_FALL_SPEED)
+	pass
+	#if not engine_enabled:
+		#velocity.y +=GRAVITY * delta
+		#velocity.y = max(velocity.y, -MAX_FALL_SPEED)
 		
-	move_and_slide()
+	#move_and_slide()
 	
 
 func _process_movement(delta):
 	moving = false
-	print('ggggg')
+
 	input_dir = Vector3.ZERO
-	var target_velocity_y := 0.0	
+	var target_velocity_y := 0.0
+	
+	var thrust_force := 200.0
+	var move_force := 100.0	
 	if input_enabled:
 		if Input.is_action_pressed("drone_forward"):
 			input_dir -= model.global_transform.basis.z
@@ -170,22 +173,16 @@ func _process_movement(delta):
 			input_dir += model.global_transform.basis.x
 			engine_enabled = true
 			moving = true
-		
+
 		if Input.is_action_pressed("drone_up"):
-			target_velocity_y = +ascend_speed
-			engine_enabled = true
-			moving = true
+			apply_central_force(Vector3.UP * thrust_force)
 		if Input.is_action_pressed("drone_down"):
-			target_velocity_y = -ascend_speed
-			engine_enabled = true
-			moving = true
-		
-	
-	# целевые скорости
-	input_dir = input_dir.normalized()
-	
-	var target_velocity_x = input_dir.x * move_speed
-	var target_velocity_z = input_dir.z * move_speed
+			apply_central_force(Vector3.DOWN * thrust_force)
+			
+	 # нормализация направления
+	if input_dir != Vector3.ZERO:
+		input_dir = input_dir.normalized()
+		apply_central_force(input_dir * move_force)
 	
 	# сглаживание
 	var accel_factor = delta / time_to_max_speed
@@ -193,9 +190,9 @@ func _process_movement(delta):
 		accel_factor = delta / factor_stop
 	var accel_factor_y =  delta / factor_stop if model.global_transform.basis.y !=Vector3.ZERO else accel_factor
 	
-	velocity.x = lerp(velocity.x, target_velocity_x, accel_factor)
-	velocity.y = lerp(velocity.y, target_velocity_y, vertical_smoothness *delta)
-	velocity.z = lerp(velocity.z, target_velocity_z, accel_factor)	
+	#velocity.x = lerp(velocity.x, target_velocity_x, accel_factor)
+	#velocity.y = lerp(velocity.y, target_velocity_y, vertical_smoothness *delta)
+	#velocity.z = lerp(velocity.z, target_velocity_z, accel_factor)	
 	
 	
 	
@@ -210,7 +207,7 @@ func _process_rotation_and_tilt(delta):
 
 
 	# наклон при движении
-	var local_input = model.global_transform.basis.inverse() * input_dir
+	var local_input = model.global_transform.basis.inverse() * linear_velocity
 	var target_tilt_x = local_input.z * tilt_amount
 	var target_tilt_z = -local_input.x * tilt_amount
 	current_tilt.x = lerp(current_tilt.x, target_tilt_x, delta * tilt_smoothness)
@@ -290,7 +287,7 @@ func _update_camera_follow(delta):
 		camera_pivot.rotation.y = camera_yaw
 
 		# --- вычисляем нормализованную скорость (0..1) по горизонтали ---
-		var horiz_speed = Vector3(velocity.x, velocity.y, velocity.z).length()
+		var horiz_speed = Vector3(linear_velocity.x, linear_velocity.y, linear_velocity.z).length()
 		var t = clamp(horiz_speed / move_speed, 0.0, 1.0)
 
 		if use_fov:

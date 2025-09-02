@@ -1,9 +1,9 @@
-[gd_scene load_steps=188 format=4 uid="uid://cs3guckxlcjyi"]
+[gd_scene load_steps=201 format=4 uid="uid://cs3guckxlcjyi"]
 
 [ext_resource type="Script" uid="uid://ctrfp37708not" path="res://game.gd" id="1_80cx4"]
-[ext_resource type="Script" uid="uid://dclhi3hbhkos5" path="res://drone_engine.gd" id="1_e2o6t"]
 [ext_resource type="AudioStream" uid="uid://bt8wqhs8owrj7" path="res://Drone Noise Test - DJI Avata vs DJI FPV vs DJI Mavic 3 vs DJI Air 2S.mp3" id="2_fc0e3"]
 [ext_resource type="Script" uid="uid://bnl211kgeotsn" path="res://label_interact.gd" id="2_feb5d"]
+[ext_resource type="Script" uid="uid://dmdk8j6rmtauh" path="res://drone.gd" id="2_qhcbd"]
 [ext_resource type="Shader" uid="uid://lf72luioho2j" path="res://vhscamera3.gdshader" id="4_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://cgopdhiu475k1" path="res://city.tscn" id="5_lc2xo"]
 [ext_resource type="PackedScene" uid="uid://duwxjydyux16" path="res://addons/kaykit_city_builder_bits/Assets/gltf/building_A.gltf" id="6_215e1"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://bb0yd1x23ifjr" path="res://addons/kaykit_city_builder_bits/Assets/gltf/building_H.gltf" id="13_hb5m1"]
 [ext_resource type="PackedScene" uid="uid://2n8tbm3osyqw" path="res://esc_menu.tscn" id="15_e8heu"]
 [ext_resource type="PackedScene" uid="uid://l8p1552i1cd4" path="res://laptop.tscn" id="16_e8heu"]
+[ext_resource type="FontFile" uid="uid://bgpdq8f1rcc1p" path="res://assets/fonts/SFPRODISPLAYHEAVYITALIC.OTF" id="17_bnpwn"]
 [ext_resource type="Script" uid="uid://db4o41je6fqbp" path="res://laptop.gd" id="17_rvswv"]
 [ext_resource type="Script" uid="uid://bgnapcb7ii40x" path="res://ui_manager.gd" id="18_e36ub"]
 [ext_resource type="Script" uid="uid://rlqnl5vb5p2b" path="res://player.gd" id="18_rvswv"]
@@ -23,35 +24,43 @@
 [ext_resource type="Script" uid="uid://vrc5fp43jlho" path="res://controller_manager.gd" id="21_hb5m1"]
 [ext_resource type="Script" uid="uid://deg13n8ftofyk" path="res://StreetCam.gd" id="22_x5p1p"]
 [ext_resource type="PackedScene" uid="uid://dyr4si0jpc4wr" path="res://building.tscn" id="24_f1jbl"]
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_f1jbl"]
-sky_top_color = Color(0.467417, 0.624602, 0.883405, 1)
-sky_cover_modulate = Color(0.714896, 0.593593, 0.807698, 0.270588)
-ground_bottom_color = Color(0.182371, 0.173204, 0.161563, 1)
-
-[sub_resource type="Sky" id="Sky_vaj68"]
-sky_material = SubResource("ProceduralSkyMaterial_f1jbl")
+[ext_resource type="Script" uid="uid://c6n1jp1wp7ahe" path="res://OrderManager.gd.gd" id="24_vaj68"]
+[ext_resource type="FontFile" uid="uid://bxqutki8x48t1" path="res://assets/fonts/SFPRODISPLAYBOLD.OTF" id="25_5b14r"]
+[ext_resource type="Script" uid="uid://w7wxhi7wv2vq" path="res://orders_panel.gd" id="25_i2p71"]
+[ext_resource type="Script" uid="uid://dh5abgdsssrqo" path="res://SubViewportUI.gd" id="25_xa8c5"]
+[ext_resource type="FontFile" uid="uid://cqipr3ixo4xi1" path="res://assets/fonts/SFPRODISPLAYTHINITALIC.OTF" id="28_bnpwn"]
 
 [sub_resource type="Environment" id="Environment_i2p71"]
-sky = SubResource("Sky_vaj68")
-sky_custom_fov = 33.9
-ambient_light_source = 3
-ambient_light_color = Color(0.696113, 0.201573, 0.561427, 1)
-reflected_light_source = 2
+background_mode = 1
+background_color = Color(0.0103008, 0.196156, 0.264996, 1)
+ssao_enabled = true
+ssao_radius = 7.9
 glow_enabled = true
+glow_levels/1 = 5.94
+glow_levels/2 = 7.19
+glow_levels/3 = 6.65
+glow_levels/4 = 0.59
+glow_levels/5 = 0.72
+glow_levels/6 = 1.8
+glow_levels/7 = 1.62
 glow_normalized = true
+glow_intensity = 7.54
+glow_strength = 1.44
 fog_enabled = true
 fog_mode = 1
+fog_light_energy = 2.02
+fog_sun_scatter = 0.29
 fog_density = 1.0
-adjustment_brightness = 6.7
-adjustment_contrast = 2.11
+fog_height = 10.0
 
-[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_xa8c5"]
-dof_blur_far_enabled = true
-dof_blur_far_distance = 40.0
-dof_blur_far_transition = 50.0
-dof_blur_near_enabled = true
-dof_blur_near_distance = 1.0
+[sub_resource type="Theme" id="Theme_xfvwf"]
+default_font = ExtResource("28_bnpwn")
+default_font_size = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_36jdj"]
+font = ExtResource("17_bnpwn")
+font_size = 20
+font_color = Color(0.235294, 0.647059, 0.258824, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_e2o6t"]
 noise_type = 3
@@ -1372,6 +1381,11 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_lxidq")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bnpwn"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 2.98
+
 [sub_resource type="ArrayMesh" id="ArrayMesh_uwe8v"]
 _surfaces = [{
 "aabb": AABB(-0.323022, 0.0482249, -0.275251, 0.127773, 0.02, 0.0590467),
@@ -1403,6 +1417,11 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_uwe8v")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_36jdj"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 3.96
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6vif1"]
 resource_name = "mat8"
@@ -2184,10 +2203,15 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_kxeea")
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_80nbo"]
-radius = 0.318441
-
 [sub_resource type="SphereShape3D" id="SphereShape3D_e2o6t"]
+radius = 2.00342
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_qhcbd"]
+height = 0.100067
+radius = 0.359375
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_f1jbl"]
+size = Vector3(0.274597, 0.329544, 0.303993)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_e2o6t"]
 size = Vector3(500, 0.335, 500)
@@ -2207,18 +2231,18 @@ albedo_texture = SubResource("NoiseTexture2D_e2o6t")
 [sub_resource type="QuadMesh" id="QuadMesh_feb5d"]
 size = Vector2(500, 500)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_feb5d"]
-size = Vector3(0.3, 0.3, 0.3)
+[sub_resource type="BoxShape3D" id="BoxShape3D_qhcbd"]
+size = Vector3(0.297119, 0.334961, 0.323242)
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_qhcbd"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qhcbd"]
+albedo_texture = SubResource("NoiseTexture2D_qhcbd")
 
 [sub_resource type="BoxMesh" id="BoxMesh_fc0e3"]
+lightmap_size_hint = Vector2i(7, 10)
+material = SubResource("StandardMaterial3D_qhcbd")
 size = Vector3(0.3, 0.3, 0.3)
-
-[sub_resource type="SystemFont" id="SystemFont_fc0e3"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_7jktm"]
-font = SubResource("SystemFont_fc0e3")
-font_size = 20
-font_color = Color(0.768763, 0.596305, 0.234444, 1)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_boyg6"]
 radius = 3.0
@@ -2256,18 +2280,67 @@ shader_parameter/bottom_border_jitter = 6.0
 shader_parameter/noise_intensity = 0.1
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_ryrav")
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_vaj68"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_i2p71"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_i2p71"]
+viewport_path = NodePath("OrdersPanel/OrderScreenViewport")
+
+[sub_resource type="Theme" id="Theme_36jdj"]
+default_font = ExtResource("25_5b14r")
+default_font_size = 20
+
+[sub_resource type="Theme" id="Theme_bnpwn"]
+
 [node name="game" type="Node3D"]
 script = ExtResource("1_80cx4")
 
-[node name="WorldEnvironment2" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_i2p71")
-camera_attributes = SubResource("CameraAttributesPractical_xa8c5")
+
+[node name="HUD" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="GameTime" type="Label" parent="HUD"]
+layout_mode = 2
+size_flags_vertical = 0
+theme = SubResource("Theme_xfvwf")
+text = "00:00"
+horizontal_alignment = 1
+
+[node name="GrabLabel" type="Label" parent="HUD"]
+visible = false
+layout_mode = 2
+text = "Grabbed Nothing"
+
+[node name="CardBalance" type="Label" parent="HUD"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "$0"
+label_settings = SubResource("LabelSettings_36jdj")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Base_Drone" type="CharacterBody3D" parent="." groups=["controllable", "drone"]]
-transform = Transform3D(-0.225631, 0, 0.974213, 0, 1, 0, -0.974213, 0, -0.225631, 7.20418, 13.261, 2.50035)
+transform = Transform3D(-0.958063, 0, 0.286558, 0, 1, 0, -0.286558, 0, -0.958063, 11.0051, 4.50673, -8.05474)
 collision_layer = 2
-collision_mask = 13
-script = ExtResource("1_e2o6t")
+collision_mask = 7
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+script = ExtResource("2_qhcbd")
 
 [node name="Model" type="Node3D" parent="Base_Drone"]
 
@@ -2427,11 +2500,21 @@ skeleton = NodePath("")
 mesh = SubResource("ArrayMesh_qhpw0")
 skeleton = NodePath("")
 
-[node name="group397981250" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="FrontRightFlashlight" type="MeshInstance3D" parent="Base_Drone/Model"]
+mesh = SubResource("ArrayMesh_ie2p1")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_bnpwn")
+
+[node name="FrontRightFlashlight2" type="MeshInstance3D" parent="Base_Drone/Model"]
 mesh = SubResource("ArrayMesh_ie2p1")
 skeleton = NodePath("")
 
-[node name="group1792975983" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="FrontLeftFlashlight" type="MeshInstance3D" parent="Base_Drone/Model"]
+mesh = SubResource("ArrayMesh_mifxi")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_36jdj")
+
+[node name="FrontLeftFlashlight2" type="MeshInstance3D" parent="Base_Drone/Model"]
 mesh = SubResource("ArrayMesh_mifxi")
 skeleton = NodePath("")
 
@@ -2548,29 +2631,42 @@ mesh = SubResource("ArrayMesh_1e4bk")
 skeleton = NodePath("")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Base_Drone/Model"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00479078, 0, -0.299586)
+transform = Transform3D(0.969445, 0, -0.245307, 0, 1, 0, 0.245307, 0, 0.969445, -0.26315, 0.100908, -0.282396)
+visible = false
+light_energy = 0.515
+light_indirect_energy = 0.0
 light_size = 0.424
 light_specular = 3.732
 shadow_enabled = true
 distance_fade_enabled = true
-spot_range = 30.0
+spot_range = 16.4455
+spot_attenuation = -0.21
+spot_angle = 26.82
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Base_Drone/Model"]
+transform = Transform3D(0.927184, 0, 0.374607, 0, 1, 0, -0.374607, 0, 0.927184, 0.224999, 0.0500069, -0.251778)
+visible = false
+light_energy = 0.515
+light_indirect_energy = 0.0
+light_size = 0.424
+light_specular = 3.732
+shadow_enabled = true
+distance_fade_enabled = true
+spot_range = 16.4455
+spot_attenuation = -0.21
+spot_angle = 26.82
 
 [node name="CameraPivot" type="Node3D" parent="Base_Drone"]
 transform = Transform3D(0.993572, 0, 0.113203, 0, 1, 0, -0.113203, 0, 0.993572, 0, 0, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Base_Drone/CameraPivot"]
 transform = Transform3D(1, 0, 0, 0, 0.981627, 0.190809, 0, -0.190809, 0.981627, 0, 0.535, 1.04)
-current = true
 
 [node name="CameraPivot2" type="Node3D" parent="Base_Drone"]
 
 [node name="Camera3D2" type="Camera3D" parent="Base_Drone/CameraPivot2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.192003, 0.0256686)
 fov = 82.2
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Base_Drone"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0126225, 0)
-shape = SubResource("SphereShape3D_80nbo")
 
 [node name="Area3D" type="Area3D" parent="Base_Drone"]
 collision_layer = 8
@@ -2581,13 +2677,27 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.189192, 0)
 shape = SubResource("SphereShape3D_e2o6t")
 
 [node name="BladeSound" type="AudioStreamPlayer3D" parent="Base_Drone"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.0153427, 0)
 stream = ExtResource("2_fc0e3")
 attenuation_model = 1
 playback_type = 1
 emission_angle_enabled = true
+emission_angle_degrees = 66.0
+emission_angle_filter_attenuation_db = -8.8
+parameters/looping = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Base_Drone"]
+transform = Transform3D(0.999999, 0, -2.98023e-07, 0, 1, 0, 2.98023e-07, 0, 0.999999, -0.00547814, 0.0837746, -0.0163102)
+shape = SubResource("CylinderShape3D_qhcbd")
+debug_color = Color(0.947, 0, 0.587, 1)
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Base_Drone"]
+transform = Transform3D(0.999999, 0, -2.98023e-07, 0, 1, 0, 2.98023e-07, 0, 0.999999, -0.00255227, -0.121986, 0.00369978)
+shape = SubResource("BoxShape3D_f1jbl")
+debug_color = Color(0.796, 0.283, 0.79, 1)
 
 [node name="floor" type="StaticBody3D" parent="."]
-collision_mask = 6
+collision_mask = 7
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="floor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.125929, 0)
@@ -2602,17 +2712,14 @@ mesh = SubResource("QuadMesh_feb5d")
 skeleton = NodePath("")
 
 [node name="drop" type="RigidBody3D" parent="." groups=["grabbable"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.35236, 0.171379, 3.19908)
-collision_layer = 4
-collision_mask = 3
-can_sleep = false
-freeze_mode = 1
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.5928, 0.300744, -7.61348)
+visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="drop"]
-shape = SubResource("BoxShape3D_feb5d")
+shape = SubResource("BoxShape3D_qhcbd")
+disabled = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="drop"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.06446, 0, 0)
 mesh = SubResource("BoxMesh_fc0e3")
 
 [node name="Label3D" type="Label3D" parent="drop"]
@@ -2632,7 +2739,6 @@ text = "Press E to grab"
 
 [node name="Label_Interact" type="Label3D" parent="drop"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.414677, 0)
-visible = false
 billboard = 1
 fixed_size = true
 alpha_cut = 1
@@ -2640,41 +2746,6 @@ text = "Drop"
 font_size = 16
 outline_size = 0
 script = ExtResource("2_feb5d")
-
-[node name="label2" type="Label" parent="."]
-offset_left = 559.0
-offset_top = 502.0
-offset_right = 693.0
-offset_bottom = 534.0
-text = "Grabbed Nothing"
-
-[node name="Current_camera" type="Label" parent="."]
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -182.0
-offset_top = -48.0
-offset_bottom = 48.0
-grow_horizontal = 0
-grow_vertical = 2
-text = "Camera1"
-label_settings = SubResource("LabelSettings_7jktm")
-
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
-offset_left = 15.0
-offset_top = 823.0
-offset_right = 326.0
-offset_bottom = 1016.0
-text = "E  - grab/drop
-WASD - move
-Space/C - up/down
-LMB/RMB - rotation
-V - camera switch
-Mouse btn4\\5 - camera up/down
-B - Engine On/Off"
-tab_size = 5
 
 [node name="City" parent="." instance=ExtResource("5_lc2xo")]
 visible = false
@@ -2706,6 +2777,9 @@ transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 39.4931, 0, -5)
 [node name="Laptop" parent="." instance=ExtResource("16_e8heu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.7007, 0.0415716, -8.0014)
 script = ExtResource("17_rvswv")
+
+[node name="Object_47" parent="Laptop/Sketchfab_model/root/GLTF_SceneRootNode/LT_Key_0" index="43"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.603882, -0.467832, -0.476501)
 
 [node name="Object_50" parent="Laptop/Sketchfab_model/root/GLTF_SceneRootNode/Plane_1" index="0"]
 visible = false
@@ -2741,7 +2815,6 @@ shape = SubResource("CapsuleShape3D_boyg6")
 
 [node name="Camera3D" type="Camera3D" parent="Player/Head"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.87434, -0.0804985)
-current = true
 
 [node name="InteractionRaycast" type="RayCast3D" parent="Player/Head/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.373812, 0.0804985)
@@ -2755,20 +2828,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Player/Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0509899)
 mesh = SubResource("CapsuleMesh_f1jbl")
-
-[node name="CardBalance" type="Label" parent="."]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -39.485
-offset_top = -62.755
-offset_right = 0.515015
-offset_bottom = -39.755
-grow_horizontal = 0
-grow_vertical = 0
-text = "$0"
 
 [node name="UIManager" type="Node" parent="."]
 script = ExtResource("18_e36ub")
@@ -2805,7 +2864,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Camera3" type="Camera3D" parent="StreetCam"]
-transform = Transform3D(0.415966, -0.237082, 0.877932, -0.0950089, 0.948804, 0.301236, -0.904403, -0.208715, 0.372146, 16.8635, 10.9874, 6.8839)
+transform = Transform3D(0.326704, -0.511284, 0.794892, 0, 0.841042, 0.540968, -0.945126, -0.176736, 0.274772, 18.7818, 12.7821, 6.49236)
 
 [node name="BUILDING" parent="." instance=ExtResource("24_f1jbl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.64649, 1.4727, 0)
@@ -2820,6 +2879,90 @@ distance_fade_enabled = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.68427, 7.0139, -0.227584)
 light_color = Color(1, 0.839216, 0.231373, 1)
 shadow_enabled = true
+
+[node name="DirectionalLight3D3" type="OmniLight3D" parent="BUILDING"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.08348, 0.0608212, -0.227584)
+light_color = Color(1, 0.839216, 0.231373, 1)
+shadow_enabled = true
+
+[node name="DirectionalLight3D5" type="OmniLight3D" parent="BUILDING"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.08348, 0.0608212, 21.0757)
+light_color = Color(1, 0.839216, 0.231373, 1)
+shadow_enabled = true
+
+[node name="DirectionalLight3D6" type="OmniLight3D" parent="BUILDING"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.08348, 5.96691, 21.0757)
+light_color = Color(1, 0.839216, 0.231373, 1)
+shadow_enabled = true
+
+[node name="DirectionalLight3D7" type="OmniLight3D" parent="BUILDING"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.19387, 0.245415, 16.2689)
+light_color = Color(1, 0.839216, 0.231373, 1)
+shadow_enabled = true
+
+[node name="DirectionalLight3D4" type="OmniLight3D" parent="BUILDING"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.44686, 3.09842, 1.47725)
+light_color = Color(0.92091, 0.8176, 0.892648, 1)
+light_energy = 5.263
+light_indirect_energy = 6.502
+light_volumetric_fog_energy = 6.98
+shadow_enabled = true
+
+[node name="RigidBody3D" type="RigidBody3D" parent="." groups=["grabbable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.684965, 0)
+collision_layer = 4
+collision_mask = 7
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("BoxShape3D_vaj68")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+mesh = SubResource("BoxMesh_i2p71")
+
+[node name="OrderManager" type="Node" parent="."]
+script = ExtResource("24_vaj68")
+
+[node name="OrdersPanel" type="Sprite3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -30.216, 2, 0)
+texture = SubResource("ViewportTexture_i2p71")
+script = ExtResource("25_i2p71")
+
+[node name="OrderScreenViewport" type="SubViewport" parent="OrdersPanel"]
+transparent_bg = true
+
+[node name="Control" type="MarginContainer" parent="OrdersPanel/OrderScreenViewport"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_36jdj")
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+script = ExtResource("25_xa8c5")
+
+[node name="ColorRect" type="ColorRect" parent="OrdersPanel/OrderScreenViewport/Control"]
+layout_mode = 2
+theme = SubResource("Theme_bnpwn")
+color = Color(0.2, 0.356863, 0.635294, 0.333333)
+
+[node name="Label" type="Label" parent="OrdersPanel/OrderScreenViewport/Control"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "ORDERS"
+
+[node name="OrderList" type="VBoxContainer" parent="OrdersPanel/OrderScreenViewport/Control"]
+layout_mode = 2
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.6188, 1.83494, -4.24676)
+light_energy = 6.141
+light_indirect_energy = 3.586
+light_volumetric_fog_energy = 1.485
+omni_range = 9.41209
 
 [connection signal="body_entered" from="Laptop/Area3D" to="Laptop" method="_on_area_3d_body_entered"]
 

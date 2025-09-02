@@ -23,9 +23,9 @@ void vertex() {
 
 void fragment(){
     vec4 base_color = texture(albedo_texture, UV);
-    
+
     float burn_progress;
-    
+
     if (cylindrical_burn) {
         burn_progress = local_position.y;
     } else {
@@ -37,19 +37,19 @@ void fragment(){
             burn_progress = local_position.z;
         }
     }
-    
+
     burn_progress = (burn_progress + 4.0) * 0.5;
-    
+
     float noise_sample = texture(noiseTexture, UV).r;
     float burn_line = burn_progress + (noise_sample * noiseForce);
-    
+
 	float progress = 0.5 + 0.5 * sin(TIME * 2.0);
     bool is_burned = burn_line < progress;
     bool is_border = burn_line < (progress + borderWidth);
-    
+
     vec3 final_albedo;
     float final_alpha;
-    
+
     if (is_burned) {
         final_albedo = ash_color;
         final_alpha = ash_alpha;
@@ -61,10 +61,10 @@ void fragment(){
         final_albedo = base_color.rgb;
         final_alpha = base_color.a;
     }
-    
+
     ALBEDO = final_albedo;
     ALPHA = final_alpha;
-    
+
     if (is_border && !is_burned) {
         float burn_mix = (progress + borderWidth - burn_line) / borderWidth;
         EMISSION = burnColor.rgb * burn_mix * 0.5;

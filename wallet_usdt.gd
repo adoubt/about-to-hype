@@ -113,8 +113,7 @@ func _confirm_deal():
 		_notify("❌ Введите карту")
 		return
 
-	#var game = get_tree().current_scene
-	#current_deal = game.request_deal(amount, current_seller, card)
+
 
 	if amount <= 0 or amount > wallet_usdt:
 		_notify("❌ Недостаточно USDT")
@@ -126,7 +125,7 @@ func _confirm_deal():
 
 # --- Wait ---
 func _start_wait(amount: float, seller: Dictionary):
-	print("start wait")
+
 	wait_panel.visible = true
 	pb.value = 0
 	pb.max_value = wait_time
