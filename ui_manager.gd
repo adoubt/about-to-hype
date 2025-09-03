@@ -4,7 +4,8 @@ class_name UIManager  # важно, чтобы был доступ как гло
 @onready var escape_menu: Control = $Escape
 @onready var panels: Dictionary = {
 	"Wallet_USDT": $Wallet_USDT,
-	"Shop": $Shop
+	"Shop": $Shop,
+	"Settings": $Settings
 	# новые панели добавляй сюда
 }
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=201 format=4 uid="uid://cs3guckxlcjyi"]
+[gd_scene load_steps=205 format=4 uid="uid://cs3guckxlcjyi"]
 
 [ext_resource type="Script" uid="uid://ctrfp37708not" path="res://game.gd" id="1_80cx4"]
 [ext_resource type="AudioStream" uid="uid://bt8wqhs8owrj7" path="res://Drone Noise Test - DJI Avata vs DJI FPV vs DJI Mavic 3 vs DJI Air 2S.mp3" id="2_fc0e3"]
@@ -23,12 +23,16 @@
 [ext_resource type="PackedScene" uid="uid://buk8u6pxakrg6" path="res://wallet_usdt.tscn" id="19_boyg6"]
 [ext_resource type="Script" uid="uid://vrc5fp43jlho" path="res://controller_manager.gd" id="21_hb5m1"]
 [ext_resource type="Script" uid="uid://deg13n8ftofyk" path="res://StreetCam.gd" id="22_x5p1p"]
+[ext_resource type="PackedScene" uid="uid://boxcl4vey5uwq" path="res://settings.tscn" id="23_7knny"]
 [ext_resource type="PackedScene" uid="uid://dyr4si0jpc4wr" path="res://building.tscn" id="24_f1jbl"]
 [ext_resource type="Script" uid="uid://c6n1jp1wp7ahe" path="res://OrderManager.gd.gd" id="24_vaj68"]
 [ext_resource type="FontFile" uid="uid://bxqutki8x48t1" path="res://assets/fonts/SFPRODISPLAYBOLD.OTF" id="25_5b14r"]
 [ext_resource type="Script" uid="uid://w7wxhi7wv2vq" path="res://orders_panel.gd" id="25_i2p71"]
 [ext_resource type="Script" uid="uid://dh5abgdsssrqo" path="res://SubViewportUI.gd" id="25_xa8c5"]
+[ext_resource type="Script" uid="uid://wxb573o058my" path="res://AudioSource3D.gd" id="26_dhpj7"]
 [ext_resource type="FontFile" uid="uid://cqipr3ixo4xi1" path="res://assets/fonts/SFPRODISPLAYTHINITALIC.OTF" id="28_bnpwn"]
+[ext_resource type="AudioStream" uid="uid://b3vmgtaw8642s" path="res://assets/sound/1231.mp3" id="30_36jdj"]
+[ext_resource type="Script" uid="uid://d3xhaa05nga6m" path="res://audio_manager.gd" id="32_7knny"]
 
 [sub_resource type="Environment" id="Environment_i2p71"]
 background_mode = 1
@@ -2340,6 +2344,7 @@ collision_mask = 7
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
+floor_block_on_wall = false
 script = ExtResource("2_qhcbd")
 
 [node name="Model" type="Node3D" parent="Base_Drone"]
@@ -2685,6 +2690,7 @@ emission_angle_enabled = true
 emission_angle_degrees = 66.0
 emission_angle_filter_attenuation_db = -8.8
 parameters/looping = false
+script = ExtResource("26_dhpj7")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Base_Drone"]
 transform = Transform3D(0.999999, 0, -2.98023e-07, 0, 1, 0, 2.98023e-07, 0, 0.999999, -0.00547814, 0.0837746, -0.0163102)
@@ -2805,6 +2811,9 @@ offset_bottom = 23.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.8099, 0, 0)
 collision_layer = 2
 collision_mask = 13
+floor_constant_speed = true
+floor_block_on_wall = false
+safe_margin = 0.2
 script = ExtResource("18_rvswv")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
@@ -2821,6 +2830,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.373812, 0.0804985)
 target_position = Vector3(0, 0, -7.31)
 debug_shape_custom_color = Color(0, 0.74902, 0, 1)
 debug_shape_thickness = 5
+
+[node name="AsdioRaycast" type="Node3D" parent="Player/Head"]
 
 [node name="Model" type="Node3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -2847,6 +2858,9 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
+[node name="Settings" parent="UIManager" instance=ExtResource("23_7knny")]
+visible = false
+
 [node name="ControllerManager" type="Node" parent="."]
 script = ExtResource("21_hb5m1")
 
@@ -2866,8 +2880,17 @@ grow_vertical = 2
 [node name="Camera3" type="Camera3D" parent="StreetCam"]
 transform = Transform3D(0.326704, -0.511284, 0.794892, 0, 0.841042, 0.540968, -0.945126, -0.176736, 0.274772, 18.7818, 12.7821, 6.49236)
 
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 1.74533e-05, 0, 1, 0, -1.74533e-05, 0, 1, 7.5738, 10.6381, 2.25277)
+stream = ExtResource("30_36jdj")
+unit_size = 6.19
+autoplay = true
+max_distance = 30.0
+parameters/looping = true
+script = ExtResource("26_dhpj7")
+
 [node name="BUILDING" parent="." instance=ExtResource("24_f1jbl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.64649, 1.4727, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.86119, 1.94145, 0.128264)
 
 [node name="DirectionalLight3D" type="OmniLight3D" parent="BUILDING"]
 transform = Transform3D(0.0127216, -0.585297, 0.810719, 0.00918324, 0.810819, 0.585225, -0.999877, 4.65604e-10, 0.0156899, 4.61125, 2.57405, 13.1462)
@@ -2963,6 +2986,10 @@ light_energy = 6.141
 light_indirect_energy = 3.586
 light_volumetric_fog_energy = 1.485
 omni_range = 9.41209
+
+[node name="AudioManager" type="Node3D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("32_7knny")
 
 [connection signal="body_entered" from="Laptop/Area3D" to="Laptop" method="_on_area_3d_body_entered"]
 
