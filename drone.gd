@@ -1,8 +1,8 @@
 extends CharacterBody3D
 
 
-const GRAVITY := -50 # м/с², на глаз или через тесты
-const MAX_FALL_SPEED := 50.0
+const GRAVITY := -40 # м/с², на глаз или через тесты
+const MAX_FALL_SPEED := 40.0
 
 @export var base_mass := 1.0  # масса пустого дрона
 var current_mass := base_mass  # масса с учётом груза
@@ -21,7 +21,8 @@ var current_mass := base_mass  # масса с учётом груза
 @onready var camera1 := $CameraPivot/Camera3D
 @onready var camera2 := $CameraPivot2/Camera3D2
 @onready var model = $Model
-
+var control_yaw: float = 0.0       # мгновенный отклик мыши
+var model_lag_speed: float = 5.0   # скорость плавного поворота модели (настройка)
 @onready var label_hint := $"../drop/Label_Interact"
 @onready var label_status := $"../HUD/GrabLabel"
 
@@ -48,8 +49,10 @@ var base_distance : float    # нормальная дистанция (наст
 @export var use_fov := true
 @export var base_fov : float
 @export var far_fov : float
-
-
+@export var new_control :bool = true
+@export var flight_assistant: bool = false
+var volume_occlusion_db: float = 0.0 # от AudioManager
+var volume_local_db: float = -30.0   # от скорости винтов
 var joint: PinJoint3D = null
 var current_camera_index: int = 1
 var current_tilt := Vector3.ZERO
@@ -222,12 +225,20 @@ func _process_rotation_and_tilt(delta):
 
 	
 func _process_mouse_camera(delta):
-	if mouse_joystick_active:
-		rotate_object_local(Vector3.UP, -deg_to_rad(mouse_delta.x * mouse_sensitivity))
+	if !new_control: 
+		if mouse_joystick_active:
+			rotate_object_local(Vector3.UP, -deg_to_rad(mouse_delta.x * mouse_sensitivity))
+			mouse_delta = Vector2.ZERO
+		else:
+			rotation_degrees.x = lerp(rotation_degrees.x, default_pitch, delta * 2.0)
+	# --- управляем направлением мгновенно ---
+	else: 
+		control_yaw += -deg_to_rad(mouse_delta.x * mouse_sensitivity)
 		mouse_delta = Vector2.ZERO
-	else:
-		rotation_degrees.x = lerp(rotation_degrees.x, default_pitch, delta * 2.0)
 
+		# --- визуальная модель догоняет с лагом ---
+		var target_yaw = control_yaw
+		model.rotation.y = lerp_angle(model.rotation.y, target_yaw, delta * model_lag_speed)
 	if Input.is_action_pressed("rotate_camera_up"):
 		_rotate_camera(-1)
 	if Input.is_action_pressed("rotate_camera_down"):
@@ -266,8 +277,8 @@ func _process_interaction(delta):
 		grabbed_box.linear_velocity = direction * 10.0
 
 func _process_engine_and_blades(delta):
-	
-	var target_blade_speed = 13000.0 if engine_enabled else 0.0
+	# --- вращение лопастей ---
+	var target_blade_speed = 3000.0 if engine_enabled else 0.0
 	blade_speed = lerp(blade_speed, target_blade_speed, delta * 5.0)
 	var rotation_amount = deg_to_rad(blade_speed * delta)
 	blade1.rotate_y(rotation_amount)
@@ -275,15 +286,22 @@ func _process_engine_and_blades(delta):
 	blade3.rotate_y(rotation_amount)
 	blade4.rotate_y(rotation_amount)
 
+	# --- запуск звука ---
 	if engine_enabled and not blade_sound.playing:
 		blade_sound.play()
 
-	var target_volume_db = max_volume_db if moving else (-30.0 if engine_enabled else min_volume_db)
-	blade_sound.volume_db = lerp(blade_sound.volume_db, target_volume_db, delta * fade_speed)
+	# --- локальная громкость ---
+	var target_local_db = max_volume_db if moving else (-30.0 if engine_enabled else min_volume_db)
+	volume_local_db = lerp(volume_local_db, target_local_db, delta * fade_speed)
 
+	# --- локальный питч ---
 	var target_pitch = (max_pitch if moving else 0.7) if engine_enabled else min_pitch
 	blade_sound.pitch_scale = lerp(blade_sound.pitch_scale, target_pitch, delta * fade_speed)
 
+	# --- применяем итоговую громкость (локальная + occlusion) ---
+	blade_sound.volume_db = volume_local_db + volume_occlusion_db
+
+	# --- остановка звука ---
 	if not engine_enabled and blade_sound.volume_db <= min_volume_db + 1.0 and blade_sound.playing:
 		blade_sound.stop()
 
