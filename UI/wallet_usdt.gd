@@ -1,8 +1,5 @@
 extends Control
 
-# Балансы
-var wallet_usdt: float = 100.0
-var card_usd: float = 0.0
 
 # Данные продавцов
 var sellers = [
@@ -10,9 +7,7 @@ var sellers = [
 	{"name": "Trader_B", "success": 82, "rate": 0.99},
 	{"name": "Trader_C", "success": 60, "rate": 1.02},
 ]
-
 # UI refs
-@onready var ui_manager = $".."
 @onready var wallet_panel = %WalletPanel
 @onready var usdt_label = %WalletPanel/USDTLabel
 @onready var card_label = %WalletPanel/CardLabel
@@ -39,12 +34,12 @@ func _ready():
 	%MarketPanel/BackBtn.pressed.connect(_back_wallet)
 	%DealPanel/CancelDealBtn.pressed.connect(_back_market)
 	%DealPanel/ConfirmDealBtn.pressed.connect(_confirm_deal)
-	$TextureRect/Header/Close_wallet.pressed.connect(func(): ui_manager.close_panel("Wallet_USDT"))
-	%WaitPanel/Close_wallet.pressed.connect(func(): ui_manager.close_panel("Wallet_USDT"))
-	texture_rect.mouse_filter = Control.MOUSE_FILTER_STOP
+	$TextureRect/Header/Close_wallet.pressed.connect(func(): UIManager.close_panel("Wallet_USDT"))
+	%WaitPanel/Close_wallet.pressed.connect(func(): UIManager.close_panel("Wallet_USDT"))
+	#texture_rect.mouse_filter = Control.MOUSE_FILTER_STOP
 	timer.timeout.connect(_on_timer_timeout)
 
-func open_wallet():
+func refresh():
 	_refresh_wallet()
 	if current_deal and current_deal["status"] == "pending":
 		wallet_panel.visible = false
@@ -57,9 +52,10 @@ func open_wallet():
 		deal_panel.visible = false
 		wait_panel.visible = false
 		_back_wallet()
+
 	
 func _refresh_wallet():
-	usdt_label.text = "%.2f USDT" % wallet_usdt
+	usdt_label.text = "%.2f USDT" % GameState.wallet_usdt
 
 # --- Market ---
 func _open_market():
@@ -115,7 +111,7 @@ func _confirm_deal():
 
 
 
-	if amount <= 0 or amount > wallet_usdt:
+	if amount <= 0 or amount > GameState.wallet_usdt:
 		_notify("❌ Недостаточно USDT")
 		return
 	_start_wait(amount,current_seller)
@@ -129,8 +125,7 @@ func _start_wait(amount: float, seller: Dictionary):
 	wait_panel.visible = true
 	pb.value = 0
 	pb.max_value = wait_time
-	# списали крипту
-	#wallet_usdt -= amount
+
 	current_deal = {
 		"amount": amount,
 		"rate": seller["rate"],
@@ -165,10 +160,10 @@ func _finish_deal(amount: float, seller: Dictionary):
 	var roll = randf() * 100
 	if roll <= chance:
 		current_deal["status"] = "success"
-		wallet_usdt -= amount
-		var usd = amount * seller["rate"]
-		card_usd += usd
-		_notify("✅ Успех! На карту пришло %.2f USD" % usd)
+		var sum = amount * seller["rate"]
+		GameState.card_usd + sum
+		GameState.wallet_usdt -sum
+		_notify("✅ Успех! На карту пришло %.2f USD" % sum)
 	else:
 		current_deal["status"] = "fail"
 		_notify("❌ Сделка сорвалась")

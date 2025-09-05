@@ -23,7 +23,7 @@ func start_transition():
 
 	var t = create_tween()
 	t.tween_property(fade, "modulate:a", 1.0, 1.0).set_trans(Tween.TRANS_SINE)
-	t.tween_callback(Callable(self, "_go_to_menu"))
+	t.tween_callback(Callable(self, "start"))
 
-func _go_to_menu():
-	get_tree().change_scene_to_file("res://Menu.tscn")
+func start():
+	SceneManager.go_to_main_menu()

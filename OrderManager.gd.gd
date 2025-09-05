@@ -7,12 +7,12 @@ signal order_failed(order)
 
 @onready var game = get_node("/root/game")  # Game.gd
 @onready var player = $"../Player"
-@onready var wallet_usdt = $"../UIManager/Wallet_USDT"
+
 
 var active_orders: Array = []
 
 # Создание нового заказа
-func create_order(address: Vector3, payment: int, duration_seconds: float):
+func create_order(address: Vector3, payment: float, duration_seconds: float):
 	var order = {
 		"address": address,
 		"payment": payment,
@@ -34,7 +34,7 @@ func _process(delta):
 			# Проверка зоны доставки
 			if player_pos.distance_to(order.address) < 2.0:
 				order.delivered = true
-				wallet_usdt.wallet_usdt += order.payment
+				GameState.wallet_usdt += order.payment
 				emit_signal("order_completed", order)
 				to_remove.append(order)
 			# Проверка дедлайна

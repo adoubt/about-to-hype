@@ -14,7 +14,7 @@ var current_mass := base_mass  # масса с учётом груза
 @export var tilt_smoothness := 5.0 #правлность наклона
 @export var vertical_smoothness := 2.0 #правлность ветикального разгона
 @export var factor_stop = 0.4 #чем больше тем плавнее остановка 0.4
-@onready var ui_manager = $"../UIManager"
+@onready var ui_manager = UIManager
 
 @onready var camera_pivot = $CameraPivot
 @onready var camera_pivot2 = $CameraPivot2
@@ -26,7 +26,6 @@ var model_lag_speed: float = 5.0   # скорость плавного пово�
 @onready var label_hint := $"../drop/Label_Interact"
 @onready var label_status := $"../HUD/GrabLabel"
 
-@onready var current_camera_status := $"../Current_camera"
 @onready var grab_area := $Area3D
 @onready var blade1 := $Model/Blade1pivot
 @onready var blade2 := $Model/Blade2pivot
@@ -49,7 +48,7 @@ var base_distance : float    # нормальная дистанция (наст
 @export var use_fov := true
 @export var base_fov : float
 @export var far_fov : float
-@export var new_control :bool = true
+@export var drone_new_control :bool = true
 @export var flight_assistant: bool = false
 var volume_occlusion_db: float = 0.0 # от AudioManager
 var volume_local_db: float = -30.0   # от скорости винтов
@@ -99,7 +98,7 @@ func toggle_camera() -> void:
 		camera1.make_current()
 		current_camera_index = 1
 		
-func get_active_camera() -> Camera3D:
+func get_current_camera() -> Camera3D:
 	return camera1 if current_camera_index == 1 else camera2
 		
 func _input(event):
@@ -225,7 +224,7 @@ func _process_rotation_and_tilt(delta):
 
 	
 func _process_mouse_camera(delta):
-	if !new_control: 
+	if !SettingsManager.values["drone_new_control"]: 
 		if mouse_joystick_active:
 			rotate_object_local(Vector3.UP, -deg_to_rad(mouse_delta.x * mouse_sensitivity))
 			mouse_delta = Vector2.ZERO
@@ -292,14 +291,14 @@ func _process_engine_and_blades(delta):
 
 	# --- локальная громкость ---
 	var target_local_db = max_volume_db if moving else (-30.0 if engine_enabled else min_volume_db)
-	volume_local_db = lerp(volume_local_db, target_local_db, delta * fade_speed)
+	blade_sound.volume_local_db = lerp(blade_sound.volume_local_db, target_local_db, delta * fade_speed)
 
 	# --- локальный питч ---
 	var target_pitch = (max_pitch if moving else 0.7) if engine_enabled else min_pitch
 	blade_sound.pitch_scale = lerp(blade_sound.pitch_scale, target_pitch, delta * fade_speed)
 
 	# --- применяем итоговую громкость (локальная + occlusion) ---
-	blade_sound.volume_db = volume_local_db + volume_occlusion_db
+	#blade_sound.volume_db = volume_local_db + volume_occlusion_db
 
 	# --- остановка звука ---
 	if not engine_enabled and blade_sound.volume_db <= min_volume_db + 1.0 and blade_sound.playing:

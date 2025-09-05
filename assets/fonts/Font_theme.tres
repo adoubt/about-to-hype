@@ -1,9 +1,8 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://lrgo7wl6w1c0"]
-
-[ext_resource type="FontFile" uid="uid://bjrss4qesetwq" path="res://assets/fonts/DarumadropOne-Regular.ttf" id="1_lficy"]
+[gd_resource type="Theme" format=3 uid="uid://lrgo7wl6w1c0"]
 
 [resource]
-default_font = ExtResource("1_lficy")
-Button/colors/icon_disabled_color = Color(1, 0, 0, 0.4)
-Button/colors/icon_normal_color = Color(0, 0, 0, 1)
-Button/colors/icon_pressed_color = Color(0, 0, 0, 1)
+default_font_size = 17
+Button/colors/icon_disabled_color = Color(1, 0.840027, 0.813055, 0.4)
+Button/colors/icon_normal_color = Color(0.909804, 0, 0, 1)
+Button/colors/icon_pressed_color = Color(0, 0.909804, 0, 1)
+Button/styles/pressed = null

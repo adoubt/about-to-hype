@@ -1,4 +1,4 @@
-[gd_scene load_steps=205 format=4 uid="uid://cs3guckxlcjyi"]
+[gd_scene load_steps=198 format=4 uid="uid://cs3guckxlcjyi"]
 
 [ext_resource type="Script" uid="uid://ctrfp37708not" path="res://game.gd" id="1_80cx4"]
 [ext_resource type="AudioStream" uid="uid://bt8wqhs8owrj7" path="res://Drone Noise Test - DJI Avata vs DJI FPV vs DJI Mavic 3 vs DJI Air 2S.mp3" id="2_fc0e3"]
@@ -14,16 +14,11 @@
 [ext_resource type="PackedScene" uid="uid://30f5pbdigma0" path="res://addons/kaykit_city_builder_bits/Assets/gltf/building_F.gltf" id="11_boyg6"]
 [ext_resource type="PackedScene" uid="uid://dw7mcha5k0bi7" path="res://addons/kaykit_city_builder_bits/Assets/gltf/building_G.gltf" id="12_e36ub"]
 [ext_resource type="PackedScene" uid="uid://bb0yd1x23ifjr" path="res://addons/kaykit_city_builder_bits/Assets/gltf/building_H.gltf" id="13_hb5m1"]
-[ext_resource type="PackedScene" uid="uid://2n8tbm3osyqw" path="res://esc_menu.tscn" id="15_e8heu"]
 [ext_resource type="PackedScene" uid="uid://l8p1552i1cd4" path="res://laptop.tscn" id="16_e8heu"]
 [ext_resource type="FontFile" uid="uid://bgpdq8f1rcc1p" path="res://assets/fonts/SFPRODISPLAYHEAVYITALIC.OTF" id="17_bnpwn"]
 [ext_resource type="Script" uid="uid://db4o41je6fqbp" path="res://laptop.gd" id="17_rvswv"]
-[ext_resource type="Script" uid="uid://bgnapcb7ii40x" path="res://ui_manager.gd" id="18_e36ub"]
 [ext_resource type="Script" uid="uid://rlqnl5vb5p2b" path="res://player.gd" id="18_rvswv"]
-[ext_resource type="PackedScene" uid="uid://buk8u6pxakrg6" path="res://wallet_usdt.tscn" id="19_boyg6"]
-[ext_resource type="Script" uid="uid://vrc5fp43jlho" path="res://controller_manager.gd" id="21_hb5m1"]
 [ext_resource type="Script" uid="uid://deg13n8ftofyk" path="res://StreetCam.gd" id="22_x5p1p"]
-[ext_resource type="PackedScene" uid="uid://boxcl4vey5uwq" path="res://settings.tscn" id="23_7knny"]
 [ext_resource type="PackedScene" uid="uid://dyr4si0jpc4wr" path="res://building.tscn" id="24_f1jbl"]
 [ext_resource type="Script" uid="uid://c6n1jp1wp7ahe" path="res://OrderManager.gd.gd" id="24_vaj68"]
 [ext_resource type="FontFile" uid="uid://bxqutki8x48t1" path="res://assets/fonts/SFPRODISPLAYBOLD.OTF" id="25_5b14r"]
@@ -31,8 +26,6 @@
 [ext_resource type="Script" uid="uid://dh5abgdsssrqo" path="res://SubViewportUI.gd" id="25_xa8c5"]
 [ext_resource type="Script" uid="uid://wxb573o058my" path="res://AudioSource3D.gd" id="26_dhpj7"]
 [ext_resource type="FontFile" uid="uid://cqipr3ixo4xi1" path="res://assets/fonts/SFPRODISPLAYTHINITALIC.OTF" id="28_bnpwn"]
-[ext_resource type="AudioStream" uid="uid://b3vmgtaw8642s" path="res://assets/sound/1231.mp3" id="30_36jdj"]
-[ext_resource type="Script" uid="uid://d3xhaa05nga6m" path="res://audio_manager.gd" id="32_7knny"]
 
 [sub_resource type="Environment" id="Environment_i2p71"]
 background_mode = 1
@@ -2840,32 +2833,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0509899)
 mesh = SubResource("CapsuleMesh_f1jbl")
 
-[node name="UIManager" type="Node" parent="."]
-script = ExtResource("18_e36ub")
-
-[node name="Escape" parent="UIManager" instance=ExtResource("15_e8heu")]
-visible = false
-visibility_layer = 2
-metadata/_edit_use_anchors_ = true
-
-[node name="Wallet_USDT" parent="UIManager" instance=ExtResource("19_boyg6")]
-visible = false
-
-[node name="Shop" type="Control" parent="UIManager"]
-visible = false
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Settings" parent="UIManager" instance=ExtResource("23_7knny")]
-visible = false
-
-[node name="ControllerManager" type="Node" parent="."]
-script = ExtResource("21_hb5m1")
-
 [node name="StreetCam" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.2814, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -73.4814, 0, 0)
 script = ExtResource("22_x5p1p")
 
 [node name="ColorRect" type="ColorRect" parent="StreetCam"]
@@ -2878,16 +2847,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Camera3" type="Camera3D" parent="StreetCam"]
-transform = Transform3D(0.326704, -0.511284, 0.794892, 0, 0.841042, 0.540968, -0.945126, -0.176736, 0.274772, 18.7818, 12.7821, 6.49236)
-
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
-transform = Transform3D(1, 0, 1.74533e-05, 0, 1, 0, -1.74533e-05, 0, 1, 7.5738, 10.6381, 2.25277)
-stream = ExtResource("30_36jdj")
-unit_size = 6.19
-autoplay = true
-max_distance = 30.0
-parameters/looping = true
-script = ExtResource("26_dhpj7")
+transform = Transform3D(0.524909, 0.46045, -0.71586, 1.92968e-08, 0.841042, 0.540969, 0.851158, -0.28396, 0.441471, 33.03, 12.7821, 6.49236)
 
 [node name="BUILDING" parent="." instance=ExtResource("24_f1jbl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.86119, 1.94145, 0.128264)
@@ -2986,10 +2946,6 @@ light_energy = 6.141
 light_indirect_energy = 3.586
 light_volumetric_fog_energy = 1.485
 omni_range = 9.41209
-
-[node name="AudioManager" type="Node3D" parent="."]
-unique_name_in_owner = true
-script = ExtResource("32_7knny")
 
 [connection signal="body_entered" from="Laptop/Area3D" to="Laptop" method="_on_area_3d_body_entered"]
 

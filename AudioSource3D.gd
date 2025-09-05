@@ -1,17 +1,17 @@
 
 extends AudioStreamPlayer3D
 
-@onready var audio_manager = %AudioManager
-@export var wall_mask: int = 1 << 1
+
+@export var wall_mask: int = 1 << 0
 @export var occlusion_db: float = -20.0
 @export var fade_speed: float = 5.0
 var volume_local_db: float = 0.0       # управляется локально (движение, скорость)
-var volume_occlusion_db: float = 0.0   # управляется AudioManager
+var volume_occlusion_db: float =  0.0  # управляется AudioManager
 func _ready():
-	audio_manager.register_source(self)
+	AudioManager.register_source(self)
 
 func _exit_tree():
-	audio_manager.unregister_source(self)
+	AudioManager.unregister_source(self)
 func update_volume():
 	# итоговая громкость = локальная + occlusion
 	volume_db = volume_local_db + volume_occlusion_db

@@ -11,5 +11,5 @@ func set_input_enabled(state: bool) -> void:
 	input_enabled = state
 
 		
-func get_active_camera() -> Camera3D:
+func get_current_camera() -> Camera3D:
 	return street_camera

@@ -1,0 +1,224 @@
+[gd_scene load_steps=9 format=3 uid="uid://buk8u6pxakrg6"]
+
+[ext_resource type="Script" uid="uid://ctc0wnsadvk4b" path="res://UI/wallet_usdt.gd" id="1_1nhjd"]
+[ext_resource type="FontFile" uid="uid://bgpdq8f1rcc1p" path="res://assets/fonts/SFPRODISPLAYHEAVYITALIC.OTF" id="1_41eps"]
+[ext_resource type="Shader" uid="uid://b8t4xvxk753le" path="res://UI/wallet_usdt.gdshader" id="2_hto7n"]
+[ext_resource type="Texture2D" uid="uid://cl5sb2pwr0qq" path="res://assets/icons/Wallet.png" id="4_pmhv0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hto7n"]
+
+[sub_resource type="Theme" id="Theme_pmhv0"]
+default_font = ExtResource("1_41eps")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_id6wk"]
+shader = ExtResource("2_hto7n")
+shader_parameter/color_a = Color(0.031, 0.094, 0.302, 1)
+shader_parameter/color_b = Color(0.984, 0.8, 0.937, 1)
+shader_parameter/scale = 6.7
+shader_parameter/speed = 0.38
+shader_parameter/contrast = 0.48
+shader_parameter/brightness = -0.9
+shader_parameter/octaves = 1
+shader_parameter/lacunarity = 2.0
+shader_parameter/gain = 0.5
+shader_parameter/use_texture = false
+shader_parameter/texture_mix = 0.5
+shader_parameter/seed = 0.0
+shader_parameter/offset = Vector2(0, 0)
+
+[sub_resource type="Texture2DRD" id="Texture2DRD_hto7n"]
+
+[node name="Wallet_USDT" type="Control"]
+material = SubResource("ShaderMaterial_hto7n")
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 29.0
+offset_top = 7.0
+offset_right = 29.0
+offset_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_pmhv0")
+script = ExtResource("1_1nhjd")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_id6wk")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -238.0
+offset_top = -256.0
+offset_right = 248.0
+offset_bottom = 256.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 1
+texture = SubResource("Texture2DRD_hto7n")
+
+[node name="WalletPanel" type="VBoxContainer" parent="TextureRect"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -66.0
+offset_bottom = 66.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+
+[node name="Label2" type="Label" parent="TextureRect/WalletPanel"]
+layout_mode = 2
+text = "Balance"
+horizontal_alignment = 1
+
+[node name="USDTLabel" type="Label" parent="TextureRect/WalletPanel"]
+layout_mode = 2
+text = "$100"
+horizontal_alignment = 1
+
+[node name="CardLabel" type="Label" parent="TextureRect/WalletPanel"]
+layout_mode = 2
+
+[node name="ToMarketBtn" type="Button" parent="TextureRect/WalletPanel"]
+layout_mode = 2
+text = "P2P MARKET
+"
+
+[node name="MarketPanel" type="VBoxContainer" parent="TextureRect"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -55.5
+offset_top = -31.0
+offset_right = 45.5
+offset_bottom = 31.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="TextureRect/MarketPanel"]
+layout_mode = 2
+text = "P2P MARKET"
+
+[node name="SellerList" type="VBoxContainer" parent="TextureRect/MarketPanel"]
+layout_mode = 2
+
+[node name="BackBtn" type="Button" parent="TextureRect/MarketPanel"]
+layout_mode = 2
+text = "BACK
+"
+
+[node name="DealPanel" type="VBoxContainer" parent="TextureRect"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -53.5
+offset_top = -81.5
+offset_right = 43.5
+offset_bottom = 81.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DealInfo" type="Label" parent="TextureRect/DealPanel"]
+layout_mode = 2
+
+[node name="AmountEdit" type="LineEdit" parent="TextureRect/DealPanel"]
+layout_mode = 2
+placeholder_text = "USDT amount"
+
+[node name="CardEdit" type="LineEdit" parent="TextureRect/DealPanel"]
+layout_mode = 2
+placeholder_text = "Card number"
+
+[node name="CancelDealBtn" type="Button" parent="TextureRect/DealPanel"]
+layout_mode = 2
+text = "Cancel"
+
+[node name="ConfirmDealBtn" type="Button" parent="TextureRect/DealPanel"]
+layout_mode = 2
+text = "Create deal"
+
+[node name="WaitPanel" type="VBoxContainer" parent="TextureRect"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -95.5
+offset_top = -58.0
+offset_right = 85.5
+offset_bottom = 58.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="WaitLabel" type="Label" parent="TextureRect/WaitPanel"]
+layout_mode = 2
+text = "Ожидание перевода..."
+
+[node name="TimerLabel" type="Label" parent="TextureRect/WaitPanel"]
+layout_mode = 2
+text = "01:00"
+
+[node name="PB" type="ProgressBar" parent="TextureRect/WaitPanel"]
+layout_mode = 2
+
+[node name="Close_wallet" type="Button" parent="TextureRect/WaitPanel"]
+layout_mode = 2
+text = "Exit
+"
+
+[node name="Timer" type="Timer" parent="TextureRect/WaitPanel"]
+unique_name_in_owner = true
+one_shot = true
+
+[node name="Header" type="BoxContainer" parent="TextureRect"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 64.0
+grow_horizontal = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TextureRect/Header"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+
+[node name="TextureRect" type="TextureRect" parent="TextureRect/Header/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("4_pmhv0")
+
+[node name="Label" type="Label" parent="TextureRect/Header/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 0
+text = "WAllet"
+uppercase = true
+
+[node name="Close_wallet" type="Button" parent="TextureRect/Header"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Exit
+"
+
+[connection signal="timeout" from="TextureRect/WaitPanel/Timer" to="." method="_on_timer_timeout"]

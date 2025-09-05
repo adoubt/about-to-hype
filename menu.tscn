@@ -1,45 +1,118 @@
-[gd_scene load_steps=3 format=3 uid="uid://dcirc02tx3del"]
+[gd_scene load_steps=8 format=3 uid="uid://dcirc02tx3del"]
 
 [ext_resource type="Script" uid="uid://c5fh12yk1o0ou" path="res://menu.gd" id="1_lti8b"]
-[ext_resource type="Theme" uid="uid://lrgo7wl6w1c0" path="res://assets/fonts/Font_theme.tres" id="1_ouk20"]
+[ext_resource type="PackedScene" uid="uid://dyr4si0jpc4wr" path="res://building.tscn" id="3_mae5d"]
+[ext_resource type="Script" uid="uid://bsglttqymu1yo" path="res://menu_camera_flow.gd" id="4_4hy44"]
 
-[node name="Menu" type="Control"]
-layout_mode = 3
+[sub_resource type="Environment" id="Environment_mae5d"]
+background_mode = 1
+background_color = Color(0.00820202, 0.00820202, 0.00820202, 1)
+
+[sub_resource type="Animation" id="Animation_4hy44"]
+resource_name = "MenuCameraFlow"
+length = 11.7595
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SubViewportContainer/SubViewport/MenuCameraFlow/Camera3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(-0.333333, 0, 3.55, 6.24, 6.97, 8.12, 9.77, 11.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 12.5646, 27.3053), Vector3(-0.114245, 11.7605, 26.8837), Vector3(-1.33096, 3.19712, 22.3927), Vector3(2.5586, 3.13684, 2.32065), Vector3(3.02225, 3.88155, -2.50385), Vector3(5.572, 4.942, -3.714), Vector3(6.172, 5.557, 21.956), Vector3(-0.114245, 11.7605, 26.8837)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SubViewportContainer/SubViewport/MenuCameraFlow/Camera3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(-0.766667, 0, 2.96667, 5.08, 6.86667, 8.16667, 9.77, 10.9667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -0.0383972, 1.08385), Vector3(0, -0.216421, 0), Vector3(-0.00174533, -0.188496, -0.649262), Vector3(0.218166, 3.13985, -0.181514), Vector3(-0.649262, 2.70701, -0.614356), Vector3(-0.893609, 1.16239, -0.397935), Vector3(0, -0.0383972, 1.08385)]
+}
+
+[sub_resource type="Animation" id="Animation_ytr4m"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SubViewportContainer/SubViewport/MenuCameraFlow/Camera3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 12.5646, 27.3053)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SubViewportContainer/SubViewport/MenuCameraFlow/Camera3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l48gv"]
+_data = {
+&"MenuCameraFlow": SubResource("Animation_4hy44"),
+&"RESET": SubResource("Animation_ytr4m")
+}
+
+[node name="Menu" type="Node3D"]
+script = ExtResource("1_lti8b")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_mae5d")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="WorldEnvironment"]
+transform = Transform3D(1, 0, 0, 0, -0.351499, 0.936188, 0, -0.936188, -0.351499, 2.03329, 24.8312, 0)
+spot_range = 48.9225
+spot_angle = 45.483
+
+[node name="OmniLight3D" type="OmniLight3D" parent="WorldEnvironment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.11264, 0.465271, 14.3984)
+light_color = Color(1, 0.231373, 0.258824, 1)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.287, -2.08116, 15.7217)
+size = Vector3(83.6172, 1, 81.632)
+
+[node name="Hub" parent="." instance=ExtResource("3_mae5d")]
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_ouk20")
-script = ExtResource("1_lti8b")
+stretch = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -146.0
-offset_top = -33.0
-offset_right = 19.0
-offset_bottom = 33.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(2, 2)
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
 
-[node name="Play" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-text = "PLAY"
+[node name="MenuCameraFlow" type="Node3D" parent="SubViewportContainer/SubViewport"]
+script = ExtResource("4_4hy44")
 
-[node name="Settings" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-text = "SETTINGS"
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport/MenuCameraFlow"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.5646, 27.3053)
+current = true
 
-[node name="Exit" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-text = "EXIT"
-
-[connection signal="pressed" from="VBoxContainer/Play" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="VBoxContainer/Settings" to="." method="_on_settings_pressed"]
-[connection signal="pressed" from="VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_l48gv")
+}
+autoplay = "MenuCameraFlow"

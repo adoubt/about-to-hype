@@ -17,7 +17,7 @@ func _ready() -> void:
 func set_input_enabled(state: bool) -> void:
 	input_enabled = state
 	
-func get_active_camera() -> Camera3D:
+func get_current_camera() -> Camera3D:
 	return player_camera
 	
 func _unhandled_input(event: InputEvent) -> void:

@@ -2,7 +2,7 @@ extends Control
 class_name EscapeMenu   # чтобы UIManager мог зарегистрировать
 
 @onready var vbox = $VBoxContainer
-
+@onready var continue_btn = $VBoxContainer/Continue
 # --- Цвета ---
 var normal_color: Color = Color(0.2, 0.6, 1.0)
 var hover_color: Color = Color(0.35, 0.7, 1.0)
@@ -14,7 +14,6 @@ var corner_radius: float = 14.0
 var hover_scale: Vector2 = Vector2(1.15, 1.15)
 var pressed_scale: Vector2 = Vector2(0.95, 0.95)
 var anim_time: float = 0.32
-@onready var ui_manager = $".."
 func _ready():
 	visible = false  # панели всегда стартуют скрытыми
 	for btn in vbox.get_children():
@@ -23,8 +22,8 @@ func _ready():
 			_connect_animation(btn)
 
 	# Подключаем кнопки к действиям
-	$VBoxContainer/Continue.pressed.connect(
-		func(): ui_manager.close_escape_menu()
+	continue_btn.pressed.connect(
+		func(): UIManager.close_escape_menu()
 	)
 	#$VBoxContainer/Restart.pressed.connect(_on_restart_pressed)
 	#$VBoxContainer/Menu.pressed.connect(_on_menu_pressed)
@@ -55,17 +54,21 @@ func _connect_animation(btn: Button) -> void:
 	btn.mouse_exited.connect(Callable(self, "_tween_scale").bind(btn, Vector2(1,1)))
 	btn.pressed.connect(Callable(self, "_tween_scale").bind(btn, pressed_scale))
 	btn.button_up.connect(Callable(self, "_tween_scale").bind(btn, hover_scale))
-
+	
 func _tween_scale(btn: Button, target_scale: Vector2) -> void:
 	var tween = create_tween()
 	tween.tween_property(btn, "scale", target_scale, anim_time).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 
 # --- Кнопки ---
 func _on_restart_pressed() -> void:
-	get_tree().change_scene_to_file("res://Game.tscn")
+	SceneManager.go_to_game()
 
 func _on_menu_pressed() -> void:
-	get_tree().change_scene_to_file("res://Menu.tscn")
+	SceneManager.go_to_main_menu()
 
 func _on_exit_pressed() -> void:
-	get_tree().quit()
+	SceneManager.exit()
+
+
+func _on_settings_pressed() -> void:
+	UIManager.open_settings()

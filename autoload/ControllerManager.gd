@@ -1,5 +1,4 @@
 extends Node
-class_name ControllerManager
 
 var controllables: Array = []
 var current_index: int = -1  # -1 значит никто не активен
@@ -47,6 +46,12 @@ func register(obj: Node, requires_input: bool = true) -> void:
 			obj.set_input_enabled(true)
 			_set_camera(obj)
 
+func refresh():
+	controllables = []
+	current_index = -1
+	
+func unregister(obj: Node) -> void:
+	pass
 # Переключение на следующего активного игрока/дрон (по кругу)
 func switch_next() -> void:
 	if controllables.is_empty():
@@ -86,9 +91,15 @@ func get_active() -> Node:
 		return controllables[current_index]["node"]
 	return null
 
+func get_current_camera() -> Camera3D:
+	var obj = get_active()
+	if obj and obj.has_method("get_current_camera"):
+		return obj.get_current_camera()
+	return null
 # --- Внутреннее ---
 func _set_camera(obj: Node):
-	if obj.has_method("get_active_camera"):
-		var cam = obj.get_active_camera()
+	if obj.has_method("get_current_camera"):
+		var cam = obj.get_current_camera()
 		if cam:
 			cam.make_current()
+			

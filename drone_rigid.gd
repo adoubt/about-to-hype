@@ -14,7 +14,7 @@ var current_mass := base_mass  # масса с учётом груза
 @export var tilt_smoothness := 5.0 #правлность наклона
 @export var vertical_smoothness := 2.0 #правлность ветикального разгона
 @export var factor_stop = 0.4 #чем больше тем плавнее остановка 0.4
-@onready var ui_manager = $"../UIManager"
+@onready var ui_manager = UIManager
 
 @onready var camera_pivot = $CameraPivot
 @onready var camera_pivot2 = $CameraPivot2
@@ -94,7 +94,7 @@ func toggle_camera() -> void:
 		camera1.make_current()
 		current_camera_index = 1
 		
-func get_active_camera() -> Camera3D:
+func get_current_camera() -> Camera3D:
 	return camera1 if current_camera_index == 1 else camera2
 		
 func _input(event):

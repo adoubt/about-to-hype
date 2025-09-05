@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://buk8u6pxakrg6"]
 
-[ext_resource type="Script" uid="uid://ctc0wnsadvk4b" path="res://wallet_usdt.gd" id="1_1nhjd"]
+[ext_resource type="Script" uid="uid://ctc0wnsadvk4b" path="res://UI/wallet_usdt.gd" id="1_1nhjd"]
 [ext_resource type="FontFile" uid="uid://bgpdq8f1rcc1p" path="res://assets/fonts/SFPRODISPLAYHEAVYITALIC.OTF" id="1_41eps"]
-[ext_resource type="Shader" uid="uid://b8t4xvxk753le" path="res://wallet_usdt.gdshader" id="2_hto7n"]
+[ext_resource type="Shader" uid="uid://b8t4xvxk753le" path="res://UI/wallet_usdt.gdshader" id="2_hto7n"]
 [ext_resource type="Texture2D" uid="uid://cl5sb2pwr0qq" path="res://assets/icons/Wallet.png" id="4_pmhv0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hto7n"]
@@ -42,6 +42,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_pmhv0")
 script = ExtResource("1_1nhjd")
+wait_time = null
 
 [node name="TextureRect" type="TextureRect" parent="."]
 unique_name_in_owner = true
