@@ -161,8 +161,8 @@ func _finish_deal(amount: float, seller: Dictionary):
 	if roll <= chance:
 		current_deal["status"] = "success"
 		var sum = amount * seller["rate"]
-		GameState.card_usd + sum
-		GameState.wallet_usdt -sum
+		GameState.card_usd += sum
+		GameState.wallet_usdt -=sum
 		_notify("✅ Успех! На карту пришло %.2f USD" % sum)
 	else:
 		current_deal["status"] = "fail"

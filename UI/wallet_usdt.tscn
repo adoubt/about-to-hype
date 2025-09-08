@@ -1,14 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://buk8u6pxakrg6"]
+[gd_scene load_steps=8 format=3 uid="uid://buk8u6pxakrg6"]
 
 [ext_resource type="Script" uid="uid://ctc0wnsadvk4b" path="res://UI/wallet_usdt.gd" id="1_1nhjd"]
-[ext_resource type="FontFile" uid="uid://bgpdq8f1rcc1p" path="res://assets/fonts/SFPRODISPLAYHEAVYITALIC.OTF" id="1_41eps"]
+[ext_resource type="Theme" uid="uid://2ocoy8vsxdat" path="res://assets/themes/tab_settings.tres" id="1_kwond"]
 [ext_resource type="Shader" uid="uid://b8t4xvxk753le" path="res://UI/wallet_usdt.gdshader" id="2_hto7n"]
 [ext_resource type="Texture2D" uid="uid://cl5sb2pwr0qq" path="res://assets/icons/Wallet.png" id="4_pmhv0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hto7n"]
-
-[sub_resource type="Theme" id="Theme_pmhv0"]
-default_font = ExtResource("1_41eps")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_id6wk"]
 shader = ExtResource("2_hto7n")
@@ -34,14 +31,19 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 29.0
-offset_top = 7.0
-offset_right = 29.0
-offset_bottom = 7.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = SubResource("Theme_pmhv0")
+theme = ExtResource("1_kwond")
 script = ExtResource("1_1nhjd")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.396078)
 
 [node name="TextureRect" type="TextureRect" parent="."]
 unique_name_in_owner = true

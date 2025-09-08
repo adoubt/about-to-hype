@@ -35,4 +35,4 @@ func _process(delta):
 		
 		if SettingsManager.values["draw_audio_path"]:
 			var color = Color.GREEN if result.is_empty() else Color.RED
-			DebugDraw3D.draw_line(from_pos, to_pos, color,3.0)
+			DebugDraw3D.draw_line(from_pos, to_pos, color,0.3)

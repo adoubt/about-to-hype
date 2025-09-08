@@ -7,7 +7,7 @@ const MAX_FALL_SPEED := 40.0
 @export var base_mass := 1.0  # масса пустого дрона
 var current_mass := base_mass  # масса с учётом груза
 @export var move_speed := 40.0
-@export var time_to_max_speed := 2.0
+@export var time_to_max_speed := 1.0
 @export var ascend_speed := 15.0 #правность горизонтального разгона
 @export var rotation_speed := 360.0
 @export var tilt_amount := 30.0 #угол наклона
@@ -17,14 +17,21 @@ var current_mass := base_mass  # масса с учётом груза
 @onready var ui_manager = UIManager
 
 @onready var camera_pivot = $CameraPivot
-@onready var camera_pivot2 = $CameraPivot2
 @onready var camera1 := $CameraPivot/Camera3D
+@onready var ray_cast_forward: RayCast3D = $CameraPivot/RayCastForward
+@onready var ray_cast_backward: RayCast3D = $CameraPivot/RayCastBackward
+@onready var ray_cast_up: RayCast3D = $CameraPivot/RayCastUp
+
+
+
+@onready var camera_pivot2 = $CameraPivot2
+
 @onready var camera2 := $CameraPivot2/Camera3D2
 @onready var model = $Model
 var control_yaw: float = 0.0       # мгновенный отклик мыши
 var model_lag_speed: float = 5.0   # скорость плавного поворота модели (настройка)
 @onready var label_hint := $"../drop/Label_Interact"
-@onready var label_status := $"../HUD/GrabLabel"
+@onready var label_status := $"../HUDManager/HUD/GrabLabel"
 
 @onready var grab_area := $Area3D
 @onready var blade1 := $Model/Blade1pivot
@@ -41,11 +48,12 @@ var camera_yaw := 0.0
 @export var camera_lag := 1.7
 # дистанции (отрицательная Z — камера позади pivot)
 var base_distance : float    # нормальная дистанция (настроится в _ready)
+var base_height : float  # нормальная высота (настроится в _ready)
 @export var far_distance := 3.0   # насколько дальше отойти при max speed
 @export var zoom_speed := 5.0      # скорость интерполяции дистанции
 
 # альтернативы: изменение FOV
-@export var use_fov := true
+#@export var use_fov_effect := true убрал в настройки
 @export var base_fov : float
 @export var far_fov : float
 @export var drone_new_control :bool = true
@@ -69,19 +77,24 @@ var blade_speed := 0.9
 var moving := false
 var input_enabled: bool = false
 var target_volume_db := -80.0  # тихо, когда мотор выключен
-var max_volume_db := 0.0       # громко, когда мотор включен
-var fade_speed := 1.5          # скорость изменения громкости
-var min_volume_db := -80.0
-var max_pitch := 1.3
-var min_pitch := 0.4
+var max_volume_db := 0.0       # громкость, когда мотор включен
+var fade_speed := 10.5          # скорость изменения громкости
+var min_volume_db := -50.0
+var max_pitch := 2.0
+var min_pitch := 0.5
+
 func _ready():
+	ray_cast_forward.add_exception(self)
+	ray_cast_backward.add_exception(self)
+	ray_cast_up.add_exception(self)
 	grab_area.body_entered.connect(_on_grab_area_body_entered)
 	grab_area.body_exited.connect(_on_grab_area_body_exited)
 	label_hint.visible = false
 	camera_yaw = model.rotation.y
 	camera_pivot.rotation.y = camera_yaw
 	base_distance = camera1.position.z
-	if use_fov:
+	base_height = camera1.position.y
+	if SettingsManager.get_value("use_fov_effect"):
 		base_fov = camera1.fov	
 		far_fov = base_fov + 90
 
@@ -139,7 +152,9 @@ func _physics_process(delta):
 		_process_rotation_and_tilt(delta)
 		_process_mouse_camera(delta)
 		_process_interaction(delta)
-		_process_engine_and_blades(delta)
+		_process_rotation_blades(delta)
+		_process_engine_sound(delta)
+		_apply_shaders()
 	_process_movement(delta)
 	# --- тут обрабатываем камеру ---
 	_update_camera_follow(delta)
@@ -275,7 +290,7 @@ func _process_interaction(delta):
 	
 		grabbed_box.linear_velocity = direction * 10.0
 
-func _process_engine_and_blades(delta):
+func _process_rotation_blades(delta):
 	# --- вращение лопастей ---
 	var target_blade_speed = 3000.0 if engine_enabled else 0.0
 	blade_speed = lerp(blade_speed, target_blade_speed, delta * 5.0)
@@ -285,24 +300,48 @@ func _process_engine_and_blades(delta):
 	blade3.rotate_y(rotation_amount)
 	blade4.rotate_y(rotation_amount)
 
+	
+func _process_engine_sound(delta):
+	# --- предполагаем, что velocity.length() даёт текущую скорость ---
+	var speed = velocity.length()
+	var max_speed = 35  # скорость, на которой громкость и pitch будут максимальными
+	var min_speed = 0   # скорость, при которой будет минимальная громкость и pitch
+
 	# --- запуск звука ---
 	if engine_enabled and not blade_sound.playing:
 		blade_sound.play()
 
 	# --- локальная громкость ---
-	var target_local_db = max_volume_db if moving else (-30.0 if engine_enabled else min_volume_db)
+	# линейно интерполируем громкость от min_volume_db до max_volume_db в зависимости от скорости
+	 
+	var target_local_db = lerp(min_volume_db, max_volume_db, clamp((speed - min_speed) /(1* (max_speed - min_speed)), 0, 1))
 	blade_sound.volume_local_db = lerp(blade_sound.volume_local_db, target_local_db, delta * fade_speed)
 
 	# --- локальный питч ---
-	var target_pitch = (max_pitch if moving else 0.7) if engine_enabled else min_pitch
+	var target_pitch = lerp(min_pitch, max_pitch, clamp((speed - min_speed) /(1*(max_speed - min_speed)), 0, 1))
 	blade_sound.pitch_scale = lerp(blade_sound.pitch_scale, target_pitch, delta * fade_speed)
 
-	# --- применяем итоговую громкость (локальная + occlusion) ---
-	#blade_sound.volume_db = volume_local_db + volume_occlusion_db
-
 	# --- остановка звука ---
-	if not engine_enabled and blade_sound.volume_db <= min_volume_db + 1.0 and blade_sound.playing:
+	if not engine_enabled and blade_sound.volume_local_db <= min_volume_db + 0.5 and blade_sound.playing:
 		blade_sound.stop()
+
+
+#func _process_engine_sound(delta):
+	## --- запуск звука ---
+	#if engine_enabled and not blade_sound.playing:
+		#blade_sound.play()
+#
+	## --- локальная громкость ---
+	#var target_local_db = max_volume_db if moving else (-30.0 if engine_enabled else min_volume_db)
+	#blade_sound.volume_local_db = lerp(blade_sound.volume_local_db, target_local_db, delta * fade_speed)
+#
+	## --- локальный питч ---
+	#var target_pitch = (max_pitch if moving else 0.7) if engine_enabled else min_pitch
+	#blade_sound.pitch_scale = lerp(blade_sound.pitch_scale, target_pitch, delta * fade_speed)
+#
+	## --- остановка звука ---
+	#if not engine_enabled and blade_sound.volume_db <= min_volume_db + 1.0 and blade_sound.playing:
+		#blade_sound.stop()
 
 func _update_camera_follow(delta):
 	# --- лаг поворота (как было) ---
@@ -317,16 +356,63 @@ func _update_camera_follow(delta):
 		var horiz_speed = Vector3(velocity.x, velocity.y, velocity.z).length()
 		var t = clamp(horiz_speed / move_speed, 0.0, 1.0)
 
-		if use_fov:
-			# плавно меняем FOV (альтернатива, безопаснее — не клипает)
+		# --- базовое расстояние до камеры ---
+		var target_dist: float
+		if SettingsManager.get_value("use_fov_effect"):
+			# плавно меняем FOV
 			var target_fov = lerp(base_fov, far_fov, t)
 			camera1.fov = lerp(camera1.fov, target_fov, delta * zoom_speed)
+			target_dist = base_distance
 		else:
-			# отдаляем камеру по Z (чем быстрее — тем дальше)
-			var target_dist = lerp(base_distance, far_distance, t)
-			var cur_z = camera1.position.z   # вместо translation.z
-			cur_z = lerp(cur_z, target_dist, delta * zoom_speed)
+			# отдаляем камеру по Z
+			target_dist = lerp(base_distance, far_distance, t)
 
-			var pos = camera1.position
-			pos.z = cur_z
-			camera1.position = pos
+		# --- проверка назад (стены за дроном) ---
+		if ray_cast_backward.is_colliding():
+			var hit_pos = ray_cast_backward.get_collision_point()
+			var local_hit = camera_pivot.to_local(hit_pos)
+			var safe_dist = abs(local_hit.z) * 0.1
+			target_dist = min(target_dist, safe_dist)
+
+		# --- проверка вперёд (стена перед дроном) ---
+		if ray_cast_forward.is_colliding():
+			var hit_pos = ray_cast_forward.get_collision_point()
+			var local_hit = camera_pivot.to_local(hit_pos)
+			var front_dist = max(0.3, abs(local_hit.z))
+			target_dist = min(target_dist, front_dist)
+
+		# по умолчанию целевая высота = базовой
+		var target_y = base_height
+
+		# если потолок есть → ограничиваем сверху
+		if ray_cast_up.is_colliding():
+			var hit_pos = ray_cast_up.get_collision_point()
+			var local_hit = camera_pivot.to_local(hit_pos)
+			target_y = min(base_height, local_hit.y - 0.5)  # потолок прижимает вниз
+		
+		
+		# --- интерполяция текущей позиции камеры ---
+		var cur_z = lerp(camera1.position.z, target_dist, delta * zoom_speed)
+		var cur_y = lerp(camera1.position.y, target_y, delta * zoom_speed)
+
+		var pos = camera1.position
+		pos.z = cur_z
+		pos.y = cur_y
+		camera1.position = pos
+		
+		
+func _apply_shaders():
+	var speed = velocity.length()
+	var shader_param = 0.0
+
+	# Минимальная скорость для появления линий
+	var min_speed = 15
+	# Максимальная скорость, на которой линии полностью видны
+	var max_speed = 35
+
+	if speed > min_speed:
+		# Линейная интерполяция прозрачности от min_speed до max_speed
+		shader_param = clamp((speed - min_speed) / (max_speed - min_speed), 0.0, 0.4)
+	
+	$"../HUDManager/SpeedLines".material.set_shader_parameter("line_density", shader_param)
+			 

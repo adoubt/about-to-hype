@@ -834,6 +834,64 @@ size_flags_horizontal = 6
 script = ExtResource("6_oflx8")
 settings_key = "drone_new_control"
 
+[node name="Panel3" type="Panel" parent="Control/HBoxContainer/TABCustom/TabContainer/Debug"]
+custom_minimum_size = Vector2(0, 45)
+layout_mode = 2
+theme = ExtResource("1_3ykye")
+theme_override_styles/panel = SubResource("StyleBoxFlat_4v2jo")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/HBoxContainer/TABCustom/TabContainer/Debug/Panel3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_3ykye")
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 7
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 7
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/HBoxContainer/TABCustom/TabContainer/Debug/Panel3/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("1_3ykye")
+theme_override_constants/separation = 220
+
+[node name="Label" type="Label" parent="Control/HBoxContainer/TABCustom/TabContainer/Debug/Panel3/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme = ExtResource("1_3ykye")
+text = "use_fov_effect"
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/HBoxContainer/TABCustom/TabContainer/Debug/Panel3/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_3ykye")
+
+[node name="OptionButton" type="OptionButton" parent="Control/HBoxContainer/TABCustom/TabContainer/Debug/Panel3/MarginContainer/HBoxContainer/HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 17
+theme_override_styles/normal = SubResource("StyleBoxFlat_l1i01")
+selected = 1
+fit_to_longest_item = false
+item_count = 2
+popup/item_0/text = "ON"
+popup/item_0/id = 0
+popup/item_1/text = "OFF"
+popup/item_1/id = 2
+
+[node name="CheckButton" type="CheckButton" parent="Control/HBoxContainer/TABCustom/TabContainer/Debug/Panel3/MarginContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+script = ExtResource("6_oflx8")
+settings_key = "use_fov_effect"
+
 [connection signal="pressed" from="Control/HBoxContainer/VBoxContainer/Back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="Control/HBoxContainer/TABCustom/TabButtons/General" to="." method="_on_general_pressed"]
 [connection signal="pressed" from="Control/HBoxContainer/TABCustom/TabButtons/Accessibility" to="." method="_on_accessibility_pressed"]
@@ -844,3 +902,5 @@ settings_key = "drone_new_control"
 [connection signal="pressed" from="Control/HBoxContainer/TABCustom/TabContainer/Debug/Panel/MarginContainer/HBoxContainer/HBoxContainer/CheckButton" to="Control/HBoxContainer/TABCustom/TabContainer/Debug/Panel/MarginContainer/HBoxContainer/HBoxContainer/CheckButton" method="_on_pressed"]
 [connection signal="item_selected" from="Control/HBoxContainer/TABCustom/TabContainer/Debug/Panel2/MarginContainer/HBoxContainer/HBoxContainer/OptionButton" to="." method="_on_option_button_item_selected"]
 [connection signal="pressed" from="Control/HBoxContainer/TABCustom/TabContainer/Debug/Panel2/MarginContainer/HBoxContainer/HBoxContainer/CheckButton" to="Control/HBoxContainer/TABCustom/TabContainer/Debug/Panel2/MarginContainer/HBoxContainer/HBoxContainer/CheckButton" method="_on_pressed"]
+[connection signal="item_selected" from="Control/HBoxContainer/TABCustom/TabContainer/Debug/Panel3/MarginContainer/HBoxContainer/HBoxContainer/OptionButton" to="." method="_on_option_button_item_selected"]
+[connection signal="pressed" from="Control/HBoxContainer/TABCustom/TabContainer/Debug/Panel3/MarginContainer/HBoxContainer/HBoxContainer/CheckButton" to="Control/HBoxContainer/TABCustom/TabContainer/Debug/Panel3/MarginContainer/HBoxContainer/HBoxContainer/CheckButton" method="_on_pressed"]

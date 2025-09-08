@@ -89,8 +89,8 @@ func _ready() -> void:
 
 	close_all()
 	scale_margins_for_resolution()  # стартовая подгонка
-	connect("resized", Callable(self, "_on_resize"))  # если Control
-	# или get_viewport().connect("size_changed", Callable(self, "_on_resize"))
+	#connect("resized", Callable(self, "_on_resize"))  # если Control
+	get_viewport().connect("size_changed", Callable(self, "_on_resize"))
 func _update_ui_state() -> void:
 	var open := _any_ui_open() or force_cursor_visible
 	ControllerManager.set_all_input_enabled(not open)

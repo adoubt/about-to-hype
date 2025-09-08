@@ -1,4 +1,4 @@
-[gd_scene load_steps=198 format=4 uid="uid://cs3guckxlcjyi"]
+[gd_scene load_steps=203 format=4 uid="uid://cs3guckxlcjyi"]
 
 [ext_resource type="Script" uid="uid://ctrfp37708not" path="res://game.gd" id="1_80cx4"]
 [ext_resource type="AudioStream" uid="uid://bt8wqhs8owrj7" path="res://Drone Noise Test - DJI Avata vs DJI FPV vs DJI Mavic 3 vs DJI Air 2S.mp3" id="2_fc0e3"]
@@ -22,8 +22,10 @@
 [ext_resource type="PackedScene" uid="uid://dyr4si0jpc4wr" path="res://building.tscn" id="24_f1jbl"]
 [ext_resource type="Script" uid="uid://c6n1jp1wp7ahe" path="res://OrderManager.gd.gd" id="24_vaj68"]
 [ext_resource type="FontFile" uid="uid://bxqutki8x48t1" path="res://assets/fonts/SFPRODISPLAYBOLD.OTF" id="25_5b14r"]
+[ext_resource type="Script" uid="uid://b1g5iaiket2lr" path="res://HUDManager.gd" id="25_bnpwn"]
 [ext_resource type="Script" uid="uid://w7wxhi7wv2vq" path="res://orders_panel.gd" id="25_i2p71"]
 [ext_resource type="Script" uid="uid://dh5abgdsssrqo" path="res://SubViewportUI.gd" id="25_xa8c5"]
+[ext_resource type="Shader" uid="uid://brfe1o0lxeqv8" path="res://assets/Shaders/SpeedLines.gdshader" id="26_5b14r"]
 [ext_resource type="Script" uid="uid://wxb573o058my" path="res://AudioSource3D.gd" id="26_dhpj7"]
 [ext_resource type="FontFile" uid="uid://cqipr3ixo4xi1" path="res://assets/fonts/SFPRODISPLAYTHINITALIC.OTF" id="28_bnpwn"]
 
@@ -45,19 +47,12 @@ glow_intensity = 7.54
 glow_strength = 1.44
 fog_enabled = true
 fog_mode = 1
-fog_light_energy = 2.02
-fog_sun_scatter = 0.29
+fog_light_color = Color(0.547701, 0.788961, 0.471182, 1)
+fog_light_energy = 0.5
+fog_sun_scatter = 0.22
 fog_density = 1.0
-fog_height = 10.0
-
-[sub_resource type="Theme" id="Theme_xfvwf"]
-default_font = ExtResource("28_bnpwn")
-default_font_size = 20
-
-[sub_resource type="LabelSettings" id="LabelSettings_36jdj"]
-font = ExtResource("17_bnpwn")
-font_size = 20
-font_color = Color(0.235294, 0.647059, 0.258824, 1)
+fog_height_density = 0.06
+fog_depth_curve = 1.68179
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_e2o6t"]
 noise_type = 3
@@ -2292,46 +2287,42 @@ default_font_size = 20
 
 [sub_resource type="Theme" id="Theme_bnpwn"]
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_bnpwn"]
+noise_type = 3
+frequency = 1.0
+domain_warp_enabled = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_36jdj"]
+noise = SubResource("FastNoiseLite_bnpwn")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xfvwf"]
+shader = ExtResource("26_5b14r")
+shader_parameter/noise = SubResource("NoiseTexture2D_36jdj")
+shader_parameter/line_color = Color(0.813258, 0.813258, 0.813258, 1)
+shader_parameter/line_count = 0.4
+shader_parameter/line_density = 0.0
+shader_parameter/line_faloff = 0.25
+shader_parameter/mask_size = 0.1
+shader_parameter/mask_edge = 0.5
+shader_parameter/animation_speed = 20.0
+
+[sub_resource type="Theme" id="Theme_xfvwf"]
+default_font = ExtResource("28_bnpwn")
+default_font_size = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_36jdj"]
+font = ExtResource("17_bnpwn")
+font_size = 20
+font_color = Color(0.235294, 0.647059, 0.258824, 1)
+
 [node name="game" type="Node3D"]
 script = ExtResource("1_80cx4")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_i2p71")
 
-[node name="HUD" type="MarginContainer" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-
-[node name="GameTime" type="Label" parent="HUD"]
-layout_mode = 2
-size_flags_vertical = 0
-theme = SubResource("Theme_xfvwf")
-text = "00:00"
-horizontal_alignment = 1
-
-[node name="GrabLabel" type="Label" parent="HUD"]
-visible = false
-layout_mode = 2
-text = "Grabbed Nothing"
-
-[node name="CardBalance" type="Label" parent="HUD"]
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
-text = "$0"
-label_settings = SubResource("LabelSettings_36jdj")
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="Base_Drone" type="CharacterBody3D" parent="." groups=["controllable", "drone"]]
-transform = Transform3D(-0.958063, 0, 0.286558, 0, 1, 0, -0.286558, 0, -0.958063, 11.0051, 4.50673, -8.05474)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 10.7188, 4.50673, -8.05474)
 collision_layer = 2
 collision_mask = 7
 axis_lock_angular_x = true
@@ -2655,15 +2646,32 @@ spot_attenuation = -0.21
 spot_angle = 26.82
 
 [node name="CameraPivot" type="Node3D" parent="Base_Drone"]
-transform = Transform3D(0.993572, 0, 0.113203, 0, 1, 0, -0.113203, 0, 0.993572, 0, 0, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Base_Drone/CameraPivot"]
-transform = Transform3D(1, 0, 0, 0, 0.981627, 0.190809, 0, -0.190809, 0.981627, 0, 0.535, 1.04)
+transform = Transform3D(1, 2.84328e-09, -1.46274e-08, 0, 0.981627, 0.190809, 1.49012e-08, -0.190809, 0.981627, 0, 0.393466, 1.226)
+
+[node name="RayCastForward" type="RayCast3D" parent="Base_Drone/CameraPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.138912, 0)
+exclude_parent = false
+target_position = Vector3(0, -0.16, -2.015)
+collision_mask = 3
+
+[node name="RayCastBackward" type="RayCast3D" parent="Base_Drone/CameraPivot"]
+transform = Transform3D(1, 0, -2.13163e-14, 0, 1, 0, 0, 0, 1, 0, 0, 0.297771)
+exclude_parent = false
+target_position = Vector3(0, 0, 0.935)
+collision_mask = 3
+
+[node name="RayCastUp" type="RayCast3D" parent="Base_Drone/CameraPivot"]
+transform = Transform3D(1, 0, -2.13163e-14, 0, 1, 0, 0, 0, 1, 0, 0, 0.297771)
+exclude_parent = false
+target_position = Vector3(0, 0.995, 0)
+collision_mask = 3
 
 [node name="CameraPivot2" type="Node3D" parent="Base_Drone"]
+transform = Transform3D(1, 0, -1.42109e-14, 0, 1, 0, 1.42109e-14, 0, 1, 0, -0.133444, -0.0220861)
 
 [node name="Camera3D2" type="Camera3D" parent="Base_Drone/CameraPivot2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.192003, 0.0256686)
 fov = 82.2
 
 [node name="Area3D" type="Area3D" parent="Base_Drone"]
@@ -2712,11 +2720,11 @@ skeleton = NodePath("")
 
 [node name="drop" type="RigidBody3D" parent="." groups=["grabbable"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.5928, 0.300744, -7.61348)
-visible = false
+collision_layer = 4
+collision_mask = 7
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="drop"]
 shape = SubResource("BoxShape3D_qhcbd")
-disabled = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="drop"]
 mesh = SubResource("BoxMesh_fc0e3")
@@ -2747,7 +2755,6 @@ outline_size = 0
 script = ExtResource("2_feb5d")
 
 [node name="City" parent="." instance=ExtResource("5_lc2xo")]
-visible = false
 
 [node name="building_A2" parent="City" instance=ExtResource("6_215e1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.81434, 2.62031, -15.7312)
@@ -2801,7 +2808,7 @@ offset_right = 40.0
 offset_bottom = 23.0
 
 [node name="Player" type="CharacterBody3D" parent="." groups=["controllable", "player"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.8099, 0, 0)
+transform = Transform3D(0.62, 0, 0, 0, 0.62, 0, 0, 0, 0.62, -34.8099, 0, 0)
 collision_layer = 2
 collision_mask = 13
 floor_constant_speed = true
@@ -2946,6 +2953,59 @@ light_energy = 6.141
 light_indirect_energy = 3.586
 light_volumetric_fog_energy = 1.485
 omni_range = 9.41209
+
+[node name="HUDManager" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("25_bnpwn")
+
+[node name="SpeedLines" type="ColorRect" parent="HUDManager"]
+material = SubResource("ShaderMaterial_xfvwf")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+
+[node name="HUD" type="MarginContainer" parent="HUDManager"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="GameTime" type="Label" parent="HUDManager/HUD"]
+layout_mode = 2
+size_flags_vertical = 0
+theme = SubResource("Theme_xfvwf")
+text = "00:00"
+horizontal_alignment = 1
+
+[node name="GrabLabel" type="Label" parent="HUDManager/HUD"]
+visible = false
+layout_mode = 2
+text = "Grabbed Nothing"
+
+[node name="CardBalance" type="Label" parent="HUDManager/HUD"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "$0"
+label_settings = SubResource("LabelSettings_36jdj")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="body_entered" from="Laptop/Area3D" to="Laptop" method="_on_area_3d_body_entered"]
 
