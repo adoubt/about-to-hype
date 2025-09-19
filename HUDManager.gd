@@ -1,6 +1,6 @@
 extends Control
 class_name HUDManager
-@onready var card_balance = $HUD/CardBalance
+@onready var card_balance = $HUD/InventoryBar/HBoxContainer2/Control3/CardBalance
 
 
 

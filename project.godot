@@ -12,7 +12,7 @@ config_version=5
 
 config/name="about to hype"
 run/main_scene="uid://bsoxxlhnjn45f"
-config/features=PackedStringArray("4.4", "Forward Plus")
+config/features=PackedStringArray("4.5", "Forward Plus")
 boot_splash/bg_color=Color(0.117864, 0.210975, 0.264721, 1)
 config/icon="res://icon.svg"
 
@@ -22,8 +22,8 @@ SettingsManager="*res://autoload/SettingsManager.gd"
 GameState="*res://autoload/GameState.gd"
 UIManager="*res://autoload/UIManager.gd"
 SceneManager="*res://autoload/SceneManager.gd"
-ControllerManager="*res://autoload/ControllerManager.gd"
 AudioManager="*res://autoload/AudioManager.gd"
+ControllerManager="*res://autoload/ControllerManager.gd"
 
 [debug_draw_3d]
 

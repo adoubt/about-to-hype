@@ -5,16 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://bqhbyh7l1imsc" path="res://assets/seTTINGS_REF.jpg" id="2_gc0em"]
 [ext_resource type="Script" uid="uid://bmcx0ghk2foqr" path="res://ui_slider.gd" id="3_cj1lu"]
 [ext_resource type="Theme" uid="uid://2ocoy8vsxdat" path="res://assets/themes/tab_settings.tres" id="4_ay7hg"]
+[ext_resource type="StyleBox" uid="uid://cetf4is0ai61y" path="res://assets/themes/back_btn_style.tres" id="5_r3owr"]
 [ext_resource type="Script" uid="uid://bofqephgaqn5r" path="res://UI/check_button.gd" id="6_oflx8"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oflx8"]
-bg_color = Color(0.439216, 0.133333, 0.0745098, 1)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-shadow_color = Color(0.439216, 0.133333, 0.0745098, 1)
-shadow_size = 10
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_oflx8"]
 
@@ -104,7 +96,7 @@ uppercase = true
 [node name="Back" type="Button" parent="Control/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("1_3ykye")
-theme_override_styles/normal = SubResource("StyleBoxFlat_oflx8")
+theme_override_styles/normal = ExtResource("5_r3owr")
 text = "BACK"
 
 [node name="TABCustom" type="VBoxContainer" parent="Control/HBoxContainer"]
@@ -215,11 +207,11 @@ theme = ExtResource("1_3ykye")
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("1_3ykye")
-theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
-theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
-theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 17
 theme_override_styles/normal = SubResource("StyleBoxFlat_l1i01")
 selected = 0
@@ -505,11 +497,11 @@ theme = ExtResource("1_3ykye")
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("1_3ykye")
-theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
-theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
-theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 17
 theme_override_styles/normal = SubResource("StyleBoxFlat_l1i01")
 selected = 0
@@ -564,11 +556,11 @@ theme = ExtResource("1_3ykye")
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("1_3ykye")
-theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
-theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
-theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 17
 theme_override_styles/normal = SubResource("StyleBoxFlat_l1i01")
 selected = 0
@@ -623,11 +615,11 @@ theme = ExtResource("1_3ykye")
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("1_3ykye")
-theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
-theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
-theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 17
 theme_override_styles/normal = SubResource("StyleBoxFlat_l1i01")
 selected = 0
@@ -682,11 +674,11 @@ theme = ExtResource("1_3ykye")
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("1_3ykye")
-theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
-theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
-theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 17
 theme_override_styles/normal = SubResource("StyleBoxFlat_l1i01")
 selected = 0

@@ -4,7 +4,8 @@ extends Node
 const SCENES := {
 	"Intro": "uid://bsoxxlhnjn45f",
 	"MainMenu": "uid://dcirc02tx3del",
-	"Game": "uid://cs3guckxlcjyi"
+	"Game": "uid://cs3guckxlcjyi",
+	"TestPolygon": "uid://dhl6fkkhp3dy8"
 }
 
 # текущая сцена
@@ -20,6 +21,10 @@ func go_to_main_menu():
 
 func go_to_game():
 	_change_scene("Game")
+	
+func go_to_test_polygon():
+	_change_scene("TestPolygon")
+	
 func exit():
 	get_tree().quit()
 # ---------------- INTERNAL ----------------

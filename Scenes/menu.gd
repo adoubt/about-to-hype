@@ -5,4 +5,4 @@ extends Node3D
 func _ready() -> void:
 	UIManager.open_main_menu()
 	ControllerManager.refresh()
-	ControllerManager.register($SubViewportContainer/SubViewport/MenuCameraFlow,false)
+	ControllerManager.register($SubViewportContainer/SubViewport/MenuCameraFlow)

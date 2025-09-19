@@ -20,3 +20,7 @@ func _on_settings_pressed() -> void:
 
 func _on_exit_pressed() -> void:
 	SceneManager.exit()
+
+
+func _on_test_pressed() -> void:
+	SceneManager.go_to_test_polygon()

@@ -1,8 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://dcirc02tx3del"]
+[gd_scene load_steps=10 format=3 uid="uid://dcirc02tx3del"]
 
-[ext_resource type="Script" uid="uid://c5fh12yk1o0ou" path="res://menu.gd" id="1_lti8b"]
+[ext_resource type="Script" uid="uid://c5fh12yk1o0ou" path="res://Scenes/menu.gd" id="1_lti8b"]
 [ext_resource type="PackedScene" uid="uid://dyr4si0jpc4wr" path="res://building.tscn" id="3_mae5d"]
 [ext_resource type="Script" uid="uid://bsglttqymu1yo" path="res://menu_camera_flow.gd" id="4_4hy44"]
+[ext_resource type="AudioStream" uid="uid://bnth3x01y1qt6" path="res://assets/sound/1081.mp3" id="4_158mb"]
+[ext_resource type="Script" uid="uid://wxb573o058my" path="res://AudioSource3D.gd" id="5_wwsa2"]
 
 [sub_resource type="Environment" id="Environment_mae5d"]
 background_mode = 1
@@ -82,7 +84,7 @@ spot_range = 48.9225
 spot_angle = 45.483
 
 [node name="OmniLight3D" type="OmniLight3D" parent="WorldEnvironment"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.11264, 0.465271, 14.3984)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.82221, 9.03617, 22.0245)
 light_color = Color(1, 0.231373, 0.258824, 1)
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
@@ -101,18 +103,24 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 handle_input_locally = false
-size = Vector2i(1152, 648)
+size = Vector2i(1920, 1080)
 render_target_update_mode = 4
 
-[node name="MenuCameraFlow" type="Node3D" parent="SubViewportContainer/SubViewport"]
+[node name="MenuCameraFlow" type="Node3D" parent="SubViewportContainer/SubViewport" groups=["controllable"]]
 script = ExtResource("4_4hy44")
 
 [node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport/MenuCameraFlow"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.5646, 27.3053)
-current = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_l48gv")
 }
 autoplay = "MenuCameraFlow"
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.215641, 2.79319, 14.9297)
+stream = ExtResource("4_158mb")
+autoplay = true
+max_distance = 30.0
+script = ExtResource("5_wwsa2")

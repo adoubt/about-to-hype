@@ -59,7 +59,7 @@ var base_height : float  # нормальная высота (настроитс
 @export var drone_new_control :bool = true
 @export var flight_assistant: bool = false
 var volume_occlusion_db: float = 0.0 # от AudioManager
-var volume_local_db: float = -30.0   # от скорости винтов
+var volume_local_db: float = -80.0   # от скорости винтов
 var joint: PinJoint3D = null
 var current_camera_index: int = 1
 var current_tilt := Vector3.ZERO
@@ -67,7 +67,7 @@ var input_dir := Vector3.ZERO
 var grabbed_box: RigidBody3D = null
 var is_grabbing := false
 var grab_offset := Vector3(0, -0.22, 0)
-var engine_enabled := false
+@export var engine_enabled := false
 var mouse_joystick_active := true
 var mouse_delta := Vector2.ZERO
 var mouse_sensitivity := 0.2
@@ -76,12 +76,11 @@ var default_pitch := 0.0
 var blade_speed := 0.9
 var moving := false
 var input_enabled: bool = false
-var target_volume_db := -80.0  # тихо, когда мотор выключен
-var max_volume_db := 0.0       # громкость, когда мотор включен
+var max_volume_db := 40.0       # громкость, когда мотор включен
 var fade_speed := 10.5          # скорость изменения громкости
-var min_volume_db := -50.0
+var min_volume_db := -80.0
 var max_pitch := 2.0
-var min_pitch := 0.5
+var min_pitch := 0.2
 
 func _ready():
 	ray_cast_forward.add_exception(self)
@@ -301,47 +300,37 @@ func _process_rotation_blades(delta):
 	blade4.rotate_y(rotation_amount)
 
 	
-func _process_engine_sound(delta):
-	# --- предполагаем, что velocity.length() даёт текущую скорость ---
+func _process_engine_sound(delta: float) -> void:
 	var speed = velocity.length()
-	var max_speed = 35  # скорость, на которой громкость и pitch будут максимальными
-	var min_speed = 0   # скорость, при которой будет минимальная громкость и pitch
+	var max_speed = 35.0
+	var min_speed = 0.0
 
 	# --- запуск звука ---
 	if engine_enabled and not blade_sound.playing:
 		blade_sound.play()
 
-	# --- локальная громкость ---
-	# линейно интерполируем громкость от min_volume_db до max_volume_db в зависимости от скорости
-	 
-	var target_local_db = lerp(min_volume_db, max_volume_db, clamp((speed - min_speed) /(1* (max_speed - min_speed)), 0, 1))
-	blade_sound.volume_local_db = lerp(blade_sound.volume_local_db, target_local_db, delta * fade_speed)
+	if engine_enabled:
+		# громкость и питч зависят от скорости
+		var intensity = clamp((speed - min_speed) / (max_speed - min_speed), 0.2, 1.0)
 
-	# --- локальный питч ---
-	var target_pitch = lerp(min_pitch, max_pitch, clamp((speed - min_speed) /(1*(max_speed - min_speed)), 0, 1))
-	blade_sound.pitch_scale = lerp(blade_sound.pitch_scale, target_pitch, delta * fade_speed)
+		var target_local_db = lerp(min_volume_db, max_volume_db, intensity)
+		blade_sound.volume_local_db = lerp(blade_sound.volume_local_db, target_local_db, delta * fade_speed)
 
-	# --- остановка звука ---
-	if not engine_enabled and blade_sound.volume_local_db <= min_volume_db + 0.5 and blade_sound.playing:
-		blade_sound.stop()
+		var target_pitch = lerp(min_pitch, max_pitch, intensity)
+		blade_sound.pitch_scale = lerp(blade_sound.pitch_scale, target_pitch, delta * fade_speed)
+	else:
+		# плавно уводим громкость и питч вниз
+		blade_sound.volume_local_db = lerp(blade_sound.volume_local_db, min_volume_db, delta * fade_speed * 0.5)
+		blade_sound.pitch_scale = lerp(blade_sound.pitch_scale, min_pitch, delta * fade_speed * 0.5)
+
+		# стопаем звук только когда он реально затух
+		if blade_sound.volume_local_db <= min_volume_db + 1 and blade_sound.playing:
+			blade_sound.stop()
 
 
-#func _process_engine_sound(delta):
-	## --- запуск звука ---
-	#if engine_enabled and not blade_sound.playing:
-		#blade_sound.play()
-#
-	## --- локальная громкость ---
-	#var target_local_db = max_volume_db if moving else (-30.0 if engine_enabled else min_volume_db)
-	#blade_sound.volume_local_db = lerp(blade_sound.volume_local_db, target_local_db, delta * fade_speed)
-#
-	## --- локальный питч ---
-	#var target_pitch = (max_pitch if moving else 0.7) if engine_enabled else min_pitch
-	#blade_sound.pitch_scale = lerp(blade_sound.pitch_scale, target_pitch, delta * fade_speed)
-#
-	## --- остановка звука ---
-	#if not engine_enabled and blade_sound.volume_db <= min_volume_db + 1.0 and blade_sound.playing:
-		#blade_sound.stop()
+
+
+
 
 func _update_camera_follow(delta):
 	# --- лаг поворота (как было) ---

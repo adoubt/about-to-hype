@@ -12,10 +12,11 @@ func unregister_source(source):
 func _process(delta):
 	var listener = ControllerManager.get_current_camera()
 	if not listener:
+		print("Некому слушать музыку")
 		return
 
 	var space_state = get_world_3d().direct_space_state
-
+	
 	for source in sources:
 		var from_pos = source.global_transform.origin
 		

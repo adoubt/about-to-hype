@@ -1,58 +1,8 @@
-[gd_scene load_steps=205 format=4 uid="uid://dex3d0ci1a5v"]
+[gd_scene load_steps=150 format=4 uid="uid://kfvo4lrg7huc"]
 
-[ext_resource type="Script" uid="uid://ctrfp37708not" path="res://Scenes/game.gd" id="1_80cx4"]
-[ext_resource type="AudioStream" uid="uid://bt8wqhs8owrj7" path="res://Drone Noise Test - DJI Avata vs DJI FPV vs DJI Mavic 3 vs DJI Air 2S.mp3" id="2_fc0e3"]
-[ext_resource type="Script" uid="uid://bnl211kgeotsn" path="res://label_interact.gd" id="2_feb5d"]
-[ext_resource type="Script" uid="uid://dmdk8j6rmtauh" path="res://drone.gd" id="2_qhcbd"]
-[ext_resource type="Shader" uid="uid://lf72luioho2j" path="res://vhscamera3.gdshader" id="4_fc0e3"]
-[ext_resource type="PackedScene" uid="uid://cgopdhiu475k1" path="res://city.tscn" id="5_lc2xo"]
-[ext_resource type="PackedScene" uid="uid://duwxjydyux16" path="res://addons/kaykit_city_builder_bits/Assets/gltf/building_A.gltf" id="6_215e1"]
-[ext_resource type="PackedScene" uid="uid://b2jrmspw5hpr6" path="res://addons/kaykit_city_builder_bits/Assets/gltf/building_B.gltf" id="7_7sc4i"]
-[ext_resource type="PackedScene" uid="uid://bcq3cqbwjw3xl" path="res://addons/kaykit_city_builder_bits/Assets/gltf/building_C.gltf" id="8_80cx4"]
-[ext_resource type="PackedScene" uid="uid://j1tp8jo44bmh" path="res://addons/kaykit_city_builder_bits/Assets/gltf/building_D.gltf" id="9_e8heu"]
-[ext_resource type="PackedScene" uid="uid://cac4rgwayljbc" path="res://addons/kaykit_city_builder_bits/Assets/gltf/building_E.gltf" id="10_rvswv"]
-[ext_resource type="PackedScene" uid="uid://30f5pbdigma0" path="res://addons/kaykit_city_builder_bits/Assets/gltf/building_F.gltf" id="11_boyg6"]
-[ext_resource type="PackedScene" uid="uid://dw7mcha5k0bi7" path="res://addons/kaykit_city_builder_bits/Assets/gltf/building_G.gltf" id="12_e36ub"]
-[ext_resource type="PackedScene" uid="uid://bb0yd1x23ifjr" path="res://addons/kaykit_city_builder_bits/Assets/gltf/building_H.gltf" id="13_hb5m1"]
-[ext_resource type="PackedScene" uid="uid://l8p1552i1cd4" path="res://laptop.tscn" id="16_e8heu"]
-[ext_resource type="FontFile" uid="uid://bgpdq8f1rcc1p" path="res://assets/fonts/SFPRODISPLAYHEAVYITALIC.OTF" id="17_bnpwn"]
-[ext_resource type="Script" uid="uid://db4o41je6fqbp" path="res://laptop.gd" id="17_rvswv"]
-[ext_resource type="Script" uid="uid://rlqnl5vb5p2b" path="res://player.gd" id="18_rvswv"]
-[ext_resource type="Script" uid="uid://deg13n8ftofyk" path="res://StreetCam.gd" id="22_x5p1p"]
-[ext_resource type="PackedScene" uid="uid://dyr4si0jpc4wr" path="res://building.tscn" id="24_f1jbl"]
-[ext_resource type="Script" uid="uid://c6n1jp1wp7ahe" path="res://OrderManager.gd.gd" id="24_vaj68"]
-[ext_resource type="FontFile" uid="uid://bxqutki8x48t1" path="res://assets/fonts/SFPRODISPLAYBOLD.OTF" id="25_5b14r"]
-[ext_resource type="Script" uid="uid://b1g5iaiket2lr" path="res://HUDManager.gd" id="25_bnpwn"]
-[ext_resource type="Script" uid="uid://w7wxhi7wv2vq" path="res://orders_panel.gd" id="25_i2p71"]
-[ext_resource type="Script" uid="uid://dh5abgdsssrqo" path="res://SubViewportUI.gd" id="25_xa8c5"]
-[ext_resource type="Shader" uid="uid://brfe1o0lxeqv8" path="res://assets/Shaders/SpeedLines.gdshader" id="26_5b14r"]
-[ext_resource type="Script" uid="uid://wxb573o058my" path="res://AudioSource3D.gd" id="26_dhpj7"]
-[ext_resource type="FontFile" uid="uid://cqipr3ixo4xi1" path="res://assets/fonts/SFPRODISPLAYTHINITALIC.OTF" id="28_bnpwn"]
-
-[sub_resource type="Environment" id="Environment_i2p71"]
-background_mode = 1
-background_color = Color(0.0103008, 0.196156, 0.264996, 1)
-ssao_enabled = true
-ssao_radius = 7.9
-glow_enabled = true
-glow_levels/1 = 5.94
-glow_levels/2 = 7.19
-glow_levels/3 = 6.65
-glow_levels/4 = 0.59
-glow_levels/5 = 0.72
-glow_levels/6 = 1.8
-glow_levels/7 = 1.62
-glow_normalized = true
-glow_intensity = 7.54
-glow_strength = 1.44
-fog_enabled = true
-fog_mode = 1
-fog_light_color = Color(0.547701, 0.788961, 0.471182, 1)
-fog_light_energy = 0.5
-fog_sun_scatter = 0.22
-fog_density = 1.0
-fog_height_density = 0.06
-fog_depth_curve = 1.68179
+[ext_resource type="Script" uid="uid://dmdk8j6rmtauh" path="res://drone.gd" id="1_v1gsr"]
+[ext_resource type="AudioStream" uid="uid://bt8wqhs8owrj7" path="res://Drone Noise Test - DJI Avata vs DJI FPV vs DJI Mavic 3 vs DJI Air 2S.mp3" id="2_ldkjq"]
+[ext_resource type="Script" uid="uid://wxb573o058my" path="res://AudioSource3D.gd" id="3_cllcg"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_e2o6t"]
 noise_type = 3
@@ -2205,428 +2155,307 @@ radius = 0.359375
 [sub_resource type="BoxShape3D" id="BoxShape3D_f1jbl"]
 size = Vector3(0.274597, 0.329544, 0.303993)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_e2o6t"]
-size = Vector3(500, 0.335, 500)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e2o6t"]
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_80nbo"]
-frequency = 0.004
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_e2o6t"]
-noise = SubResource("FastNoiseLite_80nbo")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_feb5d"]
-albedo_color = Color(0.284793, 0.517547, 0.506249, 1)
-albedo_texture = SubResource("NoiseTexture2D_e2o6t")
-
-[sub_resource type="QuadMesh" id="QuadMesh_feb5d"]
-size = Vector2(500, 500)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_qhcbd"]
-size = Vector3(0.297119, 0.334961, 0.323242)
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_qhcbd"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qhcbd"]
-albedo_texture = SubResource("NoiseTexture2D_qhcbd")
-
-[sub_resource type="BoxMesh" id="BoxMesh_fc0e3"]
-lightmap_size_hint = Vector2i(7, 10)
-material = SubResource("StandardMaterial3D_qhcbd")
-size = Vector3(0.3, 0.3, 0.3)
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_boyg6"]
-radius = 3.0
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_boyg6"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_f1jbl"]
-
-[sub_resource type="Gradient" id="Gradient_fc0e3"]
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_7jktm"]
-noise_type = 0
-seed = 4
-frequency = 0.0004
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ryrav"]
-color_ramp = SubResource("Gradient_fc0e3")
-noise = SubResource("FastNoiseLite_7jktm")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_eow3j"]
-shader = ExtResource("4_fc0e3")
-shader_parameter/vhs_resolution = Vector2(320, 240)
-shader_parameter/samples = 2
-shader_parameter/crease_noise = 1.0
-shader_parameter/crease_opacity = 0.5
-shader_parameter/filter_intensity = 0.1
-shader_parameter/tape_crease_smear = 0.2
-shader_parameter/tape_crease_intensity = 0.2
-shader_parameter/tape_crease_jitter = 0.1
-shader_parameter/tape_crease_speed = 0.5
-shader_parameter/tape_crease_discoloration = 1.0
-shader_parameter/bottom_border_thickness = 6.0
-shader_parameter/bottom_border_jitter = 6.0
-shader_parameter/noise_intensity = 0.1
-shader_parameter/noise_texture = SubResource("NoiseTexture2D_ryrav")
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_5b14r"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_bnpwn"]
-noise = SubResource("FastNoiseLite_5b14r")
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_vaj68"]
-size = Vector3(0.5, 0.5, 0.5)
-
-[sub_resource type="BoxMesh" id="BoxMesh_i2p71"]
-size = Vector3(0.5, 0.5, 0.5)
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_i2p71"]
-viewport_path = NodePath("OrdersPanel/OrderScreenViewport")
-
-[sub_resource type="Theme" id="Theme_36jdj"]
-default_font = ExtResource("25_5b14r")
-default_font_size = 20
-
-[sub_resource type="Theme" id="Theme_bnpwn"]
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_bnpwn"]
-noise_type = 3
-frequency = 1.0
-domain_warp_enabled = true
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_36jdj"]
-noise = SubResource("FastNoiseLite_bnpwn")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_xfvwf"]
-shader = ExtResource("26_5b14r")
-shader_parameter/noise = SubResource("NoiseTexture2D_36jdj")
-shader_parameter/line_color = Color(0.813258, 0.813258, 0.813258, 1)
-shader_parameter/line_count = 0.4
-shader_parameter/line_density = 0.0
-shader_parameter/line_faloff = 0.25
-shader_parameter/mask_size = 0.1
-shader_parameter/mask_edge = 0.5
-shader_parameter/animation_speed = 20.0
-
-[sub_resource type="Theme" id="Theme_xfvwf"]
-default_font = ExtResource("28_bnpwn")
-default_font_size = 20
-
-[sub_resource type="LabelSettings" id="LabelSettings_36jdj"]
-font = ExtResource("17_bnpwn")
-font_size = 20
-font_color = Color(0.235294, 0.647059, 0.258824, 1)
-
-[node name="game" type="Node3D"]
-script = ExtResource("1_80cx4")
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_i2p71")
-
-[node name="Base_Drone" type="CharacterBody3D" parent="." groups=["controllable", "drone"]]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 10.7188, 4.50673, -8.05474)
+[node name="Base_Drone" type="CharacterBody3D" groups=["controllable", "drone"]]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
 collision_layer = 2
 collision_mask = 7
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
 floor_block_on_wall = false
-script = ExtResource("2_qhcbd")
+script = ExtResource("1_v1gsr")
 time_to_max_speed = 2.0
 zoom_speed = 2.0
 
-[node name="Model" type="Node3D" parent="Base_Drone"]
+[node name="Model" type="Node3D" parent="."]
 
-[node name="group1506967990" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="group1506967990" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("ArrayMesh_17nc0")
 skeleton = NodePath("")
 
-[node name="group1434348068" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="group1434348068" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("ArrayMesh_k1drd")
 skeleton = NodePath("")
 
-[node name="group1472813429" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="group1472813429" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("ArrayMesh_3oug0")
 skeleton = NodePath("")
 
-[node name="group1345748236" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="group1345748236" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("ArrayMesh_0gsck")
 skeleton = NodePath("")
 
-[node name="group1719908566" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="group1719908566" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("ArrayMesh_neofe")
 skeleton = NodePath("")
 
-[node name="group1666348361" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="group1666348361" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("ArrayMesh_obi3m")
 skeleton = NodePath("")
 
-[node name="group1726010505" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="group1726010505" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("ArrayMesh_bnmvq")
 skeleton = NodePath("")
 
-[node name="group967657343" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="group967657343" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("ArrayMesh_dlwgt")
 skeleton = NodePath("")
 
-[node name="group1667175645" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="group1667175645" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("ArrayMesh_ldlih")
 skeleton = NodePath("")
 
-[node name="group1329982175" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="group1329982175" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("ArrayMesh_3rqna")
 skeleton = NodePath("")
 
-[node name="group49971743" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="group49971743" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("ArrayMesh_7vjfy")
 skeleton = NodePath("")
 
-[node name="group1957747061" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="group1957747061" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("ArrayMesh_wva1u")
 skeleton = NodePath("")
 
-[node name="group562219596" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="group562219596" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("ArrayMesh_3j83j")
 skeleton = NodePath("")
 
-[node name="group2075819515" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="group2075819515" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("ArrayMesh_dbbrv")
 skeleton = NodePath("")
 
-[node name="group1207665778" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="group1207665778" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("ArrayMesh_6lmt7")
 skeleton = NodePath("")
 
-[node name="group2053166467" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="group2053166467" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("ArrayMesh_mryjo")
 skeleton = NodePath("")
 
-[node name="group1426774214" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="group1426774214" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("ArrayMesh_syiv0")
 skeleton = NodePath("")
 
-[node name="group1322281205" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="group1322281205" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("ArrayMesh_mtipq")
 skeleton = NodePath("")
 
-[node name="group1013127126" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="group1013127126" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("ArrayMesh_fc5hp")
 skeleton = NodePath("")
 
-[node name="group445902523" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="group445902523" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("ArrayMesh_828am")
 skeleton = NodePath("")
 
-[node name="group1249124806" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="group1249124806" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("ArrayMesh_el2hh")
 skeleton = NodePath("")
 
-[node name="group679660587" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="group679660587" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("ArrayMesh_q5apy")
 skeleton = NodePath("")
 
-[node name="group127649674" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="group127649674" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("ArrayMesh_avljd")
 skeleton = NodePath("")
 
-[node name="group1351310026" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="group1351310026" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("ArrayMesh_tityv")
 skeleton = NodePath("")
 
-[node name="group1635633909" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="group1635633909" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("ArrayMesh_1p4oo")
 skeleton = NodePath("")
 
-[node name="group2109774117" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="group2109774117" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("ArrayMesh_oe52n")
 skeleton = NodePath("")
 
-[node name="group1947824049" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="group1947824049" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("ArrayMesh_v2kuv")
 skeleton = NodePath("")
 
-[node name="group1104531267" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="group1104531267" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("ArrayMesh_mvv31")
 skeleton = NodePath("")
 
-[node name="group1935524272" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="group1935524272" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("ArrayMesh_yhuaa")
 skeleton = NodePath("")
 
-[node name="group1852007195" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="group1852007195" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("ArrayMesh_5fbew")
 skeleton = NodePath("")
 
-[node name="group1396495753" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="group1396495753" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("ArrayMesh_vyjqq")
 skeleton = NodePath("")
 
-[node name="group895723151" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="group895723151" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("ArrayMesh_u5bp4")
 skeleton = NodePath("")
 
-[node name="group481134787" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="group481134787" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("ArrayMesh_586vo")
 skeleton = NodePath("")
 
-[node name="group2004819190" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="group2004819190" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("ArrayMesh_1243s")
 skeleton = NodePath("")
 
-[node name="group1160613555" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="group1160613555" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("ArrayMesh_iw7hl")
 skeleton = NodePath("")
 
-[node name="group1400634789" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="group1400634789" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("ArrayMesh_ajo64")
 skeleton = NodePath("")
 
-[node name="group1359119253" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="group1359119253" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("ArrayMesh_25pfm")
 skeleton = NodePath("")
 
-[node name="group1208690003" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="group1208690003" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("ArrayMesh_vydla")
 skeleton = NodePath("")
 
-[node name="group419559090" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="group419559090" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("ArrayMesh_qhpw0")
 skeleton = NodePath("")
 
-[node name="FrontRightFlashlight" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="FrontRightFlashlight" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("ArrayMesh_ie2p1")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_bnpwn")
 
-[node name="FrontRightFlashlight2" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="FrontRightFlashlight2" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("ArrayMesh_ie2p1")
 skeleton = NodePath("")
 
-[node name="FrontLeftFlashlight" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="FrontLeftFlashlight" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("ArrayMesh_mifxi")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_36jdj")
 
-[node name="FrontLeftFlashlight2" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="FrontLeftFlashlight2" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("ArrayMesh_mifxi")
 skeleton = NodePath("")
 
-[node name="group753278406" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="group753278406" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("ArrayMesh_3sore")
 skeleton = NodePath("")
 
-[node name="group2056151970" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="group2056151970" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("ArrayMesh_n8h5a")
 skeleton = NodePath("")
 
-[node name="group1802215358" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="group1802215358" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("ArrayMesh_8wmxh")
 skeleton = NodePath("")
 
-[node name="group992375522" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="group992375522" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("ArrayMesh_5kn0y")
 skeleton = NodePath("")
 
-[node name="group2114471358" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="group2114471358" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("ArrayMesh_6e4qm")
 skeleton = NodePath("")
 
-[node name="group1451992339" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="group1451992339" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("ArrayMesh_0ei2g")
 skeleton = NodePath("")
 
-[node name="group1900742671" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="group1900742671" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("ArrayMesh_nqf6x")
 skeleton = NodePath("")
 
-[node name="group325404470" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="group325404470" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("ArrayMesh_acici")
 skeleton = NodePath("")
 
-[node name="group636018321" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="group636018321" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("ArrayMesh_84doh")
 skeleton = NodePath("")
 
-[node name="group756787536" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="group756787536" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("ArrayMesh_1aat1")
 skeleton = NodePath("")
 
-[node name="group40229622" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="group40229622" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("ArrayMesh_5xhf8")
 skeleton = NodePath("")
 
-[node name="group138082458" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="group138082458" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("ArrayMesh_ab3ot")
 skeleton = NodePath("")
 
-[node name="group1235344994" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="group1235344994" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("ArrayMesh_84xc3")
 skeleton = NodePath("")
 
-[node name="group2047490254" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="group2047490254" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("ArrayMesh_oqll7")
 skeleton = NodePath("")
 
-[node name="group620095292" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="group620095292" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("ArrayMesh_gcwj8")
 skeleton = NodePath("")
 
-[node name="group1436849380" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="group1436849380" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("ArrayMesh_s603i")
 skeleton = NodePath("")
 
-[node name="group895603078" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="group895603078" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("ArrayMesh_2rsfl")
 skeleton = NodePath("")
 
-[node name="group1113120519" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="group1113120519" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("ArrayMesh_yv82i")
 skeleton = NodePath("")
 
-[node name="group979818433" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="group979818433" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("ArrayMesh_swxgb")
 skeleton = NodePath("")
 
-[node name="group985948605" type="MeshInstance3D" parent="Base_Drone/Model"]
+[node name="group985948605" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("ArrayMesh_eb1mx")
 skeleton = NodePath("")
 
-[node name="Blade2pivot" type="Node3D" parent="Base_Drone/Model"]
+[node name="Blade2pivot" type="Node3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.225, 0, -0.205)
 
-[node name="blade2" type="MeshInstance3D" parent="Base_Drone/Model/Blade2pivot"]
+[node name="blade2" type="MeshInstance3D" parent="Model/Blade2pivot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.225, 0, 0.2)
 mesh = SubResource("ArrayMesh_yfb37")
 skeleton = NodePath("")
 
-[node name="Blade3pivot" type="Node3D" parent="Base_Drone/Model"]
+[node name="Blade3pivot" type="Node3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.23, 0, 0.23)
 
-[node name="blade3" type="MeshInstance3D" parent="Base_Drone/Model/Blade3pivot"]
+[node name="blade3" type="MeshInstance3D" parent="Model/Blade3pivot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.23, 0, -0.23)
 mesh = SubResource("ArrayMesh_jdk1t")
 skeleton = NodePath("")
 
-[node name="Blade4pivot" type="Node3D" parent="Base_Drone/Model"]
+[node name="Blade4pivot" type="Node3D" parent="Model"]
 transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, 0.215, 0, 0.22)
 
-[node name="blade4" type="MeshInstance3D" parent="Base_Drone/Model/Blade4pivot"]
+[node name="blade4" type="MeshInstance3D" parent="Model/Blade4pivot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.205, 0, -0.23)
 mesh = SubResource("ArrayMesh_up2mc")
 skeleton = NodePath("")
 
-[node name="Blade1pivot" type="Node3D" parent="Base_Drone/Model"]
+[node name="Blade1pivot" type="Node3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.24, 0, -0.22)
 
-[node name="blade1" type="MeshInstance3D" parent="Base_Drone/Model/Blade1pivot"]
+[node name="blade1" type="MeshInstance3D" parent="Model/Blade1pivot"]
 transform = Transform3D(0.999848, 0, 0.0174524, 0, 1, 0, -0.0174524, 0, 0.999848, 0.24, 0, 0.22)
 mesh = SubResource("ArrayMesh_1e4bk")
 skeleton = NodePath("")
 
-[node name="SpotLight3D" type="SpotLight3D" parent="Base_Drone/Model"]
+[node name="SpotLight3D" type="SpotLight3D" parent="Model"]
 transform = Transform3D(0.969445, 0, -0.245307, 0, 1, 0, 0.245307, 0, 0.969445, -0.26315, 0.100908, -0.282396)
 visible = false
 light_energy = 0.515
@@ -2639,7 +2468,7 @@ spot_range = 16.4455
 spot_attenuation = -0.21
 spot_angle = 26.82
 
-[node name="SpotLight3D2" type="SpotLight3D" parent="Base_Drone/Model"]
+[node name="SpotLight3D2" type="SpotLight3D" parent="Model"]
 transform = Transform3D(0.927184, 0, 0.374607, 0, 1, 0, -0.374607, 0, 0.927184, 0.224999, 0.0500069, -0.251778)
 visible = false
 light_energy = 0.515
@@ -2652,378 +2481,60 @@ spot_range = 16.4455
 spot_attenuation = -0.21
 spot_angle = 26.82
 
-[node name="CameraPivot" type="Node3D" parent="Base_Drone"]
+[node name="CameraPivot" type="Node3D" parent="."]
 
-[node name="Camera3D" type="Camera3D" parent="Base_Drone/CameraPivot"]
+[node name="Camera3D" type="Camera3D" parent="CameraPivot"]
 transform = Transform3D(1, 2.84328e-09, -1.46274e-08, 0, 0.981627, 0.190809, 1.49012e-08, -0.190809, 0.981627, 0, 0.393466, 1.226)
 
-[node name="RayCastForward" type="RayCast3D" parent="Base_Drone/CameraPivot"]
+[node name="RayCastForward" type="RayCast3D" parent="CameraPivot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.138912, 0)
 exclude_parent = false
 target_position = Vector3(0, -0.16, -2.015)
 collision_mask = 3
 
-[node name="RayCastBackward" type="RayCast3D" parent="Base_Drone/CameraPivot"]
+[node name="RayCastBackward" type="RayCast3D" parent="CameraPivot"]
 transform = Transform3D(1, 0, -2.13163e-14, 0, 1, 0, 0, 0, 1, 0, 0, 0.297771)
 exclude_parent = false
 target_position = Vector3(0, 0, 0.935)
 collision_mask = 3
 
-[node name="RayCastUp" type="RayCast3D" parent="Base_Drone/CameraPivot"]
+[node name="RayCastUp" type="RayCast3D" parent="CameraPivot"]
 transform = Transform3D(1, 0, -2.13163e-14, 0, 1, 0, 0, 0, 1, 0, 0, 0.297771)
 exclude_parent = false
 target_position = Vector3(0, 0.995, 0)
 collision_mask = 3
 
-[node name="CameraPivot2" type="Node3D" parent="Base_Drone"]
+[node name="CameraPivot2" type="Node3D" parent="."]
 transform = Transform3D(1, 0, -1.42109e-14, 0, 1, 0, 1.42109e-14, 0, 1, 0, -0.133444, -0.0220861)
 
-[node name="Camera3D2" type="Camera3D" parent="Base_Drone/CameraPivot2"]
+[node name="Camera3D2" type="Camera3D" parent="CameraPivot2"]
 fov = 82.2
 
-[node name="Area3D" type="Area3D" parent="Base_Drone"]
+[node name="Area3D" type="Area3D" parent="."]
 collision_layer = 8
 collision_mask = 4
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Base_Drone/Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.189192, 0)
 shape = SubResource("SphereShape3D_e2o6t")
 
-[node name="BladeSound" type="AudioStreamPlayer3D" parent="Base_Drone"]
+[node name="BladeSound" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.0153427, 0)
-stream = ExtResource("2_fc0e3")
+stream = ExtResource("2_ldkjq")
 attenuation_model = 1
 playback_type = 1
 emission_angle_enabled = true
 emission_angle_degrees = 66.0
 emission_angle_filter_attenuation_db = -8.8
 parameters/looping = false
-script = ExtResource("26_dhpj7")
+script = ExtResource("3_cllcg")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Base_Drone"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.999999, 0, -2.98023e-07, 0, 1, 0, 2.98023e-07, 0, 0.999999, -0.00547814, 0.0837746, -0.0163102)
 shape = SubResource("CylinderShape3D_qhcbd")
 debug_color = Color(0.947, 0, 0.587, 1)
 
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="Base_Drone"]
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.999999, 0, -2.98023e-07, 0, 1, 0, 2.98023e-07, 0, 0.999999, -0.00255227, -0.121986, 0.00369978)
 shape = SubResource("BoxShape3D_f1jbl")
 debug_color = Color(0.796, 0.283, 0.79, 1)
-
-[node name="floor" type="StaticBody3D" parent="."]
-collision_mask = 7
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="floor"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.125929, 0)
-shape = SubResource("BoxShape3D_e2o6t")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="floor"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_e2o6t")
-material_overlay = SubResource("StandardMaterial3D_feb5d")
-extra_cull_margin = 0.75
-mesh = SubResource("QuadMesh_feb5d")
-skeleton = NodePath("")
-
-[node name="drop" type="RigidBody3D" parent="." groups=["grabbable"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.5928, 0.300744, -7.61348)
-collision_layer = 4
-collision_mask = 7
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="drop"]
-shape = SubResource("BoxShape3D_qhcbd")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="drop"]
-mesh = SubResource("BoxMesh_fc0e3")
-
-[node name="Label3D" type="Label3D" parent="drop"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.16, 0)
-visible = false
-text = "DROP"
-font_size = 18
-
-[node name="label1" type="Label" parent="drop"]
-visible = false
-top_level = true
-offset_left = 570.0
-offset_top = 423.0
-offset_right = 693.0
-offset_bottom = 455.0
-text = "Press E to grab"
-
-[node name="Label_Interact" type="Label3D" parent="drop"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.414677, 0)
-billboard = 1
-fixed_size = true
-alpha_cut = 1
-text = "Drop"
-font_size = 16
-outline_size = 0
-script = ExtResource("2_feb5d")
-
-[node name="City" parent="." instance=ExtResource("5_lc2xo")]
-
-[node name="building_A2" parent="City" instance=ExtResource("6_215e1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.81434, 2.62031, -15.7312)
-
-[node name="building_B2" parent="City" instance=ExtResource("7_7sc4i")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.0158, 1.24676, -17.0284)
-
-[node name="building_C2" parent="City" instance=ExtResource("8_80cx4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.6144, 1.24676, -16.6629)
-
-[node name="building_D2" parent="City" instance=ExtResource("9_e8heu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.3029, 1.24676, -16.4275)
-
-[node name="building_E2" parent="City" instance=ExtResource("10_rvswv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.2081, 1.24676, -16.0299)
-
-[node name="building_F2" parent="City" instance=ExtResource("11_boyg6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.5769, 1.24676, -15.9932)
-
-[node name="building_G2" parent="City" instance=ExtResource("12_e36ub")]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 28.4235, 0, -5)
-
-[node name="building_H2" parent="City" instance=ExtResource("13_hb5m1")]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 39.4931, 0, -5)
-
-[node name="Laptop" parent="." instance=ExtResource("16_e8heu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.7007, 0.0415716, -8.0014)
-script = ExtResource("17_rvswv")
-
-[node name="Object_47" parent="Laptop/Sketchfab_model/root/GLTF_SceneRootNode/LT_Key_0" index="43"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.603882, -0.467832, -0.476501)
-
-[node name="Object_50" parent="Laptop/Sketchfab_model/root/GLTF_SceneRootNode/Plane_1" index="0"]
-visible = false
-
-[node name="Area3D" type="Area3D" parent="Laptop"]
-collision_mask = 2
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Laptop/Area3D"]
-shape = SubResource("SphereShape3D_boyg6")
-
-[node name="PromptLabel" type="Label3D" parent="Laptop"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.17174, 0.0216842)
-pixel_size = 0.004
-billboard = 1
-text = "Press [E]"
-script = ExtResource("2_feb5d")
-
-[node name="Label" type="Label" parent="Laptop/PromptLabel"]
-offset_right = 40.0
-offset_bottom = 23.0
-
-[node name="Player" type="CharacterBody3D" parent="." groups=["controllable", "player"]]
-transform = Transform3D(0.62, 0, 0, 0, 0.62, 0, 0, 0, 0.62, -34.8099, 0, 0)
-collision_layer = 2
-collision_mask = 13
-floor_constant_speed = true
-floor_block_on_wall = false
-safe_margin = 0.2
-script = ExtResource("18_rvswv")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1017, 0)
-shape = SubResource("CapsuleShape3D_boyg6")
-
-[node name="Head" type="Node3D" parent="Player"]
-
-[node name="Camera3D" type="Camera3D" parent="Player/Head"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.87434, -0.0804985)
-
-[node name="InteractionRaycast" type="RayCast3D" parent="Player/Head/Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.373812, 0.0804985)
-target_position = Vector3(0, 0, -7.31)
-debug_shape_custom_color = Color(0, 0.74902, 0, 1)
-debug_shape_thickness = 5
-
-[node name="AsdioRaycast" type="Node3D" parent="Player/Head"]
-
-[node name="Model" type="Node3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Player/Model"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0509899)
-mesh = SubResource("CapsuleMesh_f1jbl")
-
-[node name="StreetCam" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -73.4814, 0, 0)
-script = ExtResource("22_x5p1p")
-
-[node name="ColorRect" type="ColorRect" parent="StreetCam"]
-visible = false
-material = SubResource("ShaderMaterial_eow3j")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Camera3" type="Camera3D" parent="StreetCam"]
-transform = Transform3D(0.524909, 0.46045, -0.71586, 1.92968e-08, 0.841042, 0.540969, 0.851158, -0.28396, 0.441471, 33.03, 12.7821, 6.49236)
-
-[node name="BUILDING" parent="." instance=ExtResource("24_f1jbl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.86119, 1.94145, 0.128264)
-
-[node name="DirectionalLight3D" type="OmniLight3D" parent="BUILDING"]
-transform = Transform3D(0.0127216, -0.585297, 0.810719, 0.00918324, 0.810819, 0.585225, -0.999877, 4.65604e-10, 0.0156899, 4.61125, 2.57405, 13.1462)
-light_color = Color(1, 0.839216, 0.231373, 1)
-shadow_enabled = true
-distance_fade_enabled = true
-
-[node name="DirectionalLight3D2" type="OmniLight3D" parent="BUILDING"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.68427, 7.0139, -0.227584)
-light_color = Color(1, 0.839216, 0.231373, 1)
-shadow_enabled = true
-
-[node name="DirectionalLight3D3" type="OmniLight3D" parent="BUILDING"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.08348, 0.0608212, -0.227584)
-light_color = Color(1, 0.839216, 0.231373, 1)
-shadow_enabled = true
-
-[node name="DirectionalLight3D5" type="OmniLight3D" parent="BUILDING"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.08348, 0.0608212, 21.0757)
-light_color = Color(1, 0.839216, 0.231373, 1)
-shadow_enabled = true
-
-[node name="DirectionalLight3D6" type="OmniLight3D" parent="BUILDING"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.08348, 5.96691, 21.0757)
-light_color = Color(1, 0.839216, 0.231373, 1)
-shadow_enabled = true
-
-[node name="DirectionalLight3D7" type="OmniLight3D" parent="BUILDING"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.19387, 0.245415, 16.2689)
-light_color = Color(1, 0.839216, 0.231373, 1)
-shadow_enabled = true
-
-[node name="DirectionalLight3D4" type="OmniLight3D" parent="BUILDING"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.44686, 3.09842, 1.47725)
-light_color = Color(0.92091, 0.8176, 0.892648, 1)
-light_energy = 5.263
-light_indirect_energy = 6.502
-light_volumetric_fog_energy = 6.98
-shadow_enabled = true
-
-[node name="OmniLight3D" type="OmniLight3D" parent="BUILDING"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.449113, 12.8309, 11.0499)
-light_color = Color(0.990632, 0.741572, 0.910998, 1)
-light_energy = 11.345
-light_indirect_energy = 3.263
-light_volumetric_fog_energy = 3.101
-light_projector = SubResource("NoiseTexture2D_bnpwn")
-omni_range = 14.905
-omni_attenuation = 0.9
-
-[node name="RigidBody3D" type="RigidBody3D" parent="." groups=["grabbable"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.684965, 0)
-collision_layer = 4
-collision_mask = 7
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
-shape = SubResource("BoxShape3D_vaj68")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
-mesh = SubResource("BoxMesh_i2p71")
-
-[node name="OrderManager" type="Node" parent="."]
-script = ExtResource("24_vaj68")
-
-[node name="OrdersPanel" type="Sprite3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -30.216, 2, 0)
-texture = SubResource("ViewportTexture_i2p71")
-script = ExtResource("25_i2p71")
-
-[node name="OrderScreenViewport" type="SubViewport" parent="OrdersPanel"]
-transparent_bg = true
-
-[node name="Control" type="MarginContainer" parent="OrdersPanel/OrderScreenViewport"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = SubResource("Theme_36jdj")
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-script = ExtResource("25_xa8c5")
-
-[node name="ColorRect" type="ColorRect" parent="OrdersPanel/OrderScreenViewport/Control"]
-layout_mode = 2
-theme = SubResource("Theme_bnpwn")
-color = Color(0.2, 0.356863, 0.635294, 0.333333)
-
-[node name="Label" type="Label" parent="OrdersPanel/OrderScreenViewport/Control"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-text = "ORDERS"
-
-[node name="OrderList" type="VBoxContainer" parent="OrdersPanel/OrderScreenViewport/Control"]
-layout_mode = 2
-
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.6188, 1.83494, -4.24676)
-light_energy = 6.141
-light_indirect_energy = 3.586
-light_volumetric_fog_energy = 1.485
-omni_range = 9.41209
-
-[node name="HUDManager" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-script = ExtResource("25_bnpwn")
-
-[node name="SpeedLines" type="ColorRect" parent="HUDManager"]
-material = SubResource("ShaderMaterial_xfvwf")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(1, 1, 1, 0)
-
-[node name="HUD" type="MarginContainer" parent="HUDManager"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 40
-theme_override_constants/margin_top = 40
-theme_override_constants/margin_right = 40
-theme_override_constants/margin_bottom = 40
-
-[node name="GameTime" type="Label" parent="HUDManager/HUD"]
-layout_mode = 2
-size_flags_vertical = 0
-theme = SubResource("Theme_xfvwf")
-text = "00:00"
-horizontal_alignment = 1
-
-[node name="GrabLabel" type="Label" parent="HUDManager/HUD"]
-visible = false
-layout_mode = 2
-text = "Grabbed Nothing"
-
-[node name="CardBalance" type="Label" parent="HUDManager/HUD"]
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
-text = "$0"
-label_settings = SubResource("LabelSettings_36jdj")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[connection signal="body_entered" from="Laptop/Area3D" to="Laptop" method="_on_area_3d_body_entered"]
-
-[editable path="Laptop"]

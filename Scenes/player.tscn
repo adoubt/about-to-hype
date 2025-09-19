@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://dwdoylad3f00s"]
+
+[ext_resource type="Script" uid="uid://rlqnl5vb5p2b" path="res://player.gd" id="1_cvnsp"]
+[ext_resource type="PackedScene" uid="uid://by7g6qtybner8" path="res://Interact/InteractRay.tscn" id="2_6t5aa"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_boyg6"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_f1jbl"]
+
+[node name="Player" type="CharacterBody3D" groups=["controllable", "player"]]
+transform = Transform3D(0.62, 0, 0, 0, 0.62, 0, 0, 0, 0.62, 0, 0, 0)
+collision_layer = 2
+collision_mask = 13
+floor_constant_speed = true
+floor_block_on_wall = false
+safe_margin = 0.2
+script = ExtResource("1_cvnsp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1017, 0)
+shape = SubResource("CapsuleShape3D_boyg6")
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6024724, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Head"]
+transform = Transform3D(1.6129032, 0, 0, 0, 1.6129032, 0, 0, 0, 1.6129032, 0, 0.20873666, -0.0804985)
+
+[node name="AsdioRaycast" type="Node3D" parent="Head"]
+
+[node name="InteractRay" parent="Head" instance=ExtResource("2_6t5aa")]
+debug_shape_custom_color = Color(0.99193627, 0.4714026, 0.8833152, 1)
+debug_shape_thickness = 5
+
+[node name="Model" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0509899)
+mesh = SubResource("CapsuleMesh_f1jbl")

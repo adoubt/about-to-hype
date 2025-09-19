@@ -1,0 +1,51 @@
+[gd_scene load_steps=6 format=3 uid="uid://cdjheym03q4ok"]
+
+[ext_resource type="Script" uid="uid://bnl211kgeotsn" path="res://label_interact.gd" id="1_xny2g"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qhcbd"]
+size = Vector3(0.297119, 0.334961, 0.323242)
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_qhcbd"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qhcbd"]
+albedo_texture = SubResource("NoiseTexture2D_qhcbd")
+
+[sub_resource type="BoxMesh" id="BoxMesh_fc0e3"]
+lightmap_size_hint = Vector2i(7, 10)
+material = SubResource("StandardMaterial3D_qhcbd")
+size = Vector3(0.3, 0.3, 0.3)
+
+[node name="drop" type="RigidBody3D" groups=["grabbable"]]
+collision_layer = 4
+collision_mask = 7
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_qhcbd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_fc0e3")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.16, 0)
+visible = false
+text = "DROP"
+font_size = 18
+
+[node name="label1" type="Label" parent="."]
+visible = false
+top_level = true
+offset_left = 570.0
+offset_top = 423.0
+offset_right = 693.0
+offset_bottom = 455.0
+text = "Press E to grab"
+
+[node name="Label_Interact" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.414677, 0)
+billboard = 1
+fixed_size = true
+alpha_cut = 1
+text = "Drop"
+font_size = 16
+outline_size = 0
+script = ExtResource("1_xny2g")

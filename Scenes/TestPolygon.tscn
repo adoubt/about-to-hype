@@ -1,0 +1,83 @@
+[gd_scene load_steps=12 format=3 uid="uid://dhl6fkkhp3dy8"]
+
+[ext_resource type="Script" uid="uid://bi305l2arbj1l" path="res://Scripts/test_polygon.gd" id="1_2kunf"]
+[ext_resource type="PackedScene" uid="uid://kfvo4lrg7huc" path="res://Scenes/base_drone.tscn" id="1_x0cbq"]
+[ext_resource type="PackedScene" uid="uid://dxtmay68ca301" path="res://UI/hud_manager.tscn" id="2_d6o0v"]
+[ext_resource type="PackedScene" uid="uid://bui502wsoub" path="res://Scenes/glass_window_simple.tscn" id="2_l0ril"]
+[ext_resource type="PackedScene" uid="uid://cdjheym03q4ok" path="res://Scenes/Drop.tscn" id="3_d6o0v"]
+[ext_resource type="PackedScene" uid="uid://biw81glctlbm" path="res://Scenes/glass_window_broken.tscn" id="3_tnt1b"]
+[ext_resource type="PackedScene" uid="uid://dwdoylad3f00s" path="res://Scenes/player.tscn" id="5_ftdfr"]
+
+[sub_resource type="Environment" id="Environment_tnt1b"]
+background_mode = 1
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0.19445965, 1.9673444e-05, 0.18621328, 1)
+fog_density = 0.0
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0
+volumetric_fog_anisotropy = -0.4
+volumetric_fog_length = 115.52
+volumetric_fog_detail_spread = 0.5
+volumetric_fog_ambient_inject = 1.72
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2kunf"]
+size = Vector3(100, 1, 100)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l0ril"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_l0ril"]
+material = SubResource("StandardMaterial3D_l0ril")
+size = Vector3(100, 1, 100)
+
+[node name="TestPolygon" type="Node3D"]
+script = ExtResource("1_2kunf")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_tnt1b")
+
+[node name="GlassWindowSimple" parent="." instance=ExtResource("2_l0ril")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.197073, -9.297468)
+INTENSITY = 20.0
+
+[node name="GlassWindowBroken" parent="." instance=ExtResource("3_tnt1b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.0093594, 16.035463)
+
+[node name="Floor" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("BoxShape3D_2kunf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+mesh = SubResource("BoxMesh_l0ril")
+
+[node name="Base_Drone" parent="." instance=ExtResource("1_x0cbq")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -9.377512, 2.2037513, 0)
+
+[node name="Player" parent="." instance=ExtResource("5_ftdfr")]
+transform = Transform3D(-0.18089803, 0, -0.5930227, 0, 0.62000006, 0, 0.5930227, 0, -0.18089803, -9.082563, 0, 15.834547)
+
+[node name="HUDManager" parent="." instance=ExtResource("2_d6o0v")]
+visible = false
+
+[node name="drop" parent="." instance=ExtResource("3_d6o0v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4106655, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 13.419069, 18.211119)
+light_energy = 11.7
+light_specular = 11.2
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 17.661898
+omni_attenuation = 0.632
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 13.419069, -8.548883)
+light_energy = 11.7
+light_specular = 11.2
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 17.661898
+omni_attenuation = 0.632

@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bapk8ffqxb4j1"]
+[gd_scene load_steps=4 format=3 uid="uid://bapk8ffqxb4j1"]
 
 [ext_resource type="Script" uid="uid://5eveuotn2fjd" path="res://UI/main_menu.gd" id="1_p8ccj"]
 [ext_resource type="Theme" uid="uid://2ocoy8vsxdat" path="res://assets/themes/tab_settings.tres" id="2_tk8dj"]
+[ext_resource type="StyleBox" uid="uid://cetf4is0ai61y" path="res://assets/themes/back_btn_style.tres" id="3_d8nwk"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -40,14 +41,20 @@ theme = ExtResource("2_tk8dj")
 layout_mode = 2
 text = "PLAY"
 
+[node name="Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "TEST POLYGON"
+
 [node name="Settings" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "SETTINGS"
 
 [node name="Exit" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_styles/normal = ExtResource("3_d8nwk")
 text = "EXIT"
 
 [connection signal="pressed" from="VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_test_pressed"]
 [connection signal="pressed" from="VBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="VBoxContainer/Exit" to="." method="_on_exit_pressed"]
