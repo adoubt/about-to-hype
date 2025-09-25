@@ -17,7 +17,7 @@ var input_enabled: bool = false
 
 func _ready() -> void:
 	ControllerManager.register(self) 
-
+	ControllerManager._handle_object_hotkey(name) # где name = "Player"
 func _unhandled_input(event: InputEvent) -> void:
 	if not input_enabled:
 		return

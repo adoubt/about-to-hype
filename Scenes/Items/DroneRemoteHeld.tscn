@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://fv31wdi4c5mg"]
+[gd_scene load_steps=19 format=3 uid="uid://fv31wdi4c5mg"]
 
 [ext_resource type="Script" uid="uid://bihsvmg7f4fyp" path="res://Scripts/Items/ItemDroneRemoteController.gd" id="1_4duxk"]
 [ext_resource type="Material" uid="uid://dkghwq086gte4" path="res://assets/Materials/black_plastmass_material.tres" id="3_x0eim"]
@@ -68,9 +68,6 @@ colors = PackedColorArray(0, 0, 0.85538745, 1, 0.86178774, 0.5307732, 0.833254, 
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_thu6t"]
 gradient = SubResource("Gradient_1igob")
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_1igob"]
-size = Vector3(0.44158173, 0.25723267, 0.1126709)
 
 [node name="DroneRemoteController" type="Node3D"]
 transform = Transform3D(58.08, 0, 0, 0, 58.08, 0, 0, 0, 58.08, 0, 0, 0)
@@ -224,8 +221,3 @@ size_flags_horizontal = 4
 size_flags_vertical = 8
 text = "DISTANCE
 100m"
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0025901794, -0.017318726, 6.1035156e-05)
-visible = false
-shape = SubResource("BoxShape3D_1igob")

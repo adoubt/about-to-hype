@@ -18,6 +18,11 @@ func add_item_to_inventory(item: InventoryItem, slot_index: int) -> void:
 		inventory_bar.slots[slot_index].set_item(item)
 		inventory_bar.update_selection()  # обновляем выделение
 		
+
+func clear_current_slot() -> void:
+	var slot_index = inventory_bar.current_index
+	inventory_bar.slots[slot_index].clear_item()
+	
 func _ready() -> void:
 	_update_card()
 	update_game_time_label()

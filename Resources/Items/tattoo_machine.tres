@@ -7,4 +7,6 @@
 script = ExtResource("1_hc52b")
 name = "tattoo_machine"
 icon = ExtResource("1_55py6")
+scene_item_held = "res://Scenes/Items/TestItemLoot.tscn"
+scene_item_loot = "res://Scenes/Items/TestItemHeld.tscn"
 metadata/_custom_type_script = "uid://cvu6jh1mic2ba"

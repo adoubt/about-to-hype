@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d4laoi62l8svd"]
+
+[ext_resource type="Script" uid="uid://bchjsatas8efy" path="res://Scripts/get_scene_tree.gd" id="1_uuiac"]
+
+[node name="GetSceneTree" type="Node"]
+script = ExtResource("1_uuiac")

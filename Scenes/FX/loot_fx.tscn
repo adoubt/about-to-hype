@@ -1,0 +1,64 @@
+[gd_scene load_steps=10 format=3 uid="uid://w07rimd38lgp"]
+
+[ext_resource type="Shader" uid="uid://byajqubducinv" path="res://assets/Shaders/loot_particles.tres" id="1_n10fv"]
+[ext_resource type="Texture2D" uid="uid://b8nkb7osphjsn" path="res://assets/shader_pics/istockphoto-1281301506-612x612.jpg" id="2_fp7j2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ibn8u"]
+render_priority = 0
+shader = ExtResource("1_n10fv")
+shader_parameter/Main_Texture = ExtResource("2_fp7j2")
+
+[sub_resource type="Curve" id="Curve_v51wh"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.2529644, 0.60869557), 0.0, 0.0, 0, 0, Vector2(0.47430828, 0.44565213), 0.0, 0.0, 0, 0, Vector2(0.6996047, 0.9891303), 0.1330645, 0.1330645, 0, 0, Vector2(1, 0), -8.799998, 0.0, 0, 0]
+point_count = 5
+metadata/_snap_count = 8
+
+[sub_resource type="CurveTexture" id="CurveTexture_irwqe"]
+width = 1000
+texture_mode = 1
+curve = SubResource("Curve_v51wh")
+
+[sub_resource type="Gradient" id="Gradient_fp7j2"]
+offsets = PackedFloat32Array(0.008810572, 0.37444934, 1)
+colors = PackedColorArray(1, 1, 0, 0.44700003, 0.49560964, 0, 0.368734, 0.536, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ko6xv"]
+gradient = SubResource("Gradient_fp7j2")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_unfrh"]
+lifetime_randomness = 0.5
+emission_shape_offset = Vector3(0, 0.25, 0)
+emission_shape = 6
+emission_ring_axis = Vector3(0, -1, 0)
+emission_ring_height = 1.0
+emission_ring_radius = 0.5
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 43.4
+inherit_velocity_ratio = 1.0
+direction = Vector3(0, 0, 0)
+spread = 0.0
+flatness = 1.0
+initial_velocity_max = 1.0
+gravity = Vector3(0, 1, 0)
+color_ramp = SubResource("GradientTexture1D_ko6xv")
+alpha_curve = SubResource("CurveTexture_irwqe")
+turbulence_noise_strength = 0.0
+turbulence_noise_speed_random = 2.54
+
+[sub_resource type="QuadMesh" id="QuadMesh_gpl3q"]
+lightmap_size_hint = Vector2i(4, 4)
+size = Vector2(0.5, 0.5)
+
+[node name="LootFX" type="Node3D"]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+material_override = SubResource("ShaderMaterial_ibn8u")
+visibility_range_end = 60.0
+visibility_range_end_margin = 5.0
+amount = 5
+lifetime = 1.5
+explosiveness = 0.1
+randomness = 1.0
+trail_lifetime = 1.89
+process_material = SubResource("ParticleProcessMaterial_unfrh")
+draw_pass_1 = SubResource("QuadMesh_gpl3q")

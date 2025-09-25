@@ -1,0 +1,26 @@
+[gd_scene load_steps=8 format=3 uid="uid://dx34ye0ik1qtt"]
+
+[ext_resource type="Script" uid="uid://crk6p7ykm0nn8" path="res://Scripts/Loot.gd" id="1_5ma8o"]
+[ext_resource type="Resource" uid="uid://r3s0gucu2oa8" path="res://Resources/Items/drone_remote_controller.tres" id="2_3gdj7"]
+[ext_resource type="Material" uid="uid://o765wr3vnafe" path="res://assets/Materials/item_highlight.tres" id="3_jr8xg"]
+[ext_resource type="PackedScene" uid="uid://w07rimd38lgp" path="res://Scenes/FX/loot_fx.tscn" id="3_n7d2s"]
+[ext_resource type="AudioStream" uid="uid://cnbdu8pom8ndi" path="res://assets/sound/Persistent/Loot Dust.ogg" id="4_2inet"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vaj68"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_i2p71"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[node name="RigidBody3D" type="RigidBody3D" groups=["grabbable"]]
+script = ExtResource("1_5ma8o")
+item = ExtResource("2_3gdj7")
+particles_scene = ExtResource("3_n7d2s")
+loot_sound = ExtResource("4_2inet")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_vaj68")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_i2p71")
+surface_material_override/0 = ExtResource("3_jr8xg")

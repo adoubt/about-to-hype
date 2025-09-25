@@ -1,12 +1,16 @@
-[gd_scene load_steps=20 format=3 uid="uid://djdwfp6cfwga0"]
+[gd_scene load_steps=24 format=3 uid="uid://djdwfp6cfwga0"]
 
 [ext_resource type="Material" uid="uid://dkghwq086gte4" path="res://assets/Materials/black_plastmass_material.tres" id="1_1igob"]
 [ext_resource type="Script" uid="uid://crk6p7ykm0nn8" path="res://Scripts/Loot.gd" id="1_kl183"]
+[ext_resource type="Resource" uid="uid://r3s0gucu2oa8" path="res://Resources/Items/drone_remote_controller.tres" id="2_st7cp"]
 [ext_resource type="Material" uid="uid://bnw1e4kw7wxqd" path="res://assets/Materials/blue_plastmass_material.tres" id="2_thu6t"]
+[ext_resource type="PackedScene" uid="uid://w07rimd38lgp" path="res://Scenes/FX/loot_fx.tscn" id="3_ce7r2"]
 [ext_resource type="Material" uid="uid://byq0gnhhalaca" path="res://assets/Materials/low-poly_glass_table.tres" id="3_kl183"]
+[ext_resource type="Material" uid="uid://o765wr3vnafe" path="res://assets/Materials/item_highlight.tres" id="4_ce7r2"]
+[ext_resource type="AudioStream" uid="uid://cnbdu8pom8ndi" path="res://assets/sound/Persistent/Loot Dust.ogg" id="9_ibn8u"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1igob"]
-size = Vector3(0.39160156, 0.22167969, 0.07519531)
+size = Vector3(0.63061523, 0.35546875, 0.11425781)
 
 [sub_resource type="BoxMesh" id="BoxMesh_mc6fb"]
 material = ExtResource("1_1igob")
@@ -40,6 +44,16 @@ size = Vector3(0.05, 0.025, 0.02)
 material = ExtResource("3_kl183")
 size = Vector3(0.22, 0.145, 0.005)
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_1igob"]
+viewport_path = NodePath("Model/Display/Sprite3D/SubViewport")
+
+[sub_resource type="Gradient" id="Gradient_1igob"]
+interpolation_color_space = 2
+colors = PackedColorArray(0, 0, 0.85538745, 1, 0.86178774, 0.5307732, 0.833254, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_thu6t"]
+gradient = SubResource("Gradient_1igob")
+
 [sub_resource type="CylinderMesh" id="CylinderMesh_lal6r"]
 material = ExtResource("1_1igob")
 top_radius = 0.01
@@ -62,29 +76,30 @@ top_radius = 0.03
 bottom_radius = 0.04
 height = 0.226
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_1igob"]
-viewport_path = NodePath("Sprite3D/SubViewport")
-
-[sub_resource type="Gradient" id="Gradient_1igob"]
-interpolation_color_space = 2
-colors = PackedColorArray(0, 0, 0.85538745, 1, 0.86178774, 0.5307732, 0.833254, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_thu6t"]
-gradient = SubResource("Gradient_1igob")
-
 [node name="DroneRemoteController" type="RigidBody3D"]
 mass = 0.141
 script = ExtResource("1_kl183")
+item = ExtResource("2_st7cp")
+particles_scene = ExtResource("3_ce7r2")
+particles_delay = null
+loot_sound = ExtResource("9_ibn8u")
+loot_unit_size = null
+loot_max_distance = null
+loot_volume = null
+velocity_threshold = null
+ground_check_distance = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_1igob")
 
 [node name="Model" type="Node3D" parent="."]
+transform = Transform3D(1.55, 0, 0, 0, 1.55, 0, 0, 0, 1.55, 0, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.013582014, 0)
 mesh = SubResource("BoxMesh_mc6fb")
 skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("4_ce7r2")
 
 [node name="LeftStick" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, -0.13685814, 0.031673335, 0.031364255)
@@ -132,6 +147,71 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0032020733, 0.019145437, 0.
 mesh = SubResource("BoxMesh_v1b1k")
 skeleton = NodePath("../..")
 
+[node name="Sprite3D" type="Sprite3D" parent="Model/Display"]
+transform = Transform3D(0.067, 0, 0, 0, 0.067, 0, 0, 0, 0.067, -0.1094173, -0.071137995, -0.0013012253)
+centered = false
+texture = SubResource("ViewportTexture_1igob")
+
+[node name="SubViewport" type="SubViewport" parent="Model/Display/Sprite3D"]
+size = Vector2i(329, 217)
+
+[node name="Control" type="Control" parent="Model/Display/Sprite3D/SubViewport"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Model/Display/Sprite3D/SubViewport/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_thu6t")
+
+[node name="MarginContainer" type="MarginContainer" parent="Model/Display/Sprite3D/SubViewport/Control/TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Model/Display/Sprite3D/SubViewport/Control/TextureRect/MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Model/Display/Sprite3D/SubViewport/Control/TextureRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+
+[node name="POWER" type="Label" parent="Model/Display/Sprite3D/SubViewport/Control/TextureRect/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "POWER 
+100%"
+
+[node name="POWER2" type="Label" parent="Model/Display/Sprite3D/SubViewport/Control/TextureRect/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "BATTERY
+100%"
+
+[node name="POWER3" type="Label" parent="Model/Display/Sprite3D/SubViewport/Control/TextureRect/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "DISTANCE
+100m"
+
 [node name="MeshInstance3D12" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00093750656, 0.107121035, 0)
 mesh = SubResource("CylinderMesh_lal6r")
@@ -161,70 +241,5 @@ skeleton = NodePath("../..")
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="Model"]
 skeleton = NodePath("../..")
-
-[node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(0.067, 0, 0, 0, 0.067, 0, 0, 0, 0.067, -0.10621522, -0.05199256, 0.0133526735)
-centered = false
-texture = SubResource("ViewportTexture_1igob")
-
-[node name="SubViewport" type="SubViewport" parent="Sprite3D"]
-size = Vector2i(329, 217)
-
-[node name="Control" type="Control" parent="Sprite3D/SubViewport"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="TextureRect" type="TextureRect" parent="Sprite3D/SubViewport/Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("GradientTexture1D_thu6t")
-
-[node name="MarginContainer" type="MarginContainer" parent="Sprite3D/SubViewport/Control/TextureRect"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 50
-theme_override_constants/margin_top = 50
-theme_override_constants/margin_right = 50
-theme_override_constants/margin_bottom = 50
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Sprite3D/SubViewport/Control/TextureRect/MarginContainer"]
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Sprite3D/SubViewport/Control/TextureRect/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 3
-
-[node name="POWER" type="Label" parent="Sprite3D/SubViewport/Control/TextureRect/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-text = "POWER 
-100%"
-
-[node name="POWER2" type="Label" parent="Sprite3D/SubViewport/Control/TextureRect/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-text = "BATTERY
-100%"
-
-[node name="POWER3" type="Label" parent="Sprite3D/SubViewport/Control/TextureRect/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-text = "DISTANCE
-100m"
 
 [connection signal="interacted" from="." to="." method="_on_interacted"]

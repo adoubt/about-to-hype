@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cnbdu8pom8ndi"
+path="res://.godot/imported/Loot Dust.ogg-ca7fcdc1f62254b13257a83fdc4bd19b.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sound/Persistent/Loot Dust.ogg"
+dest_files=["res://.godot/imported/Loot Dust.ogg-ca7fcdc1f62254b13257a83fdc4bd19b.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

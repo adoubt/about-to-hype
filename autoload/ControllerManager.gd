@@ -118,6 +118,9 @@ func get_current_camera() -> Camera3D:
 		return obj.get_current_camera()
 	return null
 	
+func activate_default(name: String) -> void:
+	_handle_object_hotkey(name)
+	
 # --- Внутреннее ---
 func _set_camera(obj: Node):
 	if obj.has_method("get_current_camera"):

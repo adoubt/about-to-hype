@@ -3,7 +3,9 @@ extends Node3D
 @export var audio_source_script_path: String = "uid://wxb573o058my"
 # Все источники
 var dynamic_sources: Array = []        # создаются и удаляются автоматически
-var persistent_sources: Dictionary = {} # музыка, постоянные объекты
+var persistent_sources: Dictionary = {
+	"loot_dust" : "uid://dca1cajfu4p1s"
+} # музыка, постоянные объекты
 
 
 # Максимальная слышимость
@@ -13,7 +15,8 @@ var persistent_sources: Dictionary = {} # музыка, постоянные о�
 var sounds = {
 	"flashlight_on": "uid://yjis7oplnmw5",
 	"glass_break": "uid://byj1v8aaq3drc",
-	"theme_music": "uid://abcd1234"
+	"theme_music": "uid://abcd1234",
+	"game_start" : "uid://c5d2108v7d0ka"
 }
 func _ready():
 	pass
@@ -39,6 +42,24 @@ func just_play_sound(name: String, position: Vector3, volume_db: float = 0.0, pi
 	dynamic_sources.append(player)
 	player.connect("finished", Callable(self, "_on_dynamic_finished").bind(player))
 
+func play_ui_sound(name: String, volume_db: float = -20.0, pitch_range: Vector2 = Vector2(1.0, 1.0)):
+	if not sounds.has(name):
+		push_error("AudioManager: sound not found: %s" % name)
+		return
+
+	var player = AudioStreamPlayer.new() # ⚡ не 3D, а 2D вариант
+	player.stream = load(sounds[name])
+	player.volume_db = volume_db
+	player.pitch_scale = randf_range(pitch_range.x, pitch_range.y)
+
+	add_child(player)
+	player.play()
+	
+	player.connect("finished", Callable(self, "_on_ui_finished").bind(player))
+
+func _on_ui_finished(player: AudioStreamPlayer):
+	if is_instance_valid(player):
+		player.queue_free()
 
 func _on_dynamic_finished(player: AudioStreamPlayer3D):
 	if dynamic_sources.has(player):

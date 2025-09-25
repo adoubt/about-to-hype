@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=4 uid="uid://dwdoylad3f00s"]
+[gd_scene load_steps=15 format=4 uid="uid://dwdoylad3f00s"]
 
 [ext_resource type="Script" uid="uid://rlqnl5vb5p2b" path="res://player.gd" id="1_cvnsp"]
 [ext_resource type="PackedScene" uid="uid://by7g6qtybner8" path="res://Interact/InteractRay.tscn" id="2_6t5aa"]
 [ext_resource type="Script" uid="uid://cyxbbvd2gehv5" path="res://Scripts/camera_controller.gd" id="2_vgqql"]
 [ext_resource type="PackedScene" uid="uid://bwq7sw5vrgtbs" path="res://Scenes/skeleton.tscn" id="4_vgqql"]
+[ext_resource type="Material" uid="uid://o765wr3vnafe" path="res://assets/Materials/item_highlight.tres" id="4_x3wgy"]
 [ext_resource type="PackedScene" uid="uid://fv31wdi4c5mg" path="res://Scenes/Items/DroneRemoteHeld.tscn" id="5_fkybt"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_boyg6"]
@@ -816,6 +817,7 @@ transform = Transform3D(1.6129032, 0, 0, 0, 1.6129032, 0, 0, 0, 1.6129032, 0, 0.
 [node name="InteractRay" parent="CameraController" instance=ExtResource("2_6t5aa")]
 debug_shape_custom_color = Color(0.99193627, 0.4714026, 0.8833152, 1)
 debug_shape_thickness = 5
+outline_material = ExtResource("4_x3wgy")
 
 [node name="CameraControllerAnchor" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1706651, -0.38724267)

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c5d2108v7d0ka"
+path="res://.godot/imported/Game Start.mp3-e4101af8e1fbc880192737d8d902cc48.mp3str"
+
+[deps]
+
+source_file="res://assets/sound/FX/Game Start.mp3"
+dest_files=["res://.godot/imported/Game Start.mp3-e4101af8e1fbc880192737d8d902cc48.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

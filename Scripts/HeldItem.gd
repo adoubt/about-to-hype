@@ -42,6 +42,8 @@ func throw():
 
 	# Добавляем на сцену
 	get_tree().current_scene.add_child(thrown_item)
-
+	
+	var hud = get_tree().get_root().get_node("game/HUDManager")
+	hud.clear_current_slot()
 	# Убираем предмет из руки
 	queue_free()
