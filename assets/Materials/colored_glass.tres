@@ -1,0 +1,26 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://uoa5mc4nyce7"]
+
+[ext_resource type="Shader" uid="uid://dr0vqu5xql5ot" path="res://assets/Shaders/colored_glass.gdshader" id="1_myavn"]
+
+[sub_resource type="Gradient" id="Gradient_myavn"]
+offsets = PackedFloat32Array(0, 0.04761905, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.050708726, 0.9551545, 0.050708726, 1, 1, 1, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_g37l4"]
+gradient = SubResource("Gradient_myavn")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_myavn")
+shader_parameter/albedo = Color(1, 1, 0.44297108, 0.30400002)
+shader_parameter/roughness = 0.15
+shader_parameter/refraction = 0.5
+shader_parameter/texture_refraction = SubResource("GradientTexture1D_g37l4")
+shader_parameter/refraction_texture_channel = Vector4(1, 0, 0, 0)
+shader_parameter/normal_strength = 0.0
+shader_parameter/edge_color = Color(0, 0, 0, 1)
+shader_parameter/surface_contribution = 0.2
+shader_parameter/specular_contribution = 0.2
+shader_parameter/refraction_contribution = 3.445
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)

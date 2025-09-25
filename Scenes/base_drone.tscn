@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dmdk8j6rmtauh" path="res://drone.gd" id="1_v1gsr"]
 [ext_resource type="AudioStream" uid="uid://bt8wqhs8owrj7" path="res://Drone Noise Test - DJI Avata vs DJI FPV vs DJI Mavic 3 vs DJI Air 2S.mp3" id="2_ldkjq"]
-[ext_resource type="Script" uid="uid://wxb573o058my" path="res://AudioSource3D.gd" id="3_cllcg"]
+[ext_resource type="Script" uid="uid://wxb573o058my" path="res://Scripts/AudioSource3D.gd" id="3_cllcg"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_e2o6t"]
 noise_type = 3

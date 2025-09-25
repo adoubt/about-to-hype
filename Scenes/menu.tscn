@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dyr4si0jpc4wr" path="res://building.tscn" id="3_mae5d"]
 [ext_resource type="Script" uid="uid://bsglttqymu1yo" path="res://menu_camera_flow.gd" id="4_4hy44"]
 [ext_resource type="AudioStream" uid="uid://bnth3x01y1qt6" path="res://assets/sound/1081.mp3" id="4_158mb"]
-[ext_resource type="Script" uid="uid://wxb573o058my" path="res://AudioSource3D.gd" id="5_wwsa2"]
+[ext_resource type="Script" uid="uid://wxb573o058my" path="res://Scripts/AudioSource3D.gd" id="5_wwsa2"]
 
 [sub_resource type="Environment" id="Environment_mae5d"]
 background_mode = 1

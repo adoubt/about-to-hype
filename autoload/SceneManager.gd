@@ -25,6 +25,8 @@ func go_to_game():
 func go_to_test_polygon():
 	_change_scene("TestPolygon")
 	
+func restart_current():
+	_change_scene(current_scene_name)
 func exit():
 	get_tree().quit()
 # ---------------- INTERNAL ----------------
@@ -36,6 +38,7 @@ func _change_scene(name: String):
 	current_scene_name = name
 	ControllerManager.refresh()
 	get_tree().change_scene_to_file(SCENES[name])
+	
 	_update_ui_for_scene()
 	UIManager.close_all()
 func _update_ui_for_scene():

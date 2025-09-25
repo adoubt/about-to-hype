@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://fmlrjy2hqlqq"]
 
 [ext_resource type="AudioStream" uid="uid://b3vmgtaw8642s" path="res://assets/sound/1231.mp3" id="1_nsuor"]
-[ext_resource type="Script" uid="uid://wxb573o058my" path="res://AudioSource3D.gd" id="2_jc7xf"]
+[ext_resource type="Script" uid="uid://wxb573o058my" path="res://Scripts/AudioSource3D.gd" id="2_jc7xf"]
 
 [node name="TapeRecorder" type="AudioStreamPlayer3D"]
 transform = Transform3D(1, 0, 1.74533e-05, 0, 1, 0, -1.74533e-05, 0, 1, 0, 0, 0)

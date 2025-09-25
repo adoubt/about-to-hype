@@ -61,7 +61,7 @@ func _tween_scale(btn: Button, target_scale: Vector2) -> void:
 
 # --- Кнопки ---
 func _on_restart_pressed() -> void:
-	SceneManager.go_to_game()
+	SceneManager.restart_current()
 
 func _on_menu_pressed() -> void:
 	SceneManager.go_to_main_menu()

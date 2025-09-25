@@ -17,21 +17,28 @@ func _input(event: InputEvent) -> void:
 		
 func _handle_object_hotkey(name: String) -> void:
 	for obj_dict in controllables:
-		var obj = obj_dict["node"]  # достаём Node из словаря
-		if obj.name == name:
-			if get_active() == obj and obj.has_method("toggle_camera"):
-				obj.toggle_camera()  # только для дрона
-			else:
-				if get_active() == obj and obj.has_method("toggle_camera"):
-					obj.toggle_camera()
-				else:
-					if get_active() and obj_dict["requires_input"]:  # <-- блокируем только если объект требует ввода
-						get_active().set_input_enabled(false)
-					current_index = controllables.find(obj_dict)
-					if obj_dict["requires_input"]:
-						obj.set_input_enabled(true)
-					_set_camera(obj)
-			break
+		var obj = obj_dict["node"]
+		if obj.name != name:
+			continue
+
+		var active = get_active()
+
+		if active == obj and obj.has_method("toggle_camera"):
+			obj.toggle_camera()
+			return
+
+		# отключаем ввод у текущего активного объекта
+		if active and controllables[current_index]["requires_input"]:
+			active.set_input_enabled(false)
+
+		current_index = controllables.find(obj_dict)
+
+		if obj_dict["requires_input"]:
+			obj.set_input_enabled(true)
+
+		_set_camera(obj)
+		return
+
 
 # Регистрируем объект в менеджере
 func register(obj: Node, requires_input: bool = true) -> void:
@@ -51,7 +58,20 @@ func refresh():
 	current_index = -1
 	
 func unregister(obj: Node) -> void:
-	pass
+	for i in range(controllables.size()):
+		if controllables[i]["node"] == obj:
+			if current_index == i:
+				# отключаем ввод у удаляемого объекта
+				if obj.has_method("set_input_enabled") and controllables[i]["requires_input"]:
+					obj.set_input_enabled(false)
+				current_index = -1
+				# пробуем переключиться на следующий объект
+				switch_next()
+			elif current_index > i:
+				current_index -= 1  # сдвигаем индекс
+			controllables.remove_at(i)
+			break
+
 # Переключение на следующего активного игрока/дрон (по кругу)
 func switch_next() -> void:
 	if controllables.is_empty():
@@ -74,11 +94,12 @@ func switch_next() -> void:
 	_set_camera(controllables[current_index]["node"])
 
 # Переключение на конкретный объект (например, уличная камера)
-func switch_to(obj: Node) -> void:
+func switch_to_obj(obj: Node) -> void:
 	if not controllables.any(func(c): return c["node"] == obj):
 		return
 	_set_camera(obj)
 
+	
 # Включение/отключение ввода у всех объектов, которым нужен ввод
 func set_all_input_enabled(enabled: bool):
 	for c in controllables:
@@ -96,10 +117,10 @@ func get_current_camera() -> Camera3D:
 	if obj and obj.has_method("get_current_camera"):
 		return obj.get_current_camera()
 	return null
+	
 # --- Внутреннее ---
 func _set_camera(obj: Node):
 	if obj.has_method("get_current_camera"):
 		var cam = obj.get_current_camera()
 		if cam:
 			cam.make_current()
-			

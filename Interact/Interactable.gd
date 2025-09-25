@@ -5,7 +5,7 @@ signal interacted(body)
 
 @export var enabled = true
 @export var prompt_message = "Interact"
-@export var prompt_action = "interact"
+@export var prompt_action = "Interact"
 
 
 func get_prompt():

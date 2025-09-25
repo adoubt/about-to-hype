@@ -1,0 +1,230 @@
+[gd_scene load_steps=20 format=3 uid="uid://djdwfp6cfwga0"]
+
+[ext_resource type="Material" uid="uid://dkghwq086gte4" path="res://assets/Materials/black_plastmass_material.tres" id="1_1igob"]
+[ext_resource type="Script" uid="uid://crk6p7ykm0nn8" path="res://Scripts/Loot.gd" id="1_kl183"]
+[ext_resource type="Material" uid="uid://bnw1e4kw7wxqd" path="res://assets/Materials/blue_plastmass_material.tres" id="2_thu6t"]
+[ext_resource type="Material" uid="uid://byq0gnhhalaca" path="res://assets/Materials/low-poly_glass_table.tres" id="3_kl183"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1igob"]
+size = Vector3(0.39160156, 0.22167969, 0.07519531)
+
+[sub_resource type="BoxMesh" id="BoxMesh_mc6fb"]
+material = ExtResource("1_1igob")
+size = Vector3(0.3, 0.175, 0.02)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_snf43"]
+material = ExtResource("1_1igob")
+top_radius = 0.03
+bottom_radius = 0.03
+height = 0.01
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sd8ai"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_nxuft"]
+material = SubResource("StandardMaterial3D_sd8ai")
+top_radius = 0.01
+bottom_radius = 0.001
+height = 0.026
+
+[sub_resource type="SphereMesh" id="SphereMesh_b283c"]
+material = ExtResource("2_thu6t")
+radius = 0.02
+height = 0.02
+
+[sub_resource type="BoxMesh" id="BoxMesh_6svtv"]
+material = ExtResource("2_thu6t")
+size = Vector3(0.05, 0.025, 0.02)
+
+[sub_resource type="BoxMesh" id="BoxMesh_v1b1k"]
+material = ExtResource("3_kl183")
+size = Vector3(0.22, 0.145, 0.005)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_lal6r"]
+material = ExtResource("1_1igob")
+top_radius = 0.01
+bottom_radius = 0.01
+height = 0.02
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qlu41"]
+albedo_color = Color(0.042278394, 0.042278446, 0, 1)
+roughness = 0.56
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_em383"]
+material = SubResource("StandardMaterial3D_qlu41")
+top_radius = 0.001
+bottom_radius = 0.005
+height = 0.2
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_wx2x0"]
+material = ExtResource("1_1igob")
+top_radius = 0.03
+bottom_radius = 0.04
+height = 0.226
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_1igob"]
+viewport_path = NodePath("Sprite3D/SubViewport")
+
+[sub_resource type="Gradient" id="Gradient_1igob"]
+interpolation_color_space = 2
+colors = PackedColorArray(0, 0, 0.85538745, 1, 0.86178774, 0.5307732, 0.833254, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_thu6t"]
+gradient = SubResource("Gradient_1igob")
+
+[node name="DroneRemoteController" type="RigidBody3D"]
+mass = 0.141
+script = ExtResource("1_kl183")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_1igob")
+
+[node name="Model" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.013582014, 0)
+mesh = SubResource("BoxMesh_mc6fb")
+skeleton = NodePath("../..")
+
+[node name="LeftStick" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, -0.13685814, 0.031673335, 0.031364255)
+visibility_range_fade_mode = 1
+mesh = SubResource("CylinderMesh_snf43")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model/LeftStick"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01909842, 0)
+mesh = SubResource("CylinderMesh_nxuft")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Model/LeftStick"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.005457282, 0)
+mesh = SubResource("SphereMesh_b283c")
+
+[node name="LeftStick2" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0.14244199, 0.031673335, 0.031364255)
+visibility_range_fade_mode = 1
+mesh = SubResource("CylinderMesh_snf43")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model/LeftStick2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01909842, 0)
+mesh = SubResource("CylinderMesh_nxuft")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Model/LeftStick2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.005457282, 0)
+mesh = SubResource("SphereMesh_b283c")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.14267315, 0.10351375, 0)
+mesh = SubResource("BoxMesh_6svtv")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15058602, 0.10233119, 0)
+mesh = SubResource("BoxMesh_6svtv")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D10" type="MeshInstance3D" parent="Model"]
+skeleton = NodePath("../..")
+
+[node name="Display" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0032020733, 0.019145437, 0.014653899)
+mesh = SubResource("BoxMesh_v1b1k")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D12" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00093750656, 0.107121035, 0)
+mesh = SubResource("CylinderMesh_lal6r")
+skeleton = NodePath("../..")
+
+[node name="antenna" type="MeshInstance3D" parent="Model/MeshInstance3D12"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.10743415, 0)
+mesh = SubResource("CylinderMesh_em383")
+
+[node name="MeshInstance3D13" type="MeshInstance3D" parent="Model"]
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(0.99827385, 0.0587314, 0, -0.0587314, 0.99827385, 0, 0, 0, 1, -0.1530755, -0.010204876, 0)
+mesh = SubResource("CylinderMesh_wx2x0")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(0.99827385, 0.0587314, 0, -0.0587314, 0.99827385, 0, 0, 0, 1, -0.1530755, -0.010204876, 0)
+mesh = SubResource("CylinderMesh_wx2x0")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D11" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(-0.9982398, -0.059306376, 8.742278e-08, -0.059306376, 0.9982398, 0, -8.7268894e-08, -5.184728e-09, -1, 0.15735537, -0.009597773, -2.5352037e-08)
+mesh = SubResource("CylinderMesh_wx2x0")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Model"]
+skeleton = NodePath("../..")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.067, 0, 0, 0, 0.067, 0, 0, 0, 0.067, -0.10621522, -0.05199256, 0.0133526735)
+centered = false
+texture = SubResource("ViewportTexture_1igob")
+
+[node name="SubViewport" type="SubViewport" parent="Sprite3D"]
+size = Vector2i(329, 217)
+
+[node name="Control" type="Control" parent="Sprite3D/SubViewport"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Sprite3D/SubViewport/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_thu6t")
+
+[node name="MarginContainer" type="MarginContainer" parent="Sprite3D/SubViewport/Control/TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Sprite3D/SubViewport/Control/TextureRect/MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Sprite3D/SubViewport/Control/TextureRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+
+[node name="POWER" type="Label" parent="Sprite3D/SubViewport/Control/TextureRect/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "POWER 
+100%"
+
+[node name="POWER2" type="Label" parent="Sprite3D/SubViewport/Control/TextureRect/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "BATTERY
+100%"
+
+[node name="POWER3" type="Label" parent="Sprite3D/SubViewport/Control/TextureRect/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "DISTANCE
+100m"
+
+[connection signal="interacted" from="." to="." method="_on_interacted"]

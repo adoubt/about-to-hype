@@ -3,10 +3,7 @@ extends Node3D
 
 func _ready():
 	
-	ControllerManager.refresh()
-	ControllerManager.register($Player)   
-	ControllerManager.register($Base_Drone)     
-	ControllerManager.register($StreetCam,false)
+	pass
 	
 
 func _input(event):

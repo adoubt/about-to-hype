@@ -1,0 +1,17 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://cqa6keyudxhu6"]
+
+[ext_resource type="Shader" uid="uid://uxny1qhqtpa2" path="res://assets/Shaders/dissolve_shader.gdshader" id="1_ypax7"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_ypax7")
+shader_parameter/baseColor = Color(1, 1, 1, 1)
+shader_parameter/dissolveSlider = 4.7499999933364734e-08
+shader_parameter/dissolveNoiseScale = 2.0
+shader_parameter/edgeNoiseScale = -4.18000013008864
+shader_parameter/edgesThickness = 0.0470000022325
+shader_parameter/edgeColor = Color(0, 0, 1, 1)
+shader_parameter/edgeEmissionSlider = 6.9499998446536
+shader_parameter/enable_dissolve_animation = false
+shader_parameter/animation_speed = 1.0
+shader_parameter/animation_intensity = 0.2

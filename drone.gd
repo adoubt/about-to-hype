@@ -81,6 +81,8 @@ var fade_speed := 10.5          # скорость изменения громк
 var min_volume_db := -80.0
 var max_pitch := 2.0
 var min_pitch := 0.2
+var flashlight_on: bool = false  # флаг состояния фонаря
+
 
 func _ready():
 	ray_cast_forward.add_exception(self)
@@ -93,10 +95,12 @@ func _ready():
 	camera_pivot.rotation.y = camera_yaw
 	base_distance = camera1.position.z
 	base_height = camera1.position.y
+	front_left_flashlight.hide()
+	front_right_flashlight.hide()
 	if SettingsManager.get_value("use_fov_effect"):
 		base_fov = camera1.fov	
 		far_fov = base_fov + 90
-
+	ControllerManager.register(self)  
 
 
 func set_input_enabled(state: bool) -> void:
@@ -116,13 +120,14 @@ func get_current_camera() -> Camera3D:
 func _input(event):
 	if not input_enabled:
 		return
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_MIDDLE and event.pressed:
-		mouse_joystick_active = not mouse_joystick_active
-		if mouse_joystick_active:
-			pitch = model.rotation_degrees.x
+	#if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_MIDDLE and event.pressed:
+		#mouse_joystick_active = not mouse_joystick_active
+		#if mouse_joystick_active:
+			#pitch = model.rotation_degrees.x
 	elif event is InputEventMouseMotion and mouse_joystick_active:
 		mouse_delta = event.relative
-	
+	if Input.is_action_just_pressed("flashlight"):
+		toggle_flashlight()
 
 func _on_grab_area_body_entered(body):
 	if body.is_in_group("grabbable") and not is_grabbing:
@@ -275,12 +280,7 @@ func _process_interaction(delta):
 				joint.queue_free()
 				joint = null
 			grabbed_box = null
-	if Input.is_action_just_pressed("flashlight"):
-		flashlight.visible = !flashlight.visible
-		front_left_flashlight.visible = flashlight.visible
-		await get_tree().create_timer(0.3).timeout
-		flashlight2.visible = flashlight.visible
-		front_right_flashlight.visible = flashlight2.visible
+	
 	if Input.is_action_just_pressed("drone_engine_toggle"):
 		engine_enabled = not engine_enabled
 	# удерживаемые объекты
@@ -404,4 +404,41 @@ func _apply_shaders():
 		shader_param = clamp((speed - min_speed) / (max_speed - min_speed), 0.0, 0.4)
 	
 	$"../HUDManager/SpeedLines".material.set_shader_parameter("line_density", shader_param)
+
+
+func toggle_flashlight() -> void:
+	flashlight_on = !flashlight_on  # переключаем состояние
+
+	if flashlight_on:
+		# --- Включение с морганием первой фары ---
+		flashlight.visible = true
+		front_left_flashlight.visible = true
+
+		for i in range(3):
+			flashlight.visible = false
+			front_left_flashlight.visible = false
+			await get_tree().process_frame
+			await get_tree().create_timer(0.1).timeout
+
+			flashlight.visible = true
+			front_left_flashlight.visible = true
+			await get_tree().process_frame
+			await get_tree().create_timer(0.1).timeout
+
+		# Устанавливаем окончательное состояние включено
+		flashlight.visible = true
+		front_left_flashlight.visible = true
+
+		# Правая фара включается с задержкой
+		await get_tree().create_timer(0.3).timeout
+		flashlight2.visible = true
+		front_right_flashlight.visible = true
+
+	else:
+		# --- Быстрое выключение ---
+		flashlight.visible = false
+		front_left_flashlight.visible = false
+		flashlight2.visible = false
+		front_right_flashlight.visible = false
+
 			 

@@ -1,10 +1,10 @@
-[gd_scene load_steps=42 format=3 uid="uid://cs3guckxlcjyi"]
+[gd_scene load_steps=38 format=3 uid="uid://cs3guckxlcjyi"]
 
 [ext_resource type="Script" uid="uid://ctrfp37708not" path="res://Scenes/game.gd" id="1_80cx4"]
 [ext_resource type="Script" uid="uid://bnl211kgeotsn" path="res://label_interact.gd" id="2_feb5d"]
 [ext_resource type="PackedScene" uid="uid://kfvo4lrg7huc" path="res://Scenes/base_drone.tscn" id="2_mg4q0"]
+[ext_resource type="PackedScene" uid="uid://djdwfp6cfwga0" path="res://Scenes/Items/DroneRemoteLoot.tscn" id="3_22asu"]
 [ext_resource type="PackedScene" uid="uid://cdjheym03q4ok" path="res://Scenes/Drop.tscn" id="3_vm72l"]
-[ext_resource type="Shader" uid="uid://lf72luioho2j" path="res://vhscamera3.gdshader" id="4_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://cgopdhiu475k1" path="res://city.tscn" id="5_lc2xo"]
 [ext_resource type="PackedScene" uid="uid://duwxjydyux16" path="res://addons/kaykit_city_builder_bits/Assets/gltf/building_A.gltf" id="6_215e1"]
 [ext_resource type="PackedScene" uid="uid://b2jrmspw5hpr6" path="res://addons/kaykit_city_builder_bits/Assets/gltf/building_B.gltf" id="7_7sc4i"]
@@ -71,35 +71,6 @@ size = Vector2(500, 500)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_boyg6"]
 radius = 3.0
-
-[sub_resource type="Gradient" id="Gradient_fc0e3"]
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_7jktm"]
-noise_type = 0
-seed = 4
-frequency = 0.0004
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ryrav"]
-noise = SubResource("FastNoiseLite_7jktm")
-color_ramp = SubResource("Gradient_fc0e3")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_eow3j"]
-shader = ExtResource("4_fc0e3")
-shader_parameter/vhs_resolution = Vector2(320, 240)
-shader_parameter/samples = 2
-shader_parameter/crease_noise = 1.0
-shader_parameter/crease_opacity = 0.5
-shader_parameter/filter_intensity = 0.1
-shader_parameter/tape_crease_smear = 0.2
-shader_parameter/tape_crease_intensity = 0.2
-shader_parameter/tape_crease_jitter = 0.1
-shader_parameter/tape_crease_speed = 0.5
-shader_parameter/tape_crease_discoloration = 1.0
-shader_parameter/bottom_border_thickness = 6.0
-shader_parameter/bottom_border_jitter = 6.0
-shader_parameter/noise_intensity = 0.1
-shader_parameter/noise_texture = SubResource("NoiseTexture2D_ryrav")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vaj68"]
 size = Vector3(0.5, 0.5, 0.5)
@@ -204,33 +175,28 @@ transform = Transform3D(0.62, 0, 0, 0, 0.62, 0, 0, 0, 0.62, -34.8099, 0, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -73.4814, 0, 0)
 script = ExtResource("22_x5p1p")
 
-[node name="ColorRect" type="ColorRect" parent="StreetCam"]
-visible = false
-material = SubResource("ShaderMaterial_eow3j")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="SubViewport" type="SubViewport" parent="StreetCam"]
+transparent_bg = true
+size = Vector2i(1920, 1080)
 
-[node name="Camera3" type="Camera3D" parent="StreetCam"]
-transform = Transform3D(0.524909, 0.46045, -0.71586, 1.92968e-08, 0.841042, 0.540969, 0.851158, -0.28396, 0.441471, 33.03, 12.7821, 6.49236)
+[node name="Camera" type="Camera3D" parent="StreetCam"]
+transform = Transform3D(0.5249092, 0.46045044, -0.7158602, 1.9296806e-08, 0.8410424, 0.5409693, 0.85115826, -0.28395978, 0.4414709, 33.03, 12.7821, 6.49236)
 
 [node name="BUILDING" parent="." instance=ExtResource("24_f1jbl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.86119, 1.94145, 0.128264)
 
-[node name="DirectionalLight3D" type="OmniLight3D" parent="BUILDING"]
+[node name="DirectionalLight3D2" type="OmniLight3D" parent="BUILDING"]
 transform = Transform3D(0.0127216, -0.585297, 0.810719, 0.00918324, 0.810819, 0.585225, -0.999877, 4.65604e-10, 0.0156899, 4.61125, 2.57405, 13.1462)
 light_color = Color(1, 0.839216, 0.231373, 1)
 shadow_enabled = true
 distance_fade_enabled = true
 
-[node name="DirectionalLight3D2" type="OmniLight3D" parent="BUILDING"]
+[node name="DirectionalLight3D3" type="OmniLight3D" parent="BUILDING"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.68427, 7.0139, -0.227584)
 light_color = Color(1, 0.839216, 0.231373, 1)
 shadow_enabled = true
 
-[node name="DirectionalLight3D3" type="OmniLight3D" parent="BUILDING"]
+[node name="DirectionalLight3D4" type="OmniLight3D" parent="BUILDING"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.08348, 0.0608212, -0.227584)
 light_color = Color(1, 0.839216, 0.231373, 1)
 shadow_enabled = true
@@ -250,7 +216,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.19387, 0.245415, 16.2689)
 light_color = Color(1, 0.839216, 0.231373, 1)
 shadow_enabled = true
 
-[node name="DirectionalLight3D4" type="OmniLight3D" parent="BUILDING"]
+[node name="DirectionalLight3D8" type="OmniLight3D" parent="BUILDING"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.44686, 3.09842, 1.47725)
 light_color = Color(0.92091, 0.8176, 0.892648, 1)
 light_energy = 5.263
@@ -333,6 +299,10 @@ light_volumetric_fog_energy = 1.485
 omni_range = 9.41209
 
 [node name="HUDManager" parent="." instance=ExtResource("23_22asu")]
+
+[node name="DroneRemoteController" parent="." instance=ExtResource("3_22asu")]
+transform = Transform3D(1, 0, 0, 0, 0.8953934, 0.44527602, 0, -0.44527602, 0.8953934, -44.859158, 0.42288077, -6.5661373)
+mass = 0.066
 
 [connection signal="body_entered" from="Laptop/Area3D" to="Laptop" method="_on_area_3d_body_entered"]
 

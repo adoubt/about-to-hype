@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bitej6opd7qbd"]
+
+[ext_resource type="PackedScene" uid="uid://bui502wsoub" path="res://Scenes/Objects/glass_window_simple.tscn" id="1_5dquk"]
+
+[node name="GlassWindow" type="Node3D"]
+
+[node name="GlassWindowSimple" parent="." instance=ExtResource("1_5dquk")]

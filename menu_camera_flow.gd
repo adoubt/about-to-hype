@@ -9,8 +9,7 @@ func _ready() -> void:
 func set_input_enabled(state: bool) -> void:
 	input_enabled = state
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+
 	
 func get_current_camera() -> Camera3D:
 	return camera

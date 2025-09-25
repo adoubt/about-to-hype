@@ -1,41 +1,49 @@
 extends CharacterBody3D
+class_name PlayerController
 
 @export var speed: float = 13.0
 @export var jump_velocity: float = 4.5
-@export var mouse_sensitivity: float = 0.003
+
+@onready var camera_controller_anchor: Marker3D = $CameraControllerAnchor
+@onready var player_camera := $CameraController/Camera3D
+@onready var right_hand: BoneAttachment3D = $Armature/Skeleton3D/RightHandHeld
+
+var right_hand_held: HeldItem = null
 
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
-var input_enabled: bool = true
+var input_enabled: bool = false
 
-@onready var head: Node3D = $Head
-@onready var player_camera := $Head/Camera3D
+
 
 func _ready() -> void:
-	pass
+	ControllerManager.register(self) 
 
+func _unhandled_input(event: InputEvent) -> void:
+	if not input_enabled:
+		return
 
+	if Input.is_action_just_pressed("use_item") and right_hand_held:
+		
+		right_hand_held.use()
+
+	if Input.is_action_just_pressed("use2_item") and right_hand_held:
+		right_hand_held.use2()
+		
+	if Input.is_action_just_pressed("throw") and right_hand_held:
+		right_hand_held.throw()	
+		
 func set_input_enabled(state: bool) -> void:
 	input_enabled = state
 	
 func get_current_camera() -> Camera3D:
 	return player_camera
 	
-func _unhandled_input(event: InputEvent) -> void:
-	if not input_enabled:
-		return
-	# Движение мышкой
-	if event is InputEventMouseMotion:
-		rotate_y(-event.relative.x * mouse_sensitivity)
-		head.rotate_x(-event.relative.y * mouse_sensitivity)
-
-		# Ограничим наклон головы, чтобы не ломался
-		head.rotation_degrees.x = clamp(head.rotation_degrees.x, -80, 80)
-
-	
 
 func _physics_process(delta: float) -> void:
 	if not input_enabled:
 		return
+	if velocity.length() == 0:
+		$AnimationPlayer.play("Angry")
 	var direction = Vector3.ZERO
 	
 	# WASD
@@ -63,3 +71,28 @@ func _physics_process(delta: float) -> void:
 		velocity.y = jump_velocity
 
 	move_and_slide()
+	
+
+func equip_item(item : InventoryItem):
+	if not right_hand:
+		push_error("RightHandAttachment не найден!")
+		return
+		
+	# Убираем старый HeldItem
+	if right_hand.get_child_count() > 0:
+		right_hand.get_child(0).queue_free()
+
+	# Загружаем сцену из пути
+	var scene_res: PackedScene = load(item.scene_item_held)
+	if not scene_res:
+		push_error("Не удалось загрузить сцену: %s" % item.scene_item_held)
+		return
+	print("scene_res loaded:", scene_res)
+	# Создаём новый HeldItem
+	var held_item = scene_res.instantiate() as HeldItem
+	right_hand.add_child(held_item)
+	#held_item.transform = right_hand.global_transform
+
+	# Сохраняем ссылку на предмет в руке
+	right_hand_held = held_item
+	right_hand_held.loot_data = item

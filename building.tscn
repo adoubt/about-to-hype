@@ -1,9 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://dyr4si0jpc4wr"]
+[gd_scene load_steps=5 format=3 uid="uid://dyr4si0jpc4wr"]
 
 [ext_resource type="Script" uid="uid://dcginamhu80aq" path="res://building_model.gd" id="1_5j34s"]
 [ext_resource type="PackedScene" uid="uid://fmlrjy2hqlqq" path="res://tape_recorder.tscn" id="2_2yopf"]
+[ext_resource type="PackedScene" uid="uid://bui502wsoub" path="res://Scenes/Objects/glass_window_simple.tscn" id="3_f1gjg"]
+
+[sub_resource type="Environment" id="Environment_f1gjg"]
+background_mode = 1
 
 [node name="Hub" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_f1gjg")
 
 [node name="BuildingModel" type="Node3D" parent="."]
 script = ExtResource("1_5j34s")
@@ -560,8 +567,11 @@ transform = Transform3D(-4.37114e-07, 0, -0.1, 0, 3, 0, 10, 0, -4.37114e-09, -3,
 transform = Transform3D(5, 0, 0, 0, 3, 0, 0, 0, 0.1, 2.49928, 0, 0)
 
 [node name="window" type="CSGBox3D" parent="BuildingModel/Floor4/Room/MeshInstance3D"]
-transform = Transform3D(0.6, 0, 0, 0, 0.5, 0, 0, 0, 2, 0.000144064, 0, 0)
+transform = Transform3D(0.6, 0, 0, 0, 0.5, 0, 0, 0, 2, 0.00014409423, 0, 0)
 operation = 2
+
+[node name="GlassWindowSimple" parent="BuildingModel/Floor4/Room/MeshInstance3D/window" instance=ExtResource("3_f1gjg")]
+transform = Transform3D(-2.3385594e-08, 0, 0.25, 0, 0.5, 0, -0.535, 0, -1.0927847e-08, 0, 0, 0)
 
 [node name="MeshInstance3D5" type="CSGBox3D" parent="BuildingModel/Floor4/Room"]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 0.1, -1.47366, 0, 0)
@@ -654,6 +664,10 @@ transform = Transform3D(0.6, 0, -8.88178e-16, 0, 0.5, 0, 1.06866e-11, 0, 2, 0.38
 operation = 2
 size = Vector3(1.78174, 1, 1)
 
+[node name="GlassWindowSimple" parent="BuildingModel/Floor4/Room2/MeshInstance3D21/window" instance=ExtResource("3_f1gjg")]
+transform = Transform3D(-1.2457746e-08, 0, 0.45, 0, 0.5, 0, -0.285, 0, -1.9670125e-08, 0, 0, 0)
+visible = false
+
 [node name="MeshInstance3D22" type="CSGBox3D" parent="BuildingModel/Floor4/Room2"]
 transform = Transform3D(3.93403e-07, 0, 0.1, 0, 3, 0, -3, 0, 1.31134e-08, 5.01346, 0, 19.2043)
 size = Vector3(1.99213, 1, 1)
@@ -719,3 +733,9 @@ size = Vector3(0.657867, 1.56445, 1)
 
 [node name="TapeRecorder" parent="." instance=ExtResource("2_2yopf")]
 transform = Transform3D(1, 0, 1.74533e-05, 0, 1, 0, -1.74533e-05, 0, 1, 1.35941, 5.84121, 0.552868)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.83258307, 0, 0.55390024, 0, 1, 0, -0.55390024, 0, -0.83258307, 6.214586, 8.001514, -9.733148)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.8058536, 0.094593816, 0.5845101, 0.36455962, 0.85713136, 0.36389855, -0.46657935, 0.50633764, -0.72520757, 4.6840334, 16.747295, -7.1980443)

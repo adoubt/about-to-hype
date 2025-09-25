@@ -1,0 +1,19 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://ckufmc7ehq1up"]
+
+[ext_resource type="Shader" uid="uid://c1d8pjhb1ppuu" path="res://assets/Shaders/colored_fresnel.gdshader" id="1_vkdja"]
+
+[sub_resource type="Gradient" id="Gradient_vkdja"]
+offsets = PackedFloat32Array(0.089361705, 1)
+colors = PackedColorArray(0, 0, 0.61138725, 0.97200006, 1, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_g43bk"]
+gradient = SubResource("Gradient_vkdja")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_vkdja")
+shader_parameter/fresnel_power = 3.0
+shader_parameter/emission_power = 1.7030000776326202
+shader_parameter/white_lerp = 0.2
+shader_parameter/scroll_speed = 0.2
+shader_parameter/colors_texture = SubResource("GradientTexture1D_g43bk")
