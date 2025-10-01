@@ -6,10 +6,12 @@ class_name PlayerController
 
 @onready var camera_controller_anchor: Marker3D = $CameraControllerAnchor
 @onready var player_camera := $CameraController/Camera3D
-@onready var right_hand: BoneAttachment3D = $Armature/Skeleton3D/RightHandHeld
+@onready var right_hand: BoneAttachment3D = $rigman/Armature/GeneralSkeleton/RightHandHeld
+@onready var look_at_modifier_3d: LookAtModifier3D = $rigman/Armature/GeneralSkeleton/LookAtModifier3D
 
+@onready var default_look_at_target: Marker3D = $CameraController/DefaulLookAtTarget
 var right_hand_held: HeldItem = null
-
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 var input_enabled: bool = false
 
@@ -18,6 +20,7 @@ var input_enabled: bool = false
 func _ready() -> void:
 	ControllerManager.register(self) 
 	ControllerManager._handle_object_hotkey(name) # где name = "Player"
+	look_at_modifier_3d.target_node = default_look_at_target.get_path()
 func _unhandled_input(event: InputEvent) -> void:
 	if not input_enabled:
 		return
@@ -42,8 +45,8 @@ func get_current_camera() -> Camera3D:
 func _physics_process(delta: float) -> void:
 	if not input_enabled:
 		return
-	if velocity.length() == 0:
-		$AnimationPlayer.play("Angry")
+	#if velocity.length() == 0:
+		#$AnimationPlayer.play("Angry")
 	var direction = Vector3.ZERO
 	
 	# WASD
@@ -96,3 +99,16 @@ func equip_item(item : InventoryItem):
 	# Сохраняем ссылку на предмет в руке
 	right_hand_held = held_item
 	right_hand_held.loot_data = item
+	
+
+
+func _on_area_3d_body_entered(body: CharacterBody3D) -> void:
+	look_at_modifier_3d.target_node = body.get_path()
+
+	
+
+
+
+func _on_area_3d_body_exited(body: CharacterBody3D) -> void:
+	look_at_modifier_3d.target_node = default_look_at_target.get_path()
+	

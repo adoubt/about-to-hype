@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://brxo4bnmmsehr"]
+
+[ext_resource type="Script" uid="uid://bpikj62pcjj73" path="res://Scripts/objects/mirror_cam.gd" id="1_depw5"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_81klo"]
+viewport_path = NodePath("Mirror/CSGBox3D/SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tgy6u"]
+resource_local_to_scene = true
+albedo_texture = SubResource("ViewportTexture_81klo")
+
+[node name="Mirror" type="Node3D"]
+script = ExtResource("1_depw5")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0.61743164, 0, 0)
+layers = 524288
+size = Vector3(8, 4.5, 0.1)
+material = SubResource("StandardMaterial3D_tgy6u")
+
+[node name="SubViewport" type="SubViewport" parent="CSGBox3D"]
+size = Vector2i(1920, 1080)
+
+[node name="Camera3D" type="Camera3D" parent="CSGBox3D/SubViewport"]
+keep_aspect = 0
+cull_mask = 524287
+
+[node name="Marker3D" type="Marker3D" parent="."]

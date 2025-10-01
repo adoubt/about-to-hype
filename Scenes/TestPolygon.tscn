@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dhl6fkkhp3dy8"]
+[gd_scene load_steps=17 format=3 uid="uid://dhl6fkkhp3dy8"]
 
 [ext_resource type="Script" uid="uid://bi305l2arbj1l" path="res://Scripts/test_polygon.gd" id="1_2kunf"]
 [ext_resource type="PackedScene" uid="uid://kfvo4lrg7huc" path="res://Scenes/base_drone.tscn" id="1_x0cbq"]
@@ -37,6 +37,13 @@ emission_texture = SubResource("NoiseTexture2D_ftdfr")
 material = SubResource("StandardMaterial3D_l0ril")
 size = Vector3(100, 1, 100)
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_ftdfr"]
+viewport_path = NodePath("CSGBox3D/SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pijmh"]
+resource_local_to_scene = true
+albedo_texture = SubResource("ViewportTexture_ftdfr")
+
 [node name="TestPolygon" type="Node3D"]
 script = ExtResource("1_2kunf")
 
@@ -57,7 +64,7 @@ mesh = SubResource("BoxMesh_l0ril")
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -2.073985, 3.3520353, -7.7075877)
 
 [node name="Player" parent="." instance=ExtResource("5_ftdfr")]
-transform = Transform3D(-0.18089803, 0, -0.5930227, 0, 0.62000006, 0, 0.5930227, 0, -0.18089803, -9.082563, 0, 15.834547)
+transform = Transform3D(-0.18089803, 0, -0.5930227, 0, 0.62000006, 0, 0.5930227, 0, -0.18089803, -6.3653893, 9.536743e-07, -0.7480469)
 
 [node name="HUDManager" parent="." instance=ExtResource("2_d6o0v")]
 
@@ -129,3 +136,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.309982, 4.9337234, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.875572, 4.9337234, 0)
 
 [node name="GlassWindowSimple" parent="GlassWindow10" instance=ExtResource("2_l0ril")]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, -0.59065795, 1.4688776, 0)
+size = Vector3(0.11230469, 4.370117, 2.1191406)
+material = SubResource("StandardMaterial3D_pijmh")
+
+[node name="SubViewport" type="SubViewport" parent="CSGBox3D"]
+size = Vector2i(1920, 1080)
+
+[node name="Camera3D" type="Camera3D" parent="CSGBox3D/SubViewport"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.59065795, 1.3512628, 0)

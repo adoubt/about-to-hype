@@ -34,7 +34,6 @@ func throw():
 	var hand_global = global_transform
 	thrown_item.global_transform.origin = hand_global.origin + hand_global.basis.z * 1.0  # чуть вперед
 
-	# Если нужен физический выброс
 	if thrown_item is RigidBody3D:
 		var forward_dir = -hand_global.basis.z.normalized()
 		thrown_item.linear_velocity = forward_dir * 10

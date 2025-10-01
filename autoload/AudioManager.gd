@@ -16,8 +16,11 @@ var sounds = {
 	"flashlight_on": "uid://yjis7oplnmw5",
 	"glass_break": "uid://byj1v8aaq3drc",
 	"theme_music": "uid://abcd1234",
-	"game_start" : "uid://c5d2108v7d0ka"
-}
+	"game_start" : "uid://c5d2108v7d0ka",
+	"zippo_open" : "uid://cgvkdlqy0pj25",
+	"zippo_close" : "uid://pbhybmpuipn6",
+	"zippo_fire" : "uid://bnw1umnklh3w2"
+ }
 func _ready():
 	pass
 	# теперь можно безопасно включать _process

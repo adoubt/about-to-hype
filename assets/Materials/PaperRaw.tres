@@ -1,0 +1,15 @@
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://deo18r3csu3g"]
+
+[ext_resource type="Texture2D" uid="uid://dunpgsjmtqe26" path="res://blend/materials/osb/Paper005_1K-JPG_Color.jpg" id="1_7j0fj"]
+[ext_resource type="Texture2D" uid="uid://bmaigkuhoqwew" path="res://blend/materials/osb/Paper005_1K-JPG_NormalGL.jpg" id="2_hpcuf"]
+[ext_resource type="Texture2D" uid="uid://d3fwh6q21flp7" path="res://blend/materials/osb/Paper005_1K-JPG_Roughness.jpg" id="3_phon1"]
+
+[resource]
+resource_name = "Material.003"
+transparency = 1
+cull_mode = 2
+albedo_color = Color(1, 1, 1, 0.39200002)
+albedo_texture = ExtResource("1_7j0fj")
+roughness_texture = ExtResource("3_phon1")
+normal_enabled = true
+normal_texture = ExtResource("2_hpcuf")

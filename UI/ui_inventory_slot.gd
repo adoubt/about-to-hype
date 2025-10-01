@@ -1,19 +1,23 @@
 extends Panel
-
+class_name Slot
 @export var normal_style: StyleBox 
 @export var selected_style: StyleBox
-
-@onready var icon = $Icon  # TextureRect внутри Panel
+@onready var slot_index_label: Label =  $MarginContainer/SlotId
+@onready var icon: TextureRect = $Icon  # TextureRect внутри Panel
 
 var item: InventoryItem
 
+
+func _ready():
+	var parent = get_parent()
+	if parent:
+		var index = parent.get_children().find(self)
+		if index != -1:
+			slot_index_label.text = str(index + 1)
+
 func set_item(new_item: InventoryItem) -> void:
 	item = new_item
-	if item and item.icon:
-		icon.texture = item.icon
-	else:
-		icon.texture = null
-
+	icon.texture = item.icon if item and item.icon else null
 
 func clear_item():
 	item = null

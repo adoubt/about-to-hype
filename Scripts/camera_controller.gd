@@ -20,7 +20,21 @@ func _unhandled_input(event: InputEvent) -> void:
 		mouse_input.x += -event.screen_relative.x * mouse_sensitivity
 		mouse_input.y += -event.screen_relative.y * mouse_sensitivity
 
-func _process(_delta: float) -> void:
+#func _process(_delta: float) -> void:
+	#input_rotation.x = clampf(input_rotation.x + mouse_input.y, deg_to_rad(-90), deg_to_rad(85))
+	#input_rotation.y += mouse_input.x
+	#
+	## rotate camera controller (up/down)
+	#player_controller.camera_controller_anchor.transform.basis = Basis.from_euler(Vector3(input_rotation.x, 0.0, 0.0))
+	#
+	## rotate player (left/right)
+	#player_controller.global_transform.basis = Basis.from_euler(Vector3(0.0, input_rotation.y, 0.0))
+	#
+	#global_transform = player_controller.camera_controller_anchor.get_global_transform_interpolated()
+	#
+	#mouse_input = Vector2.ZERO
+	
+func _physics_process(delta: float) -> void:
 	input_rotation.x = clampf(input_rotation.x + mouse_input.y, deg_to_rad(-90), deg_to_rad(85))
 	input_rotation.y += mouse_input.x
 	

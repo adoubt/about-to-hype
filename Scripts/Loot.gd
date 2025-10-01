@@ -22,6 +22,7 @@ var effects_started: bool = false
 
 func _ready() -> void:
 	set_physics_process(true)
+	
 
 
 func _physics_process(_delta: float) -> void:

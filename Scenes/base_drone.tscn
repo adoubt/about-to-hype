@@ -2153,7 +2153,7 @@ height = 0.100067
 radius = 0.359375
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_f1jbl"]
-size = Vector3(0.274597, 0.329544, 0.303993)
+size = Vector3(0.274597, 0.17307279, 0.303993)
 
 [node name="Base_Drone" type="CharacterBody3D" groups=["controllable", "drone"]]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
@@ -2170,22 +2170,27 @@ zoom_speed = 2.0
 [node name="Model" type="Node3D" parent="."]
 
 [node name="group1506967990" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 0.405, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("ArrayMesh_17nc0")
 skeleton = NodePath("")
 
 [node name="group1434348068" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 0.405, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("ArrayMesh_k1drd")
 skeleton = NodePath("")
 
 [node name="group1472813429" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 0.405, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("ArrayMesh_3oug0")
 skeleton = NodePath("")
 
 [node name="group1345748236" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.162, 0)
 mesh = SubResource("ArrayMesh_0gsck")
 skeleton = NodePath("")
 
 [node name="group1719908566" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.162, 0)
 mesh = SubResource("ArrayMesh_neofe")
 skeleton = NodePath("")
 
@@ -2202,10 +2207,12 @@ mesh = SubResource("ArrayMesh_dlwgt")
 skeleton = NodePath("")
 
 [node name="group1667175645" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 0.677, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("ArrayMesh_ldlih")
 skeleton = NodePath("")
 
 [node name="group1329982175" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
 mesh = SubResource("ArrayMesh_3rqna")
 skeleton = NodePath("")
 
@@ -2214,10 +2221,12 @@ mesh = SubResource("ArrayMesh_7vjfy")
 skeleton = NodePath("")
 
 [node name="group1957747061" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 0.677, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("ArrayMesh_wva1u")
 skeleton = NodePath("")
 
 [node name="group562219596" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 0.405, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("ArrayMesh_3j83j")
 skeleton = NodePath("")
 
@@ -2372,14 +2381,17 @@ mesh = SubResource("ArrayMesh_nqf6x")
 skeleton = NodePath("")
 
 [node name="group325404470" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 0.677, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("ArrayMesh_acici")
 skeleton = NodePath("")
 
 [node name="group636018321" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 0.677, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("ArrayMesh_84doh")
 skeleton = NodePath("")
 
 [node name="group756787536" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 0.677, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("ArrayMesh_1aat1")
 skeleton = NodePath("")
 
@@ -2487,7 +2499,7 @@ spot_angle = 26.82
 transform = Transform3D(1, 2.84328e-09, -1.46274e-08, 0, 0.981627, 0.190809, 1.49012e-08, -0.190809, 0.981627, 0, 0.393466, 1.226)
 
 [node name="RayCastForward" type="RayCast3D" parent="CameraPivot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.138912, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0968641, 0)
 exclude_parent = false
 target_position = Vector3(0, -0.16, -2.015)
 collision_mask = 3
@@ -2508,6 +2520,7 @@ collision_mask = 3
 transform = Transform3D(1, 0, -1.42109e-14, 0, 1, 0, 1.42109e-14, 0, 1, 0, -0.133444, -0.0220861)
 
 [node name="Camera3D2" type="Camera3D" parent="CameraPivot2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.032606766, 0)
 fov = 82.2
 
 [node name="Area3D" type="Area3D" parent="."]
@@ -2535,6 +2548,6 @@ shape = SubResource("CylinderShape3D_qhcbd")
 debug_color = Color(0.947, 0, 0.587, 1)
 
 [node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.999999, 0, -2.98023e-07, 0, 1, 0, 2.98023e-07, 0, 0.999999, -0.00255227, -0.121986, 0.00369978)
+transform = Transform3D(0.999999, 0, -2.98023e-07, 0, 1, 0, 2.98023e-07, 0, 0.999999, -0.00255227, -0.04375039, 0.00369978)
 shape = SubResource("BoxShape3D_f1jbl")
 debug_color = Color(0.796, 0.283, 0.79, 1)

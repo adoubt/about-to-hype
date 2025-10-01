@@ -215,6 +215,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+expand_mode = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="HUD/InventoryBar/HBoxContainer2/Control2/Slots/Slot"]
 layout_mode = 1
@@ -225,12 +226,11 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 5
 
-[node name="Label" type="Label" parent="HUD/InventoryBar/HBoxContainer2/Control2/Slots/Slot/MarginContainer"]
+[node name="SlotId" type="Label" parent="HUD/InventoryBar/HBoxContainer2/Control2/Slots/Slot/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_colors/font_color = Color(0.53013366, 0.7923846, 1, 1)
-text = "1"
 
 [node name="Slot2" type="Panel" parent="HUD/InventoryBar/HBoxContainer2/Control2/Slots"]
 custom_minimum_size = Vector2(64, 64)
@@ -241,6 +241,15 @@ script = ExtResource("6_8s141")
 normal_style = ExtResource("7_lr3y2")
 selected_style = ExtResource("8_x72t0")
 
+[node name="Icon" type="TextureRect" parent="HUD/InventoryBar/HBoxContainer2/Control2/Slots/Slot2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
 [node name="MarginContainer" type="MarginContainer" parent="HUD/InventoryBar/HBoxContainer2/Control2/Slots/Slot2"]
 layout_mode = 1
 anchors_preset = 15
@@ -250,12 +259,11 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 5
 
-[node name="Label" type="Label" parent="HUD/InventoryBar/HBoxContainer2/Control2/Slots/Slot2/MarginContainer"]
+[node name="SlotId" type="Label" parent="HUD/InventoryBar/HBoxContainer2/Control2/Slots/Slot2/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_colors/font_color = Color(0.53013366, 0.7923846, 1, 1)
-text = "2"
 
 [node name="Slot3" type="Panel" parent="HUD/InventoryBar/HBoxContainer2/Control2/Slots"]
 custom_minimum_size = Vector2(64, 64)
@@ -266,6 +274,15 @@ script = ExtResource("6_8s141")
 normal_style = ExtResource("7_lr3y2")
 selected_style = ExtResource("8_x72t0")
 
+[node name="Icon" type="TextureRect" parent="HUD/InventoryBar/HBoxContainer2/Control2/Slots/Slot3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
 [node name="MarginContainer" type="MarginContainer" parent="HUD/InventoryBar/HBoxContainer2/Control2/Slots/Slot3"]
 layout_mode = 1
 anchors_preset = 15
@@ -275,12 +292,11 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 5
 
-[node name="Label" type="Label" parent="HUD/InventoryBar/HBoxContainer2/Control2/Slots/Slot3/MarginContainer"]
+[node name="SlotId" type="Label" parent="HUD/InventoryBar/HBoxContainer2/Control2/Slots/Slot3/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_colors/font_color = Color(0.53013366, 0.7923846, 1, 1)
-text = "3"
 
 [node name="Slot4" type="Panel" parent="HUD/InventoryBar/HBoxContainer2/Control2/Slots"]
 custom_minimum_size = Vector2(64, 64)
@@ -291,6 +307,15 @@ script = ExtResource("6_8s141")
 normal_style = ExtResource("7_lr3y2")
 selected_style = ExtResource("8_x72t0")
 
+[node name="Icon" type="TextureRect" parent="HUD/InventoryBar/HBoxContainer2/Control2/Slots/Slot4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
 [node name="MarginContainer" type="MarginContainer" parent="HUD/InventoryBar/HBoxContainer2/Control2/Slots/Slot4"]
 layout_mode = 1
 anchors_preset = 15
@@ -300,12 +325,11 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 5
 
-[node name="Label" type="Label" parent="HUD/InventoryBar/HBoxContainer2/Control2/Slots/Slot4/MarginContainer"]
+[node name="SlotId" type="Label" parent="HUD/InventoryBar/HBoxContainer2/Control2/Slots/Slot4/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_colors/font_color = Color(0.53013366, 0.7923846, 1, 1)
-text = "4"
 
 [node name="Slot5" type="Panel" parent="HUD/InventoryBar/HBoxContainer2/Control2/Slots"]
 custom_minimum_size = Vector2(64, 64)
@@ -316,6 +340,15 @@ script = ExtResource("6_8s141")
 normal_style = ExtResource("7_lr3y2")
 selected_style = ExtResource("8_x72t0")
 
+[node name="Icon" type="TextureRect" parent="HUD/InventoryBar/HBoxContainer2/Control2/Slots/Slot5"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
 [node name="MarginContainer" type="MarginContainer" parent="HUD/InventoryBar/HBoxContainer2/Control2/Slots/Slot5"]
 layout_mode = 1
 anchors_preset = 15
@@ -325,12 +358,11 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 5
 
-[node name="Label" type="Label" parent="HUD/InventoryBar/HBoxContainer2/Control2/Slots/Slot5/MarginContainer"]
+[node name="SlotId" type="Label" parent="HUD/InventoryBar/HBoxContainer2/Control2/Slots/Slot5/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_colors/font_color = Color(0.53013366, 0.7923846, 1, 1)
-text = "5"
 
 [node name="Slot6" type="Panel" parent="HUD/InventoryBar/HBoxContainer2/Control2/Slots"]
 custom_minimum_size = Vector2(64, 64)
@@ -341,6 +373,15 @@ script = ExtResource("6_8s141")
 normal_style = ExtResource("7_lr3y2")
 selected_style = ExtResource("8_x72t0")
 
+[node name="Icon" type="TextureRect" parent="HUD/InventoryBar/HBoxContainer2/Control2/Slots/Slot6"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
 [node name="MarginContainer" type="MarginContainer" parent="HUD/InventoryBar/HBoxContainer2/Control2/Slots/Slot6"]
 layout_mode = 1
 anchors_preset = 15
@@ -350,12 +391,11 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 5
 
-[node name="Label" type="Label" parent="HUD/InventoryBar/HBoxContainer2/Control2/Slots/Slot6/MarginContainer"]
+[node name="SlotId" type="Label" parent="HUD/InventoryBar/HBoxContainer2/Control2/Slots/Slot6/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_colors/font_color = Color(0.53013366, 0.7923846, 1, 1)
-text = "6"
 
 [node name="Slot7" type="Panel" parent="HUD/InventoryBar/HBoxContainer2/Control2/Slots"]
 custom_minimum_size = Vector2(64, 64)
@@ -366,6 +406,15 @@ script = ExtResource("6_8s141")
 normal_style = ExtResource("7_lr3y2")
 selected_style = ExtResource("8_x72t0")
 
+[node name="Icon" type="TextureRect" parent="HUD/InventoryBar/HBoxContainer2/Control2/Slots/Slot7"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
 [node name="MarginContainer" type="MarginContainer" parent="HUD/InventoryBar/HBoxContainer2/Control2/Slots/Slot7"]
 layout_mode = 1
 anchors_preset = 15
@@ -375,12 +424,11 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 5
 
-[node name="Label" type="Label" parent="HUD/InventoryBar/HBoxContainer2/Control2/Slots/Slot7/MarginContainer"]
+[node name="SlotId" type="Label" parent="HUD/InventoryBar/HBoxContainer2/Control2/Slots/Slot7/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_colors/font_color = Color(0.53013366, 0.7923846, 1, 1)
-text = "7"
 
 [node name="Slot8" type="Panel" parent="HUD/InventoryBar/HBoxContainer2/Control2/Slots"]
 custom_minimum_size = Vector2(64, 64)
@@ -391,6 +439,15 @@ script = ExtResource("6_8s141")
 normal_style = ExtResource("7_lr3y2")
 selected_style = ExtResource("8_x72t0")
 
+[node name="Icon" type="TextureRect" parent="HUD/InventoryBar/HBoxContainer2/Control2/Slots/Slot8"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
 [node name="MarginContainer" type="MarginContainer" parent="HUD/InventoryBar/HBoxContainer2/Control2/Slots/Slot8"]
 layout_mode = 1
 anchors_preset = 15
@@ -400,12 +457,11 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 5
 
-[node name="Label" type="Label" parent="HUD/InventoryBar/HBoxContainer2/Control2/Slots/Slot8/MarginContainer"]
+[node name="SlotId" type="Label" parent="HUD/InventoryBar/HBoxContainer2/Control2/Slots/Slot8/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_colors/font_color = Color(0.53013366, 0.7923846, 1, 1)
-text = "8"
 
 [node name="Control3" type="Control" parent="HUD/InventoryBar/HBoxContainer2"]
 layout_mode = 2
