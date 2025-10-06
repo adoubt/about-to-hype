@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://yar3t7apurl2"]
+
+[ext_resource type="Material" uid="uid://bnw1e4kw7wxqd" path="res://assets/Materials/blue_plastmass_material.tres" id="1_6ilns"]
+
+[resource]
+resource_name = "mat21"
+next_pass = ExtResource("1_6ilns")
+emission_enabled = true

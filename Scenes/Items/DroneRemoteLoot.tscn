@@ -77,6 +77,8 @@ bottom_radius = 0.04
 height = 0.226
 
 [node name="DroneRemoteController" type="RigidBody3D"]
+collision_layer = 4
+collision_mask = 23
 mass = 0.141
 script = ExtResource("1_kl183")
 item = ExtResource("2_st7cp")

@@ -1,36 +1,9 @@
-[gd_scene load_steps=150 format=4 uid="uid://kfvo4lrg7huc"]
+[gd_scene load_steps=147 format=4 uid="uid://kfvo4lrg7huc"]
 
 [ext_resource type="Script" uid="uid://dmdk8j6rmtauh" path="res://drone.gd" id="1_v1gsr"]
+[ext_resource type="Material" uid="uid://yar3t7apurl2" path="res://assets/Materials/drone_skin_1.tres" id="2_cllcg"]
 [ext_resource type="AudioStream" uid="uid://bt8wqhs8owrj7" path="res://Drone Noise Test - DJI Avata vs DJI FPV vs DJI Mavic 3 vs DJI Air 2S.mp3" id="2_ldkjq"]
 [ext_resource type="Script" uid="uid://wxb573o058my" path="res://Scripts/AudioSource3D.gd" id="3_cllcg"]
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_e2o6t"]
-noise_type = 3
-seed = 11
-frequency = 0.0013
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_feb5d"]
-noise = SubResource("FastNoiseLite_e2o6t")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y44wb"]
-resource_name = "mat21"
-albedo_color = Color(0.977797, 0.653992, 0.711757, 1)
-albedo_texture = SubResource("NoiseTexture2D_feb5d")
-emission_enabled = true
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_4s45u"]
-_surfaces = [{
-"aabb": AABB(0.107248, -0.271775, -0.146872, 0.02, 0.26, 0.02),
-"format": 34896613377,
-"index_count": 36,
-"index_data": PackedByteArray("AAABAAIAAQADAAIAAwAAAAIAAQAAAAQAAAADAAUAAwABAAYABwAEAAAAAAAFAAcAAQAEAAcABwAFAAMABwAGAAEAAwAGAAcA"),
-"name": "mat21",
-"primitive": 3,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 8,
-"vertex_data": PackedByteArray("AAAAAP//AAD///////8AAP//AAD//wAA//8AAAAAAAAAAP////8AAAAAAAAAAAAA/////wAAAAAAAP//AAAAAA==")
-}]
-blend_shape_mode = 0
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_17nc0"]
 resource_name = "Drone_mesh1506967990"
@@ -40,7 +13,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 36,
 "index_data": PackedByteArray("AAABAAIAAQAAAAMABAAFAAYABgAHAAQACAAJAAoACQAIAAsADAANAA4ADgAPAAwAEAARABIAEQAQABMAFAAVABYAFgAXABQA"),
-"material": SubResource("StandardMaterial3D_y44wb"),
+"material": ExtResource("2_cllcg"),
 "name": "mat21",
 "primitive": 3,
 "uv_scale": Vector4(0.304105, 1.99839, 0, 0),
@@ -48,7 +21,6 @@ _surfaces = [{
 "vertex_data": PackedByteArray("AAAAAP//Gy3///////8bLf//AAD//xstAAD/////Gy0AAP//AAAAAAAAAAAAAAAA//8AAAAAAAD/////AAAAAP//AAAAADcyAAAAAP//NzL//wAA//83MgAAAAAAADcyAAD//wAALyL/////AAAvIv///////y8iAAD/////LyL///////+5Ef//AAAAALkR//8AAP//uRH/////AAC5EQAA//8AALkRAAD/////uREAAAAA//+5EQAAAAAAALkRAAD//wAA//8AAP//AAD//xrPG08azxtPGs8bTxrPG09vJd/KbyXfynAl38pvJd/KrNBZIazQWSGs0FkhrNBZIa0RKTetESk3rREpN60RKTfWSKyR1kiskdZIrJHWSKyR")
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_4s45u")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_sq1qe"]
 _surfaces = [{
@@ -72,7 +44,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 36,
 "index_data": PackedByteArray("AAABAAIAAQAAAAMABAAFAAYABgAHAAQACAAJAAoACQAIAAsADAANAA4ADgAPAAwAEAARABIAEQAQABMAFAAVABYAFgAXABQA"),
-"material": SubResource("StandardMaterial3D_y44wb"),
+"material": ExtResource("2_cllcg"),
 "name": "mat21",
 "primitive": 3,
 "uv_scale": Vector4(0.326466, 2.06431, 0, 0),
@@ -104,7 +76,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 36,
 "index_data": PackedByteArray("AAABAAIAAQAAAAMABAAFAAYABgAHAAQACAAJAAoACQAIAAsADAANAA4ADgAPAAwAEAARABIAEgATABAAFAAVABYAFQAUABcA"),
-"material": SubResource("StandardMaterial3D_y44wb"),
+"material": ExtResource("2_cllcg"),
 "name": "mat21",
 "primitive": 3,
 "uv_scale": Vector4(0.326466, 2.04547, 0, 0),
@@ -136,7 +108,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 36,
 "index_data": PackedByteArray("AAABAAIAAQAAAAMABAAFAAYABgAHAAQACAAJAAoACQAIAAsADAANAA4ADgAPAAwAEAARABIAEQAQABMAFAAVABYAFgAXABQA"),
-"material": SubResource("StandardMaterial3D_y44wb"),
+"material": ExtResource("2_cllcg"),
 "name": "mat21",
 "primitive": 3,
 "uv_scale": Vector4(0.252542, 2.01722, 0, 0),
@@ -168,7 +140,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 36,
 "index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABQAEAAcACAAJAAoACQAIAAsADAANAA4ADgAPAAwAEAARABIAEQAQABMAFAAVABYAFgAXABQA"),
-"material": SubResource("StandardMaterial3D_y44wb"),
+"material": ExtResource("2_cllcg"),
 "name": "mat21",
 "primitive": 3,
 "uv_scale": Vector4(0.278484, 2.06431, 0, 0),
@@ -200,7 +172,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 36,
 "index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABQAEAAcACAAJAAoACgALAAgADAANAA4ADQAMAA8AEAARABIAEQAQABMAFAAVABYAFgAXABQA"),
-"material": SubResource("StandardMaterial3D_y44wb"),
+"material": ExtResource("2_cllcg"),
 "name": "mat21",
 "primitive": 3,
 "uv_scale": Vector4(0.311261, 2.02099, 0, 0),
@@ -232,7 +204,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 36,
 "index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABQAEAAcACAAJAAoACgALAAgADAANAA4ADQAMAA8AEAARABIAEQAQABMAFAAVABYAFgAXABQA"),
-"material": SubResource("StandardMaterial3D_y44wb"),
+"material": ExtResource("2_cllcg"),
 "name": "mat21",
 "primitive": 3,
 "uv_scale": Vector4(0.333621, 2.06431, 0, 0),
@@ -264,7 +236,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 36,
 "index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABQAEAAcACAAJAAoACQAIAAsADAANAA4ADgAPAAwAEAARABIAEQAQABMAFAAVABYAFgAXABQA"),
-"material": SubResource("StandardMaterial3D_y44wb"),
+"material": ExtResource("2_cllcg"),
 "name": "mat21",
 "primitive": 3,
 "uv_scale": Vector4(0.322888, 2.04251, 0, 0),
@@ -296,7 +268,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 132,
 "index_data": PackedByteArray("AAABAAIAAQAAAAMABAAFAAYABQAEAAcACAAJAAoACQAIAAsADAANAA4ADQAMAA8AEAARABIAEQAQABMAFAAVABYAFgAXABQAGAAZABoAGgAbABgAHAAdAB4AHgAfABwAIAAhACIAIgAjACAAJAAlACYAJgAnACQAKAApACoAKgArACgALAAtAC4ALQAsAC8AMAAxADIAMAAzADEAMQAzADQANQAwADYANwAwADUAMAA3ADMANwA1ADgAMwA3ADkAOQA3ADoAMwA5ADsAPAA9AD4APAA+AD8APgBAAD8AQQBCADwAQwBBADwAPAA/AEMAQwBEAEEAPwBFAEMARQBGAEMAPwBHAEUA"),
-"material": SubResource("StandardMaterial3D_y44wb"),
+"material": ExtResource("2_cllcg"),
 "name": "mat21",
 "primitive": 3,
 "uv_scale": Vector4(0.297024, 2.03563, 0, 0),
@@ -365,7 +337,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 36,
 "index_data": PackedByteArray("AAABAAIAAQAAAAMABAAFAAYABgAHAAQACAAJAAoACgALAAgADAANAA4ADQAMAA8AEAARABIAEwAUABUAFQAWABMAFwAYABkA"),
-"material": SubResource("StandardMaterial3D_y44wb"),
+"material": ExtResource("2_cllcg"),
 "name": "mat21",
 "primitive": 3,
 "uv_scale": Vector4(0.305, 2.13621, 0, 0),
@@ -434,7 +406,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 36,
 "index_data": PackedByteArray("AAABAAIAAQAAAAMABAAFAAYABgAHAAQACAAJAAoACQAIAAsADAANAA4ADgAPAAwAEAARABIAEgATABAAFAAVABYAFQAUABcA"),
-"material": SubResource("StandardMaterial3D_y44wb"),
+"material": ExtResource("2_cllcg"),
 "name": "mat21",
 "primitive": 3,
 "uv_scale": Vector4(0.304105, 2.01722, 0, 0),
@@ -466,7 +438,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 36,
 "index_data": PackedByteArray("AAABAAIAAQAAAAMABAAFAAYABwAIAAkACgALAAwADAANAAoADgAPABAAEQASABMAEwAUABEAFQAWABcAGAAZABoAGwAcAB0A"),
-"material": SubResource("StandardMaterial3D_y44wb"),
+"material": ExtResource("2_cllcg"),
 "name": "mat21",
 "primitive": 3,
 "uv_scale": Vector4(0.305, 2.10707, 0, 0),
@@ -498,7 +470,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 36,
 "index_data": PackedByteArray("AAABAAIAAQAAAAMABAAFAAYABgAHAAQACAAJAAoACgALAAgADAANAA4ADgAPAAwAEAARABIAEQAQABMAFAAVABYAFgAXABQA"),
-"material": SubResource("StandardMaterial3D_y44wb"),
+"material": ExtResource("2_cllcg"),
 "name": "mat21",
 "primitive": 3,
 "uv_scale": Vector4(0.324677, 2.04238, 0, 0),
@@ -530,7 +502,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 36,
 "index_data": PackedByteArray("AAABAAIAAQAAAAMABAAFAAYABgAHAAQACAAJAAoACQAIAAsADAANAA4ADgAPAAwAEAARABIAEwAUABUAFQAWABMAFwAYABkA"),
-"material": SubResource("StandardMaterial3D_y44wb"),
+"material": ExtResource("2_cllcg"),
 "name": "mat21",
 "primitive": 3,
 "uv_scale": Vector4(0.306789, 2.13136, 0, 0),
@@ -562,7 +534,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 36,
 "index_data": PackedByteArray("AAABAAIAAQAAAAMABAAFAAYABgAHAAQACAAJAAoACwAMAA0ADgAPABAAEQASABMAEwAUABEAFQAWABcAGAAZABoAGwAcAB0A"),
-"material": SubResource("StandardMaterial3D_y44wb"),
+"material": ExtResource("2_cllcg"),
 "name": "mat21",
 "primitive": 3,
 "uv_scale": Vector4(0.305, 2.02099, 0, 0),
@@ -594,7 +566,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 36,
 "index_data": PackedByteArray("AAABAAIAAQAAAAMABAAFAAYABgAHAAQACAAJAAoACQAIAAsADAANAA4ADgAPAAwAEAARABIAEQAQABMAFAAVABYAFgAXABQA"),
-"material": SubResource("StandardMaterial3D_y44wb"),
+"material": ExtResource("2_cllcg"),
 "name": "mat21",
 "primitive": 3,
 "uv_scale": Vector4(0.305894, 2.00215, 0, 0),
@@ -626,7 +598,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 36,
 "index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABQAEAAcACAAJAAoACQAIAAsADAANAA4ADgAPAAwAEAARABIAEQAQABMAFAAVABYAFgAXABQA"),
-"material": SubResource("StandardMaterial3D_y44wb"),
+"material": ExtResource("2_cllcg"),
 "name": "mat21",
 "primitive": 3,
 "uv_scale": Vector4(0.326466, 2.06162, 0, 0),
@@ -658,7 +630,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 36,
 "index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABQAEAAcACAAJAAoACQAIAAsADAANAA4ADgAPAAwAEAARABIAEQAQABMAFAAVABYAFgAXABQA"),
-"material": SubResource("StandardMaterial3D_y44wb"),
+"material": ExtResource("2_cllcg"),
 "name": "mat21",
 "primitive": 3,
 "uv_scale": Vector4(0.326466, 2.06296, 0, 0),
@@ -690,7 +662,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 36,
 "index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABQAEAAcACAAJAAoACgALAAgADAANAA4ADQAMAA8AEAARABIAEQAQABMAFAAVABYAFgAXABQA"),
-"material": SubResource("StandardMaterial3D_y44wb"),
+"material": ExtResource("2_cllcg"),
 "name": "mat21",
 "primitive": 3,
 "uv_scale": Vector4(0.324677, 2.06054, 0, 0),
@@ -722,7 +694,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 36,
 "index_data": PackedByteArray("AAABAAIAAQAAAAMABAAFAAYABgAHAAQACAAJAAoACgALAAgADAANAA4ADQAMAA8AEAARABIAEwAUABUAFgAXABgAGQAaABsA"),
-"material": SubResource("StandardMaterial3D_y44wb"),
+"material": ExtResource("2_cllcg"),
 "name": "mat21",
 "primitive": 3,
 "uv_scale": Vector4(0.305, 2.12957, 0, 0),
@@ -754,7 +726,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 36,
 "index_data": PackedByteArray("AAABAAIAAQAAAAMABAAFAAYABgAHAAQACAAJAAoACgALAAgADAANAA4ADQAMAA8AEAARABIAEQAQABMAFAAVABYAFgAXABQA"),
-"material": SubResource("StandardMaterial3D_y44wb"),
+"material": ExtResource("2_cllcg"),
 "name": "mat21",
 "primitive": 3,
 "uv_scale": Vector4(0.342566, 2.06431, 0, 0),
@@ -786,7 +758,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 36,
 "index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABQAEAAcACAAJAAoACQAIAAsADAANAA4ADgAPAAwAEAARABIAEQAQABMAFAAVABYAFgAXABQA"),
-"material": SubResource("StandardMaterial3D_y44wb"),
+"material": ExtResource("2_cllcg"),
 "name": "mat21",
 "primitive": 3,
 "uv_scale": Vector4(0.358109, 2.10449, 0, 0),
@@ -818,7 +790,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 36,
 "index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABQAEAAcACAAJAAoACQAIAAsADAANAA4ADgAPAAwAEAARABIAEQAQABMAFAAVABYAFgAXABQA"),
-"material": SubResource("StandardMaterial3D_y44wb"),
+"material": ExtResource("2_cllcg"),
 "name": "mat21",
 "primitive": 3,
 "uv_scale": Vector4(0.366097, 2.07139, 0, 0),
@@ -850,7 +822,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 36,
 "index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABQAEAAcACAAJAAoACQAIAAsADAANAA4ADgAPAAwAEAARABIAEQAQABMAFAAVABYAFgAXABQA"),
-"material": SubResource("StandardMaterial3D_y44wb"),
+"material": ExtResource("2_cllcg"),
 "name": "mat21",
 "primitive": 3,
 "uv_scale": Vector4(0.310665, 2.01278, 0, 0),
@@ -882,7 +854,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 36,
 "index_data": PackedByteArray("AAABAAIAAQAAAAMABAAFAAYABgAHAAQACAAJAAoACgALAAgADAANAA4ADQAMAA8AEAARABIAEQAQABMAFAAVABYAFgAXABQA"),
-"material": SubResource("StandardMaterial3D_y44wb"),
+"material": ExtResource("2_cllcg"),
 "name": "mat21",
 "primitive": 3,
 "uv_scale": Vector4(0.315383, 1.99395, 0, 0),
@@ -1463,7 +1435,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 576,
 "index_data": PackedByteArray("AAABAAIAAwAEAAUABgAHAAgACQAKAAsADAANAA4ADwAQABEAEgATABQAFQAWABcAGAAZABoAGwAcAB0AHgAfACAAIQAiACMAJAAlACYAJgAnACQAKAApACoAKgArACgALAAtAC4ALgAvACwAMAAxADIAMgAzADAANAA1ADYANgA3ADQAOAA5ADoAOgA7ADgAPAA9AD4APgA/ADwAQABBAEIAQgBDAEAARABFAEYARgBHAEQASABJAEoASgBLAEgATABNAE4ATgBPAEwAUABRAFIAUgBTAFAAVABVAFYAVgBXAFQAWABZAFoAWgBbAFgAXABdAF4AXgBfAFwAYABhAGIAYgBjAGAAZABlAGYAZgBnAGQAaABpAGoAagBrAGgAbABtAG4AbgBvAGwAcABxAHIAcgBzAHAAdAB1AHYAdgB3AHQAeAB5AHoAegB7AHgAfAB9AH4AfgB/AHwAgACBAIIAggCDAIAAhACFAIYAhQCEAIcAiACJAIoAiQCIAIsAjACNAI4AjQCMAI8AkACRAJIAkQCQAJMAlACVAJYAlQCUAJcAmACZAJoAmQCYAJsAnACdAJ4AngCfAJwAoAChAKIAoQCgAKMApAClAKYApQCkAKcAqACpAKoAqQCoAKsArACtAK4ArQCsAK8AsACxALIAsQCwALMAtAC1ALYAtQC0ALcAuAC5ALoAuQC4ALsAvAC9AL4AvQC8AL8AwADBAMIAwQDAAMMAxADFAMYAxQDEAMcAyADJAMoAygDLAMgAzADNAM4AzgDPAMwA0ADRANIA0gDTANAA1ADVANYA1gDXANQA2ADZANoA2gDbANgA3ADdAN4A3gDfANwA4ADhAOIA4QDgAOMA5ADlAOYA5QDkAOcA6ADpAOoA6QDoAOsA7ADtAO4A7QDsAO8A8ADxAPIA8QDwAPMA9AD1APYA9QD0APcA+AD5APoA+gD7APgA/AD9AP4A/gD/APwAAAEBAQIBAgEDAQABBAEFAQYBBgEHAQQBCAEJAQoBCgELAQgBDAENAQ4BDgEPAQwBEAERARIBEQEQARMBFAEVARYBFQEUARcBGAEZARoBGQEYARsBHAEdAR4BHQEcAR8BIAEhASIBIQEgASMBJAElASYBJQEkAScBKAEpASoBKQEoASsBLAEtAS4BLQEsAS8BMAExATIBMQEwATMBNAE1ATYBNQE0ATcBOAE5AToBOQE4ATsBPAE9AT4BPQE8AT8BQAFBAUIBQQFAAUMBRAFFAUYBRQFEAUcBSAFJAUoBSQFIAUsBTAFNAU4BTQFMAU8BUAFRAVIBUQFQAVMBVAFVAVYBVQFUAVcBWAFZAVoBWQFYAVsBXAFdAV4BXQFcAV8BYAFhAWIBYQFgAWMBZAFlAWYBZQFkAWcBaAFpAWoBaQFoAWsBbAFtAW4BbQFsAW8BcAFxAXIBcQFwAXMBdAF1AXYBdwF4AXkBegF7AXwBfQF+AX8BgAGBAYIBgwGEAYUBhgGHAYgBiQGKAYsBjAGNAY4BjwGQAZEBkgGTAZQBlQGWAZcB"),
-"material": SubResource("StandardMaterial3D_y44wb"),
+"material": ExtResource("2_cllcg"),
 "name": "mat21",
 "primitive": 3,
 "uv_scale": Vector4(0.328366, 2.25306, 0, 0),
@@ -1495,7 +1467,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 576,
 "index_data": PackedByteArray("AAABAAIAAwAEAAUABgAHAAgACQAKAAsADAANAA4ADwAQABEAEgATABQAFQAWABcAGAAZABoAGwAcAB0AHgAfACAAIQAiACMAJAAlACYAJQAkACcAKAApACoAKQAoACsALAAtAC4ALQAsAC8AMAAxADIAMQAwADMANAA1ADYANQA0ADcAOAA5ADoAOQA4ADsAPAA9AD4APQA8AD8AQABBAEIAQQBAAEMARABFAEYARQBEAEcASABJAEoASQBIAEsATABNAE4ATQBMAE8AUABRAFIAUQBQAFMAVABVAFYAVQBUAFcAWABZAFoAWQBYAFsAXABdAF4AXgBfAFwAYABhAGIAYgBjAGAAZABlAGYAZQBkAGcAaABpAGoAaQBoAGsAbABtAG4AbQBsAG8AcABxAHIAcQBwAHMAdAB1AHYAdQB0AHcAeAB5AHoAeQB4AHsAfAB9AH4AfQB8AH8AgACBAIIAgQCAAIMAhACFAIYAhQCEAIcAiACJAIoAiQCIAIsAjACNAI4AjQCMAI8AkACRAJIAkQCQAJMAlACVAJYAlQCUAJcAmACZAJoAmQCYAJsAnACdAJ4AnQCcAJ8AoAChAKIAoQCgAKMApAClAKYApQCkAKcAqACpAKoAqQCoAKsArACtAK4ArQCsAK8AsACxALIAsQCwALMAtAC1ALYAtQC0ALcAuAC5ALoAugC7ALgAvAC9AL4AvgC/ALwAwADBAMIAwgDDAMAAxADFAMYAxgDHAMQAyADJAMoAyQDIAMsAzADNAM4AzQDMAM8A0ADRANIA0QDQANMA1ADVANYA1QDUANcA2ADZANoA2QDYANsA3ADdAN4A3QDcAN8A4ADhAOIA4QDgAOMA5ADlAOYA5gDnAOQA6ADpAOoA6gDrAOgA7ADtAO4A7gDvAOwA8ADxAPIA8gDzAPAA9AD1APYA9gD3APQA+AD5APoA+gD7APgA/AD9AP4A/gD/APwAAAEBAQIBAQEAAQMBBAEFAQYBBQEEAQcBCAEJAQoBCQEIAQsBDAENAQ4BDgEPAQwBEAERARIBEgETARABFAEVARYBFgEXARQBGAEZARoBGgEbARgBHAEdAR4BHgEfARwBIAEhASIBIgEjASABJAElASYBJgEnASQBKAEpASoBKgErASgBLAEtAS4BLgEvASwBMAExATIBMgEzATABNAE1ATYBNQE0ATcBOAE5AToBOQE4ATsBPAE9AT4BPgE/ATwBQAFBAUIBQgFDAUABRAFFAUYBRgFHAUQBSAFJAUoBSgFLAUgBTAFNAU4BTgFPAUwBUAFRAVIBUgFTAVABVAFVAVYBVgFXAVQBWAFZAVoBWgFbAVgBXAFdAV4BXgFfAVwBYAFhAWIBYgFjAWABZAFlAWYBZgFnAWQBaAFpAWoBagFrAWgBbAFtAW4BbgFvAWwBcAFxAXIBcgFzAXABdAF1AXYBdwF4AXkBegF7AXwBfQF+AX8BgAGBAYIBgwGEAYUBhgGHAYgBiQGKAYsBjAGNAY4BjwGQAZEBkgGTAZQBlQGWAZcB"),
-"material": SubResource("StandardMaterial3D_y44wb"),
+"material": ExtResource("2_cllcg"),
 "name": "mat21",
 "primitive": 3,
 "uv_scale": Vector4(0.3185, 2.2447, 0, 0),
@@ -1527,7 +1499,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 576,
 "index_data": PackedByteArray("AAABAAIAAwAEAAUABgAHAAgACQAKAAsADAANAA4ADwAQABEAEgATABQAFQAWABcAGAAZABoAGwAcAB0AHgAfACAAIQAiACMAJAAlACYAJgAnACQAKAApACoAKgArACgALAAtAC4ALgAvACwAMAAxADIAMgAzADAANAA1ADYANgA3ADQAOAA5ADoAOgA7ADgAPAA9AD4APgA/ADwAQABBAEIAQgBDAEAARABFAEYARgBHAEQASABJAEoASgBLAEgATABNAE4ATgBPAEwAUABRAFIAUgBTAFAAVABVAFYAVgBXAFQAWABZAFoAWgBbAFgAXABdAF4AXgBfAFwAYABhAGIAYgBjAGAAZABlAGYAZgBnAGQAaABpAGoAagBrAGgAbABtAG4AbgBvAGwAcABxAHIAcgBzAHAAdAB1AHYAdQB0AHcAeAB5AHoAeQB4AHsAfAB9AH4AfgB/AHwAgACBAIIAggCDAIAAhACFAIYAhgCHAIQAiACJAIoAigCLAIgAjACNAI4AjgCPAIwAkACRAJIAkgCTAJAAlACVAJYAlgCXAJQAmACZAJoAmgCbAJgAnACdAJ4AngCfAJwAoAChAKIAogCjAKAApAClAKYApgCnAKQAqACpAKoAqgCrAKgArACtAK4ArgCvAKwAsACxALIAsgCzALAAtAC1ALYAtgC3ALQAuAC5ALoAugC7ALgAvAC9AL4AvgC/ALwAwADBAMIAwgDDAMAAxADFAMYAxgDHAMQAyADJAMoAyQDIAMsAzADNAM4AzQDMAM8A0ADRANIA0QDQANMA1ADVANYA1QDUANcA2ADZANoA2QDYANsA3ADdAN4A3gDfANwA4ADhAOIA4gDjAOAA5ADlAOYA5QDkAOcA6ADpAOoA6QDoAOsA7ADtAO4A7gDvAOwA8ADxAPIA8gDzAPAA9AD1APYA9QD0APcA+AD5APoA+QD4APsA/AD9AP4A/QD8AP8AAAEBAQIBAQEAAQMBBAEFAQYBBQEEAQcBCAEJAQoBCQEIAQsBDAENAQ4BDQEMAQ8BEAERARIBEQEQARMBFAEVARYBFQEUARcBGAEZARoBGQEYARsBHAEdAR4BHgEfARwBIAEhASIBIgEjASABJAElASYBJQEkAScBKAEpASoBKQEoASsBLAEtAS4BLQEsAS8BMAExATIBMQEwATMBNAE1ATYBNQE0ATcBOAE5AToBOQE4ATsBPAE9AT4BPQE8AT8BQAFBAUIBQQFAAUMBRAFFAUYBRQFEAUcBSAFJAUoBSQFIAUsBTAFNAU4BTQFMAU8BUAFRAVIBUQFQAVMBVAFVAVYBVQFUAVcBWAFZAVoBWQFYAVsBXAFdAV4BXQFcAV8BYAFhAWIBYQFgAWMBZAFlAWYBZQFkAWcBaAFpAWoBaQFoAWsBbAFtAW4BbQFsAW8BcAFxAXIBcQFwAXMBdAF1AXYBdwF4AXkBegF7AXwBfQF+AX8BgAGBAYIBgwGEAYUBhgGHAYgBiQGKAYsBjAGNAY4BjwGQAZEBkgGTAZQBlQGWAZcB"),
-"material": SubResource("StandardMaterial3D_y44wb"),
+"material": ExtResource("2_cllcg"),
 "name": "mat21",
 "primitive": 3,
 "uv_scale": Vector4(0.341401, 2.0822, 0, 0),
@@ -1559,7 +1531,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 576,
 "index_data": PackedByteArray("AAABAAIAAwAEAAUABgAHAAgACQAKAAsADAANAA4ADwAQABEAEgATABQAFQAWABcAGAAZABoAGwAcAB0AHgAfACAAIQAiACMAJAAlACYAJgAnACQAKAApACoAKgArACgALAAtAC4ALgAvACwAMAAxADIAMgAzADAANAA1ADYANgA3ADQAOAA5ADoAOgA7ADgAPAA9AD4APgA/ADwAQABBAEIAQgBDAEAARABFAEYARgBHAEQASABJAEoASgBLAEgATABNAE4ATgBPAEwAUABRAFIAUgBTAFAAVABVAFYAVgBXAFQAWABZAFoAWgBbAFgAXABdAF4AXgBfAFwAYABhAGIAYgBjAGAAZABlAGYAZgBnAGQAaABpAGoAagBrAGgAbABtAG4AbgBvAGwAcABxAHIAcgBzAHAAdAB1AHYAdQB0AHcAeAB5AHoAeQB4AHsAfAB9AH4AfgB/AHwAgACBAIIAggCDAIAAhACFAIYAhgCHAIQAiACJAIoAigCLAIgAjACNAI4AjgCPAIwAkACRAJIAkgCTAJAAlACVAJYAlgCXAJQAmACZAJoAmgCbAJgAnACdAJ4AngCfAJwAoAChAKIAogCjAKAApAClAKYApgCnAKQAqACpAKoAqgCrAKgArACtAK4ArgCvAKwAsACxALIAsgCzALAAtAC1ALYAtgC3ALQAuAC5ALoAugC7ALgAvAC9AL4AvgC/ALwAwADBAMIAwgDDAMAAxADFAMYAxgDHAMQAyADJAMoAygDLAMgAzADNAM4AzgDPAMwA0ADRANIA0QDQANMA1ADVANYA1QDUANcA2ADZANoA2QDYANsA3ADdAN4A3gDfANwA4ADhAOIA4gDjAOAA5ADlAOYA5QDkAOcA6ADpAOoA6QDoAOsA7ADtAO4A7gDvAOwA8ADxAPIA8gDzAPAA9AD1APYA9QD0APcA+AD5APoA+QD4APsA/AD9AP4A/QD8AP8AAAEBAQIBAQEAAQMBBAEFAQYBBQEEAQcBCAEJAQoBCQEIAQsBDAENAQ4BDQEMAQ8BEAERARIBEQEQARMBFAEVARYBFQEUARcBGAEZARoBGQEYARsBHAEdAR4BHgEfARwBIAEhASIBIgEjASABJAElASYBJQEkAScBKAEpASoBKQEoASsBLAEtAS4BLQEsAS8BMAExATIBMQEwATMBNAE1ATYBNQE0ATcBOAE5AToBOQE4ATsBPAE9AT4BPQE8AT8BQAFBAUIBQQFAAUMBRAFFAUYBRQFEAUcBSAFJAUoBSQFIAUsBTAFNAU4BTQFMAU8BUAFRAVIBUQFQAVMBVAFVAVYBVQFUAVcBWAFZAVoBWQFYAVsBXAFdAV4BXQFcAV8BYAFhAWIBYQFgAWMBZAFlAWYBZQFkAWcBaAFpAWoBaQFoAWsBbAFtAW4BbQFsAW8BcAFxAXIBcQFwAXMBdAF1AXYBdwF4AXkBegF7AXwBfQF+AX8BgAGBAYIBgwGEAYUBhgGHAYgBiQGKAYsBjAGNAY4BjwGQAZEBkgGTAZQBlQGWAZcB"),
-"material": SubResource("StandardMaterial3D_y44wb"),
+"material": ExtResource("2_cllcg"),
 "name": "mat21",
 "primitive": 3,
 "uv_scale": Vector4(0.344665, 2.26094, 0, 0),
@@ -1591,7 +1563,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 576,
 "index_data": PackedByteArray("AAABAAIAAwAEAAUABgAHAAgACQAKAAsADAANAA4ADwAQABEAEgATABQAFQAWABcAGAAZABoAGwAcAB0AHgAfACAAIQAiACMAJAAlACYAJQAkACcAKAApACoAKQAoACsALAAtAC4ALQAsAC8AMAAxADIAMQAwADMANAA1ADYANQA0ADcAOAA5ADoAOQA4ADsAPAA9AD4APQA8AD8AQABBAEIAQQBAAEMARABFAEYARQBEAEcASABJAEoASQBIAEsATABNAE4ATQBMAE8AUABRAFIAUQBQAFMAVABVAFYAVQBUAFcAWABZAFoAWQBYAFsAXABdAF4AXgBfAFwAYABhAGIAYgBjAGAAZABlAGYAZQBkAGcAaABpAGoAaQBoAGsAbABtAG4AbQBsAG8AcABxAHIAcQBwAHMAdAB1AHYAdQB0AHcAeAB5AHoAeQB4AHsAfAB9AH4AfQB8AH8AgACBAIIAgQCAAIMAhACFAIYAhQCEAIcAiACJAIoAiQCIAIsAjACNAI4AjQCMAI8AkACRAJIAkQCQAJMAlACVAJYAlQCUAJcAmACZAJoAmQCYAJsAnACdAJ4AnQCcAJ8AoAChAKIAoQCgAKMApAClAKYApQCkAKcAqACpAKoAqQCoAKsArACtAK4ArQCsAK8AsACxALIAsQCwALMAtAC1ALYAtQC0ALcAuAC5ALoAugC7ALgAvAC9AL4AvgC/ALwAwADBAMIAwgDDAMAAxADFAMYAxgDHAMQAyADJAMoAygDLAMgAzADNAM4AzgDPAMwA0ADRANIA0QDQANMA1ADVANYA1QDUANcA2ADZANoA2QDYANsA3ADdAN4A3QDcAN8A4ADhAOIA4QDgAOMA5ADlAOYA5gDnAOQA6ADpAOoA6gDrAOgA7ADtAO4A7gDvAOwA8ADxAPIA8gDzAPAA9AD1APYA9gD3APQA+AD5APoA+gD7APgA/AD9AP4A/gD/APwAAAEBAQIBAQEAAQMBBAEFAQYBBQEEAQcBCAEJAQoBCQEIAQsBDAENAQ4BDgEPAQwBEAERARIBEgETARABFAEVARYBFgEXARQBGAEZARoBGgEbARgBHAEdAR4BHgEfARwBIAEhASIBIgEjASABJAElASYBJgEnASQBKAEpASoBKgErASgBLAEtAS4BLgEvASwBMAExATIBMgEzATABNAE1ATYBNQE0ATcBOAE5AToBOQE4ATsBPAE9AT4BPgE/ATwBQAFBAUIBQgFDAUABRAFFAUYBRgFHAUQBSAFJAUoBSgFLAUgBTAFNAU4BTgFPAUwBUAFRAVIBUgFTAVABVAFVAVYBVgFXAVQBWAFZAVoBWgFbAVgBXAFdAV4BXgFfAVwBYAFhAWIBYgFjAWABZAFlAWYBZgFnAWQBaAFpAWoBagFrAWgBbAFtAW4BbgFvAWwBcAFxAXIBcgFzAXABdAF1AXYBdwF4AXkBegF7AXwBfQF+AX8BgAGBAYIBgwGEAYUBhgGHAYgBiQGKAYsBjAGNAY4BjwGQAZEBkgGTAZQBlQGWAZcB"),
-"material": SubResource("StandardMaterial3D_y44wb"),
+"material": ExtResource("2_cllcg"),
 "name": "mat21",
 "primitive": 3,
 "uv_scale": Vector4(0.338623, 2.15803, 0, 0),
@@ -1623,7 +1595,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 108,
 "index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQACAAJAAoACgALAAgADAANAA4ADgAPAAwAEAARABIAEgATABAAFAAVABYAFQAUABcAGAAZABoAGQAYABsAHAAdAB4AHQAcAB8AIAAhACIAIQAgACMAJAAlACYAJQAkACcAKAApACoAKAAqACsAKgAsACsALQAoACsALQAuACgAKwAvAC0ALwAwAC0AKwAxAC8AMgAzADQAMgA1ADMAMwA1ADYANwA1ADIANwAyADgANQA3ADkAOQA3ADoANQA5ADsA"),
-"material": SubResource("StandardMaterial3D_y44wb"),
+"material": ExtResource("2_cllcg"),
 "name": "mat21",
 "primitive": 3,
 "uv_scale": Vector4(0.316483, 2.00956, 0, 0),
@@ -1655,7 +1627,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 36,
 "index_data": PackedByteArray("AAABAAIAAwAEAAUABgAHAAgACQAKAAsADAANAA4ADwAQABEAEgATABQAFQAWABcAGAAZABoAGwAcAB0AHgAfACAAIQAiACMA"),
-"material": SubResource("StandardMaterial3D_y44wb"),
+"material": ExtResource("2_cllcg"),
 "name": "mat21",
 "primitive": 3,
 "uv_scale": Vector4(0.309015, 2.04739, 0, 0),
@@ -1687,7 +1659,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 84,
 "index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQACAAJAAoACgALAAgADAANAA4ADgAPAAwAEAARABIAEQAQABMAFAAVABYAFQAUABcAGAAZABoAGQAYABsAHAAdAB4AHQAcAB8AIAAhACIAIAAiACMAIgAkACMAIwAlACAAJQAmACAAIwAnACUAKAApACoAKAArACkAKQArACwAKwAoAC0ALQAoAC4AKwAtAC8A"),
-"material": SubResource("StandardMaterial3D_y44wb"),
+"material": ExtResource("2_cllcg"),
 "name": "mat21",
 "primitive": 3,
 "uv_scale": Vector4(0.301599, 2.10577, 0, 0),
@@ -2162,10 +2134,7 @@ collision_mask = 7
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
-floor_block_on_wall = false
 script = ExtResource("1_v1gsr")
-time_to_max_speed = 2.0
-zoom_speed = 2.0
 
 [node name="Model" type="Node3D" parent="."]
 
@@ -2177,7 +2146,6 @@ skeleton = NodePath("")
 [node name="group1434348068" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 0.405, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("ArrayMesh_k1drd")
-skeleton = NodePath("")
 
 [node name="group1472813429" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 0.405, 0, 0, 0, 1, 0, 0, 0)
@@ -2517,11 +2485,9 @@ target_position = Vector3(0, 0.995, 0)
 collision_mask = 3
 
 [node name="CameraPivot2" type="Node3D" parent="."]
-transform = Transform3D(1, 0, -1.42109e-14, 0, 1, 0, 1.42109e-14, 0, 1, 0, -0.133444, -0.0220861)
+transform = Transform3D(1, 0, -1.4210855e-14, 0, 1, 0, 1.4210855e-14, 0, 1, 0, -0.09210045, 0)
 
 [node name="Camera3D2" type="Camera3D" parent="CameraPivot2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.032606766, 0)
-fov = 82.2
 
 [node name="Area3D" type="Area3D" parent="."]
 collision_layer = 8
