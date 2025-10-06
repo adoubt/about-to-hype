@@ -29,14 +29,15 @@ func throw():
 	if not thrown_item:
 		push_error("Не удалось создать ноду Loot из сцены!")
 		return
-
+	
 	# Ставим в позицию руки
 	var hand_global = global_transform
 	thrown_item.global_transform.origin = hand_global.origin + hand_global.basis.z * 1.0  # чуть вперед
-
+	# Сила броска
+	var throw_strength = 15.0
+	var camera_forward = -ControllerManager.get_current_camera().global_transform.basis.z.normalized()
 	if thrown_item is RigidBody3D:
-		var forward_dir = -hand_global.basis.z.normalized()
-		thrown_item.linear_velocity = forward_dir * 10
+		thrown_item.linear_velocity = camera_forward * throw_strength
 		thrown_item.angular_velocity = Vector3(randf(), randf(), randf()) * 5
 
 	# Добавляем на сцену
@@ -46,3 +47,4 @@ func throw():
 	hud.clear_current_slot()
 	# Убираем предмет из руки
 	queue_free()
+	AudioManager.just_play_sound("throw",position)

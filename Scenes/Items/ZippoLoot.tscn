@@ -162,6 +162,8 @@ shadow_mesh = SubResource("ArrayMesh_4dpbh")
 size = Vector3(0.578125, 2.2304688, 1.5917969)
 
 [node name="Zippo" type="RigidBody3D"]
+collision_layer = 4
+collision_mask = 23
 script = ExtResource("1_po863")
 item = ExtResource("2_psj2y")
 particles_scene = ExtResource("3_pnrt3")

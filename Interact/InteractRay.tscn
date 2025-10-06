@@ -5,6 +5,7 @@
 
 [node name="InteractRay" type="RayCast3D"]
 target_position = Vector3(0, 0, -4)
+collision_mask = 6
 collide_with_areas = true
 script = ExtResource("1_10173")
 
