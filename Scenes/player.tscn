@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://dwdoylad3f00s"]
+[gd_scene load_steps=35 format=3 uid="uid://dwdoylad3f00s"]
 
 [ext_resource type="Script" uid="uid://rlqnl5vb5p2b" path="res://player.gd" id="1_cvnsp"]
 [ext_resource type="PackedScene" uid="uid://by7g6qtybner8" path="res://Interact/InteractRay.tscn" id="2_6t5aa"]
@@ -6244,15 +6244,9 @@ _data = {
 &"walk_forward_right_leg": SubResource("Animation_cyf0p")
 }
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_f1ek2"]
-animation = &"AnimPack/walk"
-
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_gymyn"]
-graph_offset = Vector2(-268.31888, -8.604919)
+graph_offset = Vector2(-256.84302, -187.15701)
 nodes/output/position = Vector2(880, 60)
-nodes/Animation/node = SubResource("AnimationNodeAnimation_f1ek2")
-nodes/Animation/position = Vector2(380, 60)
-node_connections = [&"output", 0, &"Animation"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fkybt"]
 radius = 0.17480469
@@ -6263,7 +6257,7 @@ radius = 2.7590625
 
 [node name="Player" type="CharacterBody3D" groups=["controllable", "player"]]
 collision_layer = 2
-collision_mask = 13
+collision_mask = 23
 floor_constant_speed = true
 floor_block_on_wall = false
 floor_snap_length = 0.2
