@@ -1,12 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://dxtmay68ca301"]
+[gd_scene load_steps=12 format=3 uid="uid://dxtmay68ca301"]
 
 [ext_resource type="Script" uid="uid://b1g5iaiket2lr" path="res://UI/HUDManager.gd" id="1_8uiqn"]
 [ext_resource type="Shader" uid="uid://brfe1o0lxeqv8" path="res://assets/Shaders/SpeedLines.gdshader" id="2_s7b2q"]
-[ext_resource type="Texture2D" uid="uid://bsp6f7rgy5x35" path="res://assets/refs/UI_inventory.webp" id="3_bxubi"]
 [ext_resource type="FontFile" uid="uid://cqipr3ixo4xi1" path="res://assets/fonts/SFPRODISPLAYTHINITALIC.OTF" id="4_8xtfn"]
-[ext_resource type="Shader" uid="uid://lf72luioho2j" path="res://assets/Shaders/vhscamera3.gdshader" id="4_bxubi"]
 [ext_resource type="Script" uid="uid://be15q7ba8qpca" path="res://UI/ui_inventory_bar.gd" id="5_1ryed"]
-[ext_resource type="Shader" uid="uid://cu5on7cpkd3f0" path="res://assets/Shaders/Buckshot_roulette.gdshader" id="5_8xtfn"]
 [ext_resource type="Script" uid="uid://fs8q3868lwkg" path="res://UI/ui_inventory_slot.gd" id="6_8s141"]
 [ext_resource type="StyleBox" uid="uid://77k1s263g7pn" path="res://assets/themes/inventory_slot.tres" id="7_lr3y2"]
 [ext_resource type="StyleBox" uid="uid://dj12eayb0am4x" path="res://assets/themes/selected_inventory_slot.tres" id="8_x72t0"]
@@ -29,43 +26,6 @@ shader_parameter/line_faloff = 0.25
 shader_parameter/mask_size = 0.1
 shader_parameter/mask_edge = 0.5
 shader_parameter/animation_speed = 20.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1ryed"]
-shader = ExtResource("4_bxubi")
-shader_parameter/vhs_resolution = Vector2(320, 240)
-shader_parameter/samples = 2
-shader_parameter/crease_noise = 1.0
-shader_parameter/crease_opacity = 0.5
-shader_parameter/filter_intensity = 0.1
-shader_parameter/tape_crease_smear = 0.2
-shader_parameter/tape_crease_intensity = 0.2
-shader_parameter/tape_crease_jitter = 0.1
-shader_parameter/tape_crease_speed = 0.5
-shader_parameter/tape_crease_discoloration = 1.0
-shader_parameter/bottom_border_thickness = 6.0
-shader_parameter/bottom_border_jitter = 6.0
-shader_parameter/noise_intensity = 0.1
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_8s141"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_lr3y2"]
-shader = ExtResource("5_8xtfn")
-shader_parameter/exposure = 1.0
-shader_parameter/contrast = 1.05
-shader_parameter/saturation = 0.9
-shader_parameter/enable_pixelate = true
-shader_parameter/pixel_factor = 3.0
-shader_parameter/enable_posterize = true
-shader_parameter/color_levels = 16.0
-shader_parameter/dither_strength = 0.35
-shader_parameter/chrom_aberration = 0.07
-shader_parameter/vignette_strength = 1.0
-shader_parameter/grain_strength = 0.2
-shader_parameter/tint_color = Vector3(0.95, 1.03, 0.9)
-shader_parameter/tint_strength = 0.15
-shader_parameter/viewport_size_override = Vector2(0, 0)
-
-[sub_resource type="Texture2DRD" id="Texture2DRD_bxubi"]
 
 [sub_resource type="Theme" id="Theme_xfvwf"]
 default_font = ExtResource("4_8xtfn")
@@ -90,39 +50,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0)
-
-[node name="TextureRect" type="TextureRect" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("3_bxubi")
-expand_mode = 1
-
-[node name="CamNoise" type="TextureRect" parent="."]
-visible = false
-material = SubResource("ShaderMaterial_1ryed")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("ViewportTexture_8s141")
-
-[node name="BuckshotRoulette" type="TextureRect" parent="."]
-visible = false
-material = SubResource("ShaderMaterial_lr3y2")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("Texture2DRD_bxubi")
 
 [node name="HUD" type="MarginContainer" parent="."]
 layout_mode = 1

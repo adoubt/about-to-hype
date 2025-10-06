@@ -1,8 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://boxcl4vey5uwq"]
+[gd_scene load_steps=12 format=3 uid="uid://boxcl4vey5uwq"]
 
 [ext_resource type="Theme" uid="uid://lrgo7wl6w1c0" path="res://assets/fonts/Font_theme.tres" id="1_3ykye"]
 [ext_resource type="Script" uid="uid://c0spwl5w1xlol" path="res://UI/settings_UI.gd" id="2_cj1lu"]
-[ext_resource type="Texture2D" uid="uid://bqhbyh7l1imsc" path="res://assets/seTTINGS_REF.jpg" id="2_gc0em"]
 [ext_resource type="Script" uid="uid://bmcx0ghk2foqr" path="res://ui_slider.gd" id="3_cj1lu"]
 [ext_resource type="Theme" uid="uid://2ocoy8vsxdat" path="res://assets/themes/tab_settings.tres" id="4_ay7hg"]
 [ext_resource type="StyleBox" uid="uid://cetf4is0ai61y" path="res://assets/themes/back_btn_style.tres" id="5_r3owr"]
@@ -52,17 +51,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.196078)
-
-[node name="ColorRect" type="TextureRect" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_gc0em")
-expand_mode = 1
 
 [node name="Control" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -157,6 +145,8 @@ theme = ExtResource("4_ay7hg")
 theme_override_styles/panel = SubResource("StyleBoxEmpty_r3owr")
 current_tab = 4
 tabs_visible = false
+use_hidden_tabs_for_min_size = true
+tab_focus_mode = 1
 
 [node name="General" type="VBoxContainer" parent="Control/HBoxContainer/TABCustom/TabContainer"]
 visible = false
