@@ -19,8 +19,9 @@ var sounds = {
 	"game_start" : "uid://c5d2108v7d0ka",
 	"zippo_open" : "uid://cgvkdlqy0pj25",
 	"zippo_close" : "uid://pbhybmpuipn6",
-	"zippo_fire" : "uid://bnw1umnklh3w2"
- }
+	"zippo_fire" : "uid://bnw1umnklh3w2",
+	"throw" : "uid://cd8itn7cer776"
+}
 func _ready():
 	pass
 	# теперь можно безопасно включать _process
