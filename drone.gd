@@ -1,19 +1,50 @@
 extends CharacterBody3D
 
 
-const GRAVITY := -40 # м/с², на глаз или через тесты
-const MAX_FALL_SPEED := 40.0
 
-@export var base_mass := 1.0  # масса пустого дрона
-var current_mass := base_mass  # масса с учётом груза
+
+@export_group("Drone")
+
+## Mass of the empty drone
+@export var base_mass := 1.0
+
+## Maximum falling speed
+@export var max_fall_speed: float = 40.0
+
+## Gravity (m/s²)
+@export var gravity := -40
+
+## Horizontal movement speed
 @export var move_speed := 40.0
+
+## Time to reach maximum horizontal speed
 @export var time_to_max_speed := 1.0
-@export var ascend_speed := 15.0 #правность горизонтального разгона
+
+## Vertical ascending speed
+@export var ascend_speed := 15.0
+
+## Rotation speed in degrees per second
 @export var rotation_speed := 360.0
-@export var tilt_amount := 30.0 #угол наклона
-@export var tilt_smoothness := 5.0 #правлность наклона
-@export var vertical_smoothness := 2.0 #правлность ветикального разгона
-@export var factor_stop = 0.4 #чем больше тем плавнее остановка 0.4
+
+## Maximum tilt angle during movement
+@export var tilt_amount := 30.0
+
+## Smoothness of tilt movement
+@export var tilt_smoothness := 5.0
+
+## Smoothness of vertical acceleration
+@export var vertical_smoothness := 2.0
+
+## Factor for stopping; higher values make stopping smoother
+@export var factor_stop := 0.4
+
+@export var drone_new_control :bool = true
+
+## Enable flight assistant (Not emplimented yet).
+@export var flight_assistant: bool = false
+var blade_speed :float  = 0.9
+## Blades speed
+@export var target_blade_speed := 3000.0
 @onready var ui_manager = UIManager
 
 @onready var camera_pivot = $CameraPivot
@@ -44,43 +75,67 @@ var model_lag_speed: float = 5.0   # скорость плавного пово�
 @onready var front_left_flashlight:= $Model/FrontLeftFlashlight
 @onready var front_right_flashlight:= $Model/FrontRightFlashlight
 
-var camera_yaw := 0.0
-@export var camera_lag := 1.7
-# дистанции (отрицательная Z — камера позади pivot)
+
+@export_group("Camera")
+## Camera FOV angle affect(Current FOV = Base camera FOV + affect FOV). Please set Base Camera FOV in its settings.
+@export_range(0.0, 180.0, 1) var affect_fov: float = 90.0
+
+
+
+## How far to move camera back at maximum speed
+@export var far_distance := 3.0
+
+## Camera zoom interpolation speed
+@export var zoom_speed := 5.0
+
+## Camera selection: 1 - Third-person POV, 2 - First-person POV
+@export_range(1, 2, 1) var current_camera_index: int = 1
+
+## Horizontal rotation of the camera
+@export var camera_yaw := 0.0
+
+## Camera rotation lag
+@export var camera_lag := 1.7  
+
+## Mouse sensitivity
+@export var mouse_sensitivity := 0.2
+
+var base_fov : float
+var far_fov : float
 var base_distance : float    # нормальная дистанция (настроится в _ready)
 var base_height : float  # нормальная высота (настроится в _ready)
-@export var far_distance := 3.0   # насколько дальше отойти при max speed
-@export var zoom_speed := 5.0      # скорость интерполяции дистанции
 
-# альтернативы: изменение FOV
-#@export var use_fov_effect := true убрал в настройки
-@export var base_fov : float
-@export var far_fov : float
-@export var drone_new_control :bool = true
-@export var flight_assistant: bool = false
-var volume_occlusion_db: float = 0.0 # от AudioManager
-var volume_local_db: float = -80.0   # от скорости винтов
+@export_group("Blades Sound")
+@export var volume_local_db: float = -80.0   # от скорости винтов
+@export var pitch := 0.0
+@export var default_pitch := 0.0
+@export var min_volume_db := -80.0
+@export var max_pitch := 2.0
+@export var min_pitch := 0.2
+
+@export var max_volume_db := 40.0       # громкость, когда мотор включен
+@export var fade_speed := 10.5          # скорость изменения громкости
+
+
+
+var current_mass := base_mass  # масса с учётом груза
 var joint: PinJoint3D = null
-var current_camera_index: int = 1
+
 var current_tilt := Vector3.ZERO
 var input_dir := Vector3.ZERO
 var grabbed_box: RigidBody3D = null
 var is_grabbing := false
 var grab_offset := Vector3(0, -0.22, 0)
-@export var engine_enabled := false
+var engine_enabled := false
 var mouse_joystick_active := true
 var mouse_delta := Vector2.ZERO
-var mouse_sensitivity := 0.2
-var pitch := 0.0
-var default_pitch := 0.0
-var blade_speed := 0.9
+
+
+
+
 var moving := false
 var input_enabled: bool = false
-var max_volume_db := 40.0       # громкость, когда мотор включен
-var fade_speed := 10.5          # скорость изменения громкости
-var min_volume_db := -80.0
-var max_pitch := 2.0
-var min_pitch := 0.2
+
 var flashlight_on: bool = false  # флаг состояния фонаря
 
 
@@ -99,7 +154,7 @@ func _ready():
 	front_right_flashlight.hide()
 	if SettingsManager.get_value("use_fov_effect"):
 		base_fov = camera1.fov	
-		far_fov = base_fov + 90
+		far_fov = base_fov + affect_fov
 	ControllerManager.register(self)  
 
 
@@ -165,8 +220,8 @@ func _physics_process(delta):
 func _apply_physics(delta):
 	
 	if not engine_enabled:
-		velocity.y +=GRAVITY * delta
-		velocity.y = max(velocity.y, -MAX_FALL_SPEED)
+		velocity.y +=gravity * delta
+		velocity.y = max(velocity.y, -max_fall_speed)
 		
 	move_and_slide()
 	
@@ -291,8 +346,9 @@ func _process_interaction(delta):
 
 func _process_rotation_blades(delta):
 	# --- вращение лопастей ---
-	var target_blade_speed = 3000.0 if engine_enabled else 0.0
-	blade_speed = lerp(blade_speed, target_blade_speed, delta * 5.0)
+	
+	var _target_blade_speed = target_blade_speed if engine_enabled else 0.0
+	blade_speed = lerp(blade_speed, _target_blade_speed, delta * 5.0)
 	var rotation_amount = deg_to_rad(blade_speed * delta)
 	blade1.rotate_y(rotation_amount)
 	blade2.rotate_y(rotation_amount)
