@@ -1037,9 +1037,19 @@ bone_idx = 20
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4772821, 3.795574, 0)
 bone_name = "Head"
 bone = 5
+origin_from = 1
+origin_bone_name = "Head"
+origin_bone = 5
+origin_safe_margin = 2.554
 duration = 0.5
 transition_type = 1
-ease_type = 2
+ease_type = 3
+use_angle_limitation = true
+symmetry_limitation = true
+primary_limit_angle = 2.81382
+primary_damp_threshold = 1.0
+secondary_limit_angle = 3.3150785
+secondary_damp_threshold = 1.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

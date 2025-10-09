@@ -1,8 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://dyr4si0jpc4wr"]
+[gd_scene load_steps=9 format=3 uid="uid://dyr4si0jpc4wr"]
 
 [ext_resource type="Script" uid="uid://dcginamhu80aq" path="res://building_model.gd" id="1_5j34s"]
 [ext_resource type="PackedScene" uid="uid://fmlrjy2hqlqq" path="res://tape_recorder.tscn" id="2_2yopf"]
+[ext_resource type="Material" uid="uid://dkghwq086gte4" path="res://assets/Materials/black_plastmass_material.tres" id="2_qnfc1"]
 [ext_resource type="PackedScene" uid="uid://bui502wsoub" path="res://Scenes/Objects/glass_window_simple.tscn" id="3_f1gjg"]
+[ext_resource type="Material" uid="uid://ckufmc7ehq1up" path="res://assets/Materials/colored_fresnel_shader.tres" id="3_ow2p3"]
+[ext_resource type="Material" uid="uid://byq0gnhhalaca" path="res://assets/Materials/low-poly_glass_table.tres" id="4_2vvqs"]
+[ext_resource type="PackedScene" uid="uid://bitej6opd7qbd" path="res://Scenes/Objects/glass_window.tscn" id="6_2vvqs"]
 
 [sub_resource type="Environment" id="Environment_f1gjg"]
 background_mode = 1
@@ -14,6 +18,7 @@ environment = SubResource("Environment_f1gjg")
 
 [node name="BuildingModel" type="Node3D" parent="."]
 script = ExtResource("1_5j34s")
+mat = ExtResource("2_qnfc1")
 
 [node name="Floor" type="Node3D" parent="BuildingModel"]
 
@@ -21,6 +26,7 @@ script = ExtResource("1_5j34s")
 
 [node name="MeshInstance3D2" type="CSGBox3D" parent="BuildingModel/Floor/Room"]
 transform = Transform3D(5, 0, 0, 0, 3, 0, 0, 0, 0.1, 2.48242, 0, 10)
+material = ExtResource("3_ow2p3")
 
 [node name="Door" type="CSGBox3D" parent="BuildingModel/Floor/Room/MeshInstance3D2"]
 transform = Transform3D(0.6, 0, 0, 0, 0.5, 0, 0, 0, 1.9999, -0.277009, -0.119661, 0)
@@ -66,9 +72,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0300164, 0.204465, -0.07909
 operation = 2
 size = Vector3(0.642111, 0.535767, 1.56055)
 
-[node name="MeshInstance3D12" type="CSGBox3D" parent="BuildingModel/Floor/Room"]
+[node name="BalkonGlass" type="CSGBox3D" parent="BuildingModel/Floor/Room"]
 transform = Transform3D(5, 0, 0, 0, 3, 0, 0, 0, 0.1, -0.838164, -0.865723, -1.66505)
 size = Vector3(0.85067, 0.422852, 1)
+material = ExtResource("4_2vvqs")
 
 [node name="MeshInstance3D13" type="CSGBox3D" parent="BuildingModel/Floor/Room"]
 transform = Transform3D(-4.37114e-07, 8, 4.37114e-09, 0, -3.49691e-07, 0.1, 10, 3.49691e-07, 1.91069e-16, 1, -1.49194, -0.857941)
@@ -246,9 +253,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0300164, 0.204465, -0.07909
 operation = 2
 size = Vector3(0.642111, 0.535767, 1.56055)
 
-[node name="MeshInstance3D12" type="CSGBox3D" parent="BuildingModel/Floor2/Room"]
+[node name="BalkonGlass" type="CSGBox3D" parent="BuildingModel/Floor2/Room"]
 transform = Transform3D(5, 0, 0, 0, 3, 0, 0, 0, 0.1, -0.838164, -0.865723, -1.66505)
 size = Vector3(0.85067, 0.422852, 1)
+material = ExtResource("4_2vvqs")
 
 [node name="MeshInstance3D13" type="CSGBox3D" parent="BuildingModel/Floor2/Room"]
 transform = Transform3D(-4.37114e-07, 8, 4.37114e-09, 0, -3.49691e-07, 0.1, 10, 3.49691e-07, 1.91069e-16, 1, -1.49194, -0.857941)
@@ -421,9 +429,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0300164, 0.204465, -0.07909
 operation = 2
 size = Vector3(0.642111, 0.535767, 1.56055)
 
-[node name="MeshInstance3D12" type="CSGBox3D" parent="BuildingModel/Floor3/Room"]
+[node name="BalkonGlass" type="CSGBox3D" parent="BuildingModel/Floor3/Room"]
 transform = Transform3D(5, 0, 0, 0, 3, 0, 0, 0, 0.1, -0.838164, -0.865723, -1.66505)
 size = Vector3(0.85067, 0.422852, 1)
+material = ExtResource("4_2vvqs")
 
 [node name="MeshInstance3D13" type="CSGBox3D" parent="BuildingModel/Floor3/Room"]
 transform = Transform3D(-4.37114e-07, 8, 4.37114e-09, 0, -3.49691e-07, 0.1, 10, 3.49691e-07, 1.91069e-16, 1, -1.49194, -0.857941)
@@ -599,9 +608,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0300164, 0.204465, -0.07909
 operation = 2
 size = Vector3(0.642111, 0.535767, 1.56055)
 
-[node name="MeshInstance3D12" type="CSGBox3D" parent="BuildingModel/Floor4/Room"]
+[node name="BalkonGlass" type="CSGBox3D" parent="BuildingModel/Floor4/Room"]
 transform = Transform3D(5, 0, 0, 0, 3, 0, 0, 0, 0.1, -0.838164, -0.865723, -1.66505)
 size = Vector3(0.85067, 0.422852, 1)
+material = ExtResource("4_2vvqs")
 
 [node name="MeshInstance3D13" type="CSGBox3D" parent="BuildingModel/Floor4/Room"]
 transform = Transform3D(-4.37114e-07, 8, 4.37114e-09, 0, -3.49691e-07, 0.1, 10, 3.49691e-07, 1.91069e-16, 1, -1.49194, -0.857941)
@@ -635,7 +645,7 @@ transform = Transform3D(-4.37114e-07, 8, 4.37114e-09, 0, -3.49691e-07, 0.1, 10, 
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 0.1, -1.47366, 0, 10)
 
 [node name="MeshInstance3D11" type="CSGBox3D" parent="BuildingModel/Floor4/Room"]
-transform = Transform3D(-4.37114e-07, 8, 4.37114e-09, 0, -3.49691e-07, 0.1, 10, 3.49691e-07, 1.91069e-16, 1, 1.50806, 5)
+transform = Transform3D(-4.37114e-07, 8, 4.37114e-09, 0, -3.49691e-07, 0.1, 10, 3.49691e-07, 1.91069e-16, 1, 1.5080605, 5)
 
 [node name="MeshInstance3D14" type="CSGBox3D" parent="BuildingModel/Floor4/Room"]
 transform = Transform3D(-4.37114e-07, 0, -0.1, 0, 3, 0, 10, 0, -4.37114e-09, -3, 0, -0.806772)
@@ -687,8 +697,8 @@ transform = Transform3D(-1.31134e-07, 0, -0.1, 0, 3, 0, 3, 0, -4.37114e-09, -3.0
 size = Vector3(2.1199, 1, 1)
 
 [node name="MeshInstance3D24" type="CSGBox3D" parent="BuildingModel/Floor4/Stairs"]
-transform = Transform3D(1.26235e-14, 3, 4.37114e-09, 1.16235, -1.20891e-07, 0.092189, 2.76567, 5.08081e-08, -0.0387451, 4.2074, 0.0530745, 13.1652)
-size = Vector3(0.997674, 0.554688, 1)
+transform = Transform3D(1.26235e-14, 3, 4.37114e-09, 1.16235, -1.20891e-07, 0.092189, 2.76567, 5.08081e-08, -0.0387451, 4.2074, 0.054798126, 13.169302)
+size = Vector3(1.0056729, 0.554688, 1)
 
 [node name="MeshInstance3D25" type="CSGBox3D" parent="BuildingModel/Floor4/Stairs"]
 transform = Transform3D(3, 0, -4.37114e-09, 1.31134e-07, 5.73206e-15, 0.1, 0, -3, 1.91069e-16, 4.19308, -0.522428, 10.9146)
@@ -706,8 +716,26 @@ size = Vector3(1.57813, 2.04288, 1)
 transform = Transform3D(3, 0, -4.37114e-09, 1.31134e-07, 5.73206e-15, 0.1, 0, -3, 1.91069e-16, 1.02912, 1.47757, 13.124)
 size = Vector3(2.67529, 2.04288, 1)
 
+[node name="TOP" type="CSGBox3D" parent="BuildingModel/Floor4/Stairs/MeshInstance3D32"]
+transform = Transform3D(0.99999964, 1.0318301e-26, 1.5487611e-13, -1.951602e-26, 0.99999964, 1.3228272e-20, -1.1368684e-13, -4.0935408e-17, 0.9997297, 0.28025377, 0.026976109, 0)
+operation = 2
+size = Vector3(0.778, 0.778, 1.997)
+
+[node name="GlassWindow" parent="BuildingModel/Floor4/Stairs/MeshInstance3D32/TOP" instance=ExtResource("6_2vvqs")]
+transform = Transform3D(-4.371139e-08, 0, -0.195, 0, 0.39, 0, 1, 0, -8.52372e-09, 0, 0, 0)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="BuildingModel/Floor4/Stairs/MeshInstance3D32"]
+transform = Transform3D(0.99999964, 1.9753077e-27, 2.7866598e-14, -3.6546196e-27, 0.99999964, 2.514629e-21, -1.1368684e-13, -7.643625e-18, 0.99994934, 1.060001, -0.27307272, 0)
+operation = 2
+size = Vector3(0.46269226, 1.378418, 1.7419434)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="BuildingModel/Floor4/Stairs/MeshInstance3D32"]
+transform = Transform3D(0.99999964, 2.297163e-27, 3.2418512e-14, -4.2841722e-27, 0.99999964, 2.9381455e-21, -1.1368684e-13, -8.964997e-18, 0.99994063, 0.79086363, -0.7238736, 0)
+operation = 2
+size = Vector3(1.0121918, 0.49047852, 1.3395996)
+
 [node name="MeshInstance3D27" type="CSGBox3D" parent="BuildingModel/Floor4/Stairs"]
-transform = Transform3D(3, 0, -4.37114e-09, 1.31134e-07, 5.73206e-15, 0.1, 0, -3, 1.91069e-16, 4.19308, 0.624463, 15.3993)
+transform = Transform3D(3, 0, -4.37114e-09, 1.31134e-07, 5.73206e-15, 0.1, 0, -3, 1.91069e-16, 4.19308, 0.6583337, 15.3993)
 size = Vector3(0.542138, 0.569946, 1)
 
 [node name="MeshInstance3D26" type="CSGBox3D" parent="BuildingModel/Floor4/Stairs"]
@@ -715,8 +743,8 @@ transform = Transform3D(2.59808, -6.21725e-15, -0.05, 1.5, -1.31134e-07, 0.08660
 size = Vector3(0.645819, 0.574829, 1)
 
 [node name="MeshInstance3D28" type="CSGBox3D" parent="BuildingModel/Floor4/Stairs"]
-transform = Transform3D(-2.63197, 1.22201e-07, 0.0479902, 1.43971, -1.28351e-07, 0.0877322, -4.61511e-15, 3, 3.72529e-09, 2.58726, 1.04064, 15.415)
-size = Vector3(0.595925, 0.55249, 1)
+transform = Transform3D(-2.63197, 1.22201e-07, 0.0479902, 1.43971, -1.28351e-07, 0.0877322, -4.61511e-15, 3, 3.72529e-09, 2.6264915, 1.0605268, 15.374104)
+size = Vector3(0.5850289, 0.55249, 1)
 
 [node name="MeshInstance3D20" type="CSGBox3D" parent="BuildingModel/Floor4/Stairs"]
 transform = Transform3D(-3, 0, 8.74228e-09, 0, 3, 0, -2.62268e-07, 0, -0.1, 1.01346, 0, 16.2167)
@@ -729,13 +757,5 @@ size = Vector3(0.657867, 1.56445, 1)
 
 [node name="Node" type="Node" parent="BuildingModel"]
 
-[node name="Sound" type="Node" parent="."]
-
 [node name="TapeRecorder" parent="." instance=ExtResource("2_2yopf")]
 transform = Transform3D(1, 0, 1.74533e-05, 0, 1, 0, -1.74533e-05, 0, 1, 1.35941, 5.84121, 0.552868)
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-0.83258307, 0, 0.55390024, 0, 1, 0, -0.55390024, 0, -0.83258307, 6.214586, 8.001514, -9.733148)
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.8058536, 0.094593816, 0.5845101, 0.36455962, 0.85713136, 0.36389855, -0.46657935, 0.50633764, -0.72520757, 4.6840334, 16.747295, -7.1980443)

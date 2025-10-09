@@ -1,13 +1,14 @@
-[gd_scene load_steps=27 format=3 uid="uid://cs3guckxlcjyi"]
+[gd_scene load_steps=26 format=3 uid="uid://cs3guckxlcjyi"]
 
 [ext_resource type="Script" uid="uid://ctrfp37708not" path="res://Scenes/game.gd" id="1_80cx4"]
-[ext_resource type="Script" uid="uid://bnl211kgeotsn" path="res://label_interact.gd" id="2_feb5d"]
+[ext_resource type="Sky" uid="uid://chle3jp3mirl1" path="res://assets/Materials/sky.tres" id="2_7nbq1"]
 [ext_resource type="PackedScene" uid="uid://kfvo4lrg7huc" path="res://Scenes/base_drone.tscn" id="2_mg4q0"]
 [ext_resource type="PackedScene" uid="uid://djdwfp6cfwga0" path="res://Scenes/Items/DroneRemoteLoot.tscn" id="3_22asu"]
 [ext_resource type="PackedScene" uid="uid://cdjheym03q4ok" path="res://Scenes/Drop.tscn" id="3_vm72l"]
+[ext_resource type="Material" uid="uid://dkghwq086gte4" path="res://assets/Materials/black_plastmass_material.tres" id="6_7t8sx"]
 [ext_resource type="PackedScene" uid="uid://dwdoylad3f00s" path="res://Scenes/player.tscn" id="15_vm72l"]
-[ext_resource type="PackedScene" uid="uid://l8p1552i1cd4" path="res://laptop.tscn" id="16_e8heu"]
-[ext_resource type="Script" uid="uid://db4o41je6fqbp" path="res://laptop.gd" id="17_rvswv"]
+[ext_resource type="PackedScene" uid="uid://btjeyr68qxsn7" path="res://Scenes/Objects/laptop.tscn" id="18_85qyi"]
+[ext_resource type="PackedScene" uid="uid://csit36qfxrgg7" path="res://Scenes/Objects/glass_table.tscn" id="19_iivbl"]
 [ext_resource type="Script" uid="uid://deg13n8ftofyk" path="res://StreetCam.gd" id="22_x5p1p"]
 [ext_resource type="PackedScene" uid="uid://dxtmay68ca301" path="res://UI/hud_manager.tscn" id="23_22asu"]
 [ext_resource type="PackedScene" uid="uid://dyr4si0jpc4wr" path="res://building.tscn" id="24_f1jbl"]
@@ -19,42 +20,18 @@
 [ext_resource type="Resource" uid="uid://cmjc2taikirhg" path="res://Resources/Items/tattoo_machine.tres" id="26_fkdbe"]
 [ext_resource type="PackedScene" uid="uid://cib10taw405l3" path="res://Scenes/Items/ZippoLoot.tscn" id="27_81klo"]
 
-[sub_resource type="Environment" id="Environment_i2p71"]
-background_mode = 1
-background_color = Color(0.019923339, 0.25778797, 0.3474873, 1)
-ssao_enabled = true
-ssao_radius = 7.9
-ssao_intensity = 2.21
-glow_enabled = true
-glow_levels/1 = 5.94
-glow_levels/2 = 7.19
-glow_levels/3 = 6.65
-glow_levels/4 = 0.59
-glow_levels/5 = 0.72
-glow_levels/6 = 1.8
-glow_levels/7 = 1.62
-glow_normalized = true
-glow_intensity = 7.54
-glow_strength = 1.44
-fog_enabled = true
-fog_mode = 1
-fog_light_color = Color(0.50280696, 0.8057744, 0.36752108, 1)
-fog_light_energy = 0.4
-fog_density = 0.6732
-fog_sky_affect = 0.0
-fog_height_density = 0.06
-fog_depth_curve = 1.68179
+[sub_resource type="Environment" id="Environment_7t8sx"]
+background_mode = 2
+sky = ExtResource("2_7nbq1")
+ssr_fade_in = 0.19118407
+sdfgi_use_occlusion = true
+sdfgi_read_sky_light = false
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_e2o6t"]
 size = Vector3(500, 0.335, 500)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iivbl"]
-
 [sub_resource type="QuadMesh" id="QuadMesh_feb5d"]
 size = Vector2(500, 500)
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_boyg6"]
-radius = 3.0
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_i2p71"]
 viewport_path = NodePath("OrdersPanel/OrderScreenViewport")
@@ -70,11 +47,10 @@ script = ExtResource("1_80cx4")
 metadata/_edit_horizontal_guides_ = [1235.0]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_i2p71")
+environment = SubResource("Environment_7t8sx")
 
 [node name="Base_Drone" parent="." instance=ExtResource("2_mg4q0")]
 transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 10.7188, 4.50673, -8.05474)
-move_speed = 20.0
 
 [node name="floor" type="StaticBody3D" parent="."]
 collision_mask = 7
@@ -85,69 +61,27 @@ shape = SubResource("BoxShape3D_e2o6t")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="floor"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_iivbl")
 extra_cull_margin = 0.75
 mesh = SubResource("QuadMesh_feb5d")
 skeleton = NodePath("")
+surface_material_override/0 = ExtResource("6_7t8sx")
 
 [node name="drop" parent="." instance=ExtResource("3_vm72l")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.5928, 0.300744, -7.61348)
 
-[node name="Laptop" parent="." instance=ExtResource("16_e8heu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.7007, 0.0415716, -8.0014)
-script = ExtResource("17_rvswv")
-
-[node name="Object_47" parent="Laptop/Sketchfab_model/root/GLTF_SceneRootNode/LT_Key_0" index="43"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.603882, -0.467832, -0.476501)
-
-[node name="Object_50" parent="Laptop/Sketchfab_model/root/GLTF_SceneRootNode/Plane_1" index="0"]
-visible = false
-
-[node name="Area3D" type="Area3D" parent="Laptop"]
-collision_mask = 2
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Laptop/Area3D"]
-shape = SubResource("SphereShape3D_boyg6")
-
-[node name="PromptLabel" type="Label3D" parent="Laptop"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.17174, 0.0216842)
-pixel_size = 0.004
-billboard = 1
-text = "Press [E]"
-script = ExtResource("2_feb5d")
-
-[node name="Label" type="Label" parent="Laptop/PromptLabel"]
-offset_right = 40.0
-offset_bottom = 23.0
-
 [node name="Player" parent="." instance=ExtResource("15_vm72l")]
-transform = Transform3D(0.01570728, 0, 0.9998766, 0, 1, 0, -0.9998766, 0, 0.01570728, -6.0767627, 0.013259411, 3.2020473)
+transform = Transform3D(0.9976879, 0, 0.067963146, 0, 1, 0, -0.067963146, 0, 0.9976879, 5.845911, 6.836657, 0.84254074)
 speed = 10.0
+main_player = true
 
 [node name="Player2" parent="." instance=ExtResource("15_vm72l")]
-transform = Transform3D(-0.92652863, 0, -0.37622422, 0, 1, 0, 0.37622422, 0, -0.92652863, -7.550266, 0, 2.6297648)
-speed = 5.0
+transform = Transform3D(-0.92652863, 0, -0.37622422, 0, 1, 0, 0.37622422, 0, -0.92652863, -34.48825, 0, -8.749414)
 
 [node name="Player3" parent="." instance=ExtResource("15_vm72l")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.7367067, 0, 4.4370375)
+transform = Transform3D(0.9346768, 0, 0.35549852, 0, 1, 0, -0.35549852, 0, 0.9346768, 2.8061504, 0, 14.282229)
 
 [node name="Player4" parent="." instance=ExtResource("15_vm72l")]
-transform = Transform3D(-0.9952274, 0, -0.09758282, 0, 1, 0, 0.09758282, 0, -0.9952274, -6.3745136, 0, 2.3304348)
-
-[node name="Player5" parent="." instance=ExtResource("15_vm72l")]
-transform = Transform3D(-0.9952274, 0, -0.09758282, 0, 1, 0, 0.09758282, 0, -0.9952274, -6.994008, 0.0054831505, 2.4312778)
-
-[node name="Player6" parent="." instance=ExtResource("15_vm72l")]
-transform = Transform3D(0.73372984, 0, -0.67944133, 0, 1, 0, 0.67944133, 0, 0.73372984, -7.6447973, 0, 3.3886428)
-
-[node name="Player7" parent="." instance=ExtResource("15_vm72l")]
-transform = Transform3D(0.9690157, 0, -0.24699901, 0, 1, 0, 0.24699901, 0, 0.9690157, -7.2322807, 0, 4.031763)
-
-[node name="Player8" parent="." instance=ExtResource("15_vm72l")]
-transform = Transform3D(0.49090376, 0, 0.8712138, 0, 1, 0, -0.8712138, 0, 0.49090376, -6.202308, 0, 4.068825)
-
-[node name="Player9" parent="." instance=ExtResource("15_vm72l")]
-transform = Transform3D(0.01570728, 0, 0.9998766, 0, 1, 0, -0.9998766, 0, 0.01570728, -5.722489, 0.02400726, 3.8248324)
+transform = Transform3D(-0.9952274, 0, -0.09758282, 0, 1, 0, 0.09758282, 0, -0.9952274, 2.080555, 0, -4.073665)
 
 [node name="StreetCam" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -73.4814, 0, 0)
@@ -193,14 +127,6 @@ shadow_enabled = true
 [node name="DirectionalLight3D7" type="OmniLight3D" parent="BUILDING"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.19387, 0.245415, 16.2689)
 light_color = Color(1, 0.839216, 0.231373, 1)
-shadow_enabled = true
-
-[node name="DirectionalLight3D8" type="OmniLight3D" parent="BUILDING"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.44686, 3.09842, 1.47725)
-light_color = Color(0.92091, 0.8176, 0.892648, 1)
-light_energy = 5.263
-light_indirect_energy = 6.502
-light_volumetric_fog_energy = 6.98
 shadow_enabled = true
 
 [node name="OmniLight3D" type="OmniLight3D" parent="BUILDING"]
@@ -286,6 +212,9 @@ loot_max_distance = 40.0
 [node name="Zippo" parent="." instance=ExtResource("27_81klo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1944535, 1.1937368, -3.5275044)
 
-[connection signal="body_entered" from="Laptop/Area3D" to="Laptop" method="_on_area_3d_body_entered"]
+[node name="Laptop" parent="." instance=ExtResource("18_85qyi")]
+transform = Transform3D(-0.008757875, 0, -0.027376056, 0, 0.028742803, 0, 0.027376056, 0, -0.008757875, 11.160037, 6.7387743, 4.062207)
+prompt_message = "Use Laptop"
 
-[editable path="Laptop"]
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("19_iivbl")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 11.092806, 6.0330157, 3.9165335)

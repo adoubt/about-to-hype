@@ -1,9 +1,10 @@
 extends CharacterBody3D
 class_name PlayerController
 
-@export var speed: float = 13.0
+@export var speed: float = 5.0
 @export var jump_velocity: float = 4.5
-
+##if true this player will registred as 1st player
+@export var main_player :bool =false
 @onready var camera_controller_anchor: Marker3D = $CameraControllerAnchor
 @onready var player_camera := $CameraController/Camera3D
 @onready var right_hand: BoneAttachment3D = $rigman/Armature/GeneralSkeleton/RightHandHeld
@@ -19,8 +20,10 @@ var input_enabled: bool = false
 
 func _ready() -> void:
 	ControllerManager.register(self) 
-	ControllerManager._handle_object_hotkey(name) # где name = "Player"
-	look_at_modifier_3d.target_node = default_look_at_target.get_path()
+	if main_player:
+		ControllerManager._handle_object_hotkey(name) # где name = "Player"
+	#look_at_modifier_3d.target_node = default_look_at_target.get_path()
+	#look_at_modifier_3d.target_node = NodePath("")
 func _unhandled_input(event: InputEvent) -> void:
 	if not input_enabled:
 		return
@@ -103,12 +106,15 @@ func equip_item(item : InventoryItem):
 
 
 func _on_area_3d_body_entered(body: CharacterBody3D) -> void:
-	look_at_modifier_3d.target_node = body.get_path()
+	if body.velocity.length()>0:
+		look_at_modifier_3d.target_node = body.get_path()
+
 
 	
 
 
 
 func _on_area_3d_body_exited(body: CharacterBody3D) -> void:
-	look_at_modifier_3d.target_node = default_look_at_target.get_path()
+
+	look_at_modifier_3d.target_node = NodePath("")
 	

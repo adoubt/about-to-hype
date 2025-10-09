@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://6tyxwtjt4k0f"]
+
+[node name="RigidBody3D" type="RigidBody3D"]
+mass = 0.1
+sleeping = true
+freeze = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]

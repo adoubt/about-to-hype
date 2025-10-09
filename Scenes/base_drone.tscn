@@ -1,6 +1,6 @@
 [gd_scene load_steps=147 format=4 uid="uid://kfvo4lrg7huc"]
 
-[ext_resource type="Script" uid="uid://dmdk8j6rmtauh" path="res://drone.gd" id="1_v1gsr"]
+[ext_resource type="Script" uid="uid://dmdk8j6rmtauh" path="res://Scripts/drone.gd" id="1_v1gsr"]
 [ext_resource type="Material" uid="uid://yar3t7apurl2" path="res://assets/Materials/drone_skin_1.tres" id="2_cllcg"]
 [ext_resource type="AudioStream" uid="uid://bt8wqhs8owrj7" path="res://Drone Noise Test - DJI Avata vs DJI FPV vs DJI Mavic 3 vs DJI Air 2S.mp3" id="2_ldkjq"]
 [ext_resource type="Script" uid="uid://wxb573o058my" path="res://Scripts/AudioSource3D.gd" id="3_cllcg"]
@@ -2130,11 +2130,12 @@ size = Vector3(0.274597, 0.17307279, 0.303993)
 [node name="Base_Drone" type="CharacterBody3D" groups=["controllable", "drone"]]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
 collision_layer = 2
-collision_mask = 7
+collision_mask = 23
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
 script = ExtResource("1_v1gsr")
+time_to_max_speed = 2.0
 
 [node name="Model" type="Node3D" parent="."]
 
@@ -2485,7 +2486,7 @@ target_position = Vector3(0, 0.995, 0)
 collision_mask = 3
 
 [node name="CameraPivot2" type="Node3D" parent="."]
-transform = Transform3D(1, 0, -1.4210855e-14, 0, 1, 0, 1.4210855e-14, 0, 1, 0, -0.09210045, 0)
+transform = Transform3D(1, 0, -1.4210855e-14, 0, 1, 0, 1.4210855e-14, 0, 1, -4.9723243e-09, -0.10537553, -0.05687675)
 
 [node name="Camera3D2" type="Camera3D" parent="CameraPivot2"]
 

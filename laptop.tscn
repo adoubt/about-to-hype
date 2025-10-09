@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://l8p1552i1cd4"]
-
-[ext_resource type="PackedScene" uid="uid://bc6lfresh3vsb" path="res://laptop.glb" id="1_syt5x"]
-
-[node name="Sketchfab_Scene" instance=ExtResource("1_syt5x")]
-
-[node name="Plane_1" parent="Sketchfab_model/root/GLTF_SceneRootNode" index="1"]
-visible = false

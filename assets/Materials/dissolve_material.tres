@@ -1,12 +1,30 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://cqa6keyudxhu6"]
+[gd_resource type="ShaderMaterial" load_steps=7 format=3 uid="uid://cqa6keyudxhu6"]
 
 [ext_resource type="Shader" uid="uid://uxny1qhqtpa2" path="res://assets/Shaders/dissolve_shader.gdshader" id="1_ypax7"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ypax7"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_5snax"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_muud1"]
+frequency = 0.0026
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_lougv"]
+noise = SubResource("FastNoiseLite_muud1")
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_pvyeb"]
 
 [resource]
 render_priority = 0
 shader = ExtResource("1_ypax7")
-shader_parameter/baseColor = Color(1, 1, 1, 1)
-shader_parameter/dissolveSlider = 4.7499999933364734e-08
+shader_parameter/baseColor = Color(0, 1, 1, 0.43100002)
+shader_parameter/metallic = 0.30999999307088
+shader_parameter/specular = 0.60999998636528
+shader_parameter/normalTexture = SubResource("NoiseTexture2D_lougv")
+shader_parameter/aoTexture = SubResource("NoiseTexture2D_ypax7")
+shader_parameter/heightTexture = SubResource("NoiseTexture2D_5snax")
+shader_parameter/roughnessTexture = SubResource("NoiseTexture2D_pvyeb")
+shader_parameter/dissolveSlider = -1.0
 shader_parameter/dissolveNoiseScale = 2.0
 shader_parameter/edgeNoiseScale = -4.18000013008864
 shader_parameter/edgesThickness = 0.0470000022325

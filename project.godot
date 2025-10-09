@@ -235,6 +235,7 @@ sensors/enable_magnetometer=true
 3d_physics/layer_3="Interact Objects"
 3d_physics/layer_4="Interact_atea"
 3d_physics/layer_5="Breakable"
+3d_physics/layer_6="Broken_shards"
 
 [physics]
 

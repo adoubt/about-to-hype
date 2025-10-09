@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://m33iompvqqvl" path="res://Scripts/glass_window_simple.gd" id="1_3n8pw"]
 [ext_resource type="PackedScene" uid="uid://biw81glctlbm" path="res://Scenes/Objects/glass_window_broken.tscn" id="2_qxjsr"]
-[ext_resource type="Material" uid="uid://byq0gnhhalaca" path="res://assets/Materials/low-poly_glass_table.tres" id="3_d7ei1"]
+[ext_resource type="Material" uid="uid://d4aemkxqacu0i" path="res://assets/Materials/glass_window.tres" id="3_d7ei1"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_whcl2"]
 _surfaces = [{
@@ -21,7 +21,7 @@ _surfaces = [{
 }]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qxjsr"]
-size = Vector3(0.046875, 2, 4)
+size = Vector3(0.08496094, 2.0390625, 4.068115)
 
 [node name="GlassWindowSimple" type="Node3D"]
 script = ExtResource("1_3n8pw")
@@ -32,7 +32,9 @@ transform = Transform3D(0, 1, 0, 0, 0, -1, -2, 0, 0, 0, 0, 0)
 mesh = SubResource("ArrayMesh_whcl2")
 
 [node name="Area3D" type="Area3D" parent="."]
-collision_mask = 6
+collision_layer = 16
+collision_mask = 38
+priority = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("BoxShape3D_qxjsr")

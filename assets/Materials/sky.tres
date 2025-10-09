@@ -1,0 +1,60 @@
+[gd_resource type="Sky" load_steps=12 format=3 uid="uid://chle3jp3mirl1"]
+
+[ext_resource type="Shader" uid="uid://o3sk84snka5c" path="res://assets/Shaders/sky_shader.gdshader" id="1_yx6jq"]
+[ext_resource type="Texture2D" uid="uid://c2f5ngxstvtfs" path="res://assets/pics/planet.PNG" id="2_eecqt"]
+[ext_resource type="Texture2D" uid="uid://dsxmxbelw60bh" path="res://assets/shader_pics/white-lens-flare-11552154625amxuji8fmt.jpg" id="3_almpf"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_exi56"]
+noise_type = 0
+fractal_octaves = 2
+fractal_weighted_strength = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_7t8sx"]
+noise = SubResource("FastNoiseLite_exi56")
+normalize = false
+
+[sub_resource type="Gradient" id="Gradient_exi56"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_mg4q0"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_exi56"]
+noise = SubResource("FastNoiseLite_mg4q0")
+color_ramp = SubResource("Gradient_exi56")
+normalize = false
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_yx6jq"]
+frequency = 0.0026
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_mg4q0"]
+width = 1024
+height = 1024
+noise = SubResource("FastNoiseLite_yx6jq")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7nbq1"]
+shader = ExtResource("1_yx6jq")
+shader_parameter/cloud_shape_sampler = SubResource("NoiseTexture2D_mg4q0")
+shader_parameter/cloud_noise_sampler = SubResource("NoiseTexture2D_exi56")
+shader_parameter/cloud_curves = SubResource("NoiseTexture2D_7t8sx")
+shader_parameter/clouds_samples = 32
+shader_parameter/shadow_sample = 1
+shader_parameter/clouds_density = 0.5
+shader_parameter/clouds_scale = 1.0
+shader_parameter/clouds_smoothness = 0.0999999977648
+shader_parameter/clouds_light_color = Color(0.86467505, 0.86467516, 0.864675, 1)
+shader_parameter/clouds_shadow_intensity = 2.5000000372530002
+shader_parameter/high_clouds_density = 0.0
+shader_parameter/top_color = Color(0.17819098, 0, 0.23164421, 1)
+shader_parameter/bottom_color = Color(1.2333506e-07, 0, 0.17081833, 1)
+shader_parameter/sun_scatter = Color(1.92523e-07, 0.21906352, 0.30264446, 1)
+shader_parameter/astro_tint = Color(0.9978896, 0.9943711, 0.99770576, 1)
+shader_parameter/astro_sampler = ExtResource("2_eecqt")
+shader_parameter/astro_scale = 0.10000000149012
+shader_parameter/astro_intensity = 2.20000001788144
+shader_parameter/stars_intensity = 5.0
+shader_parameter/shooting_stars_intensity = 1.20000001788144
+shader_parameter/shooting_star_sampler = ExtResource("3_almpf")
+shader_parameter/shooting_star_tint = Color(1, 1, 0, 1)
+
+[resource]
+sky_material = SubResource("ShaderMaterial_7nbq1")

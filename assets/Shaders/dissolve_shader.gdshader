@@ -1,6 +1,7 @@
 shader_type spatial;
-render_mode blend_mix, depth_draw_opaque, cull_disabled, diffuse_lambert, specular_schlick_ggx;
+render_mode blend_mix, depth_draw_always, cull_disabled;
 
+//render_mode blend_mix, depth_draw_opaque, cull_disabled, diffuse_lambert, specular_schlick_ggx;
 // Varyings
 varying vec3 worldPos;
 varying vec3 localPos;
@@ -8,8 +9,16 @@ varying vec2 uv;
 
 // Group: Base Color
 group_uniforms base_color;
-uniform vec4 baseColor : source_color = vec4(1.0);
+
+uniform vec4 baseColor : source_color = vec4(1.0, 1.0, 1.0, 1.0);
+//uniform float baseTransp : hint_range(0.0, 1.0) = 0.5;
 uniform sampler2D baseColorTexture : source_color;
+
+// Group: Metalness
+group_uniforms metalness;
+uniform float metallic : hint_range(0.0, 1.0, 0.01) = 0.0;
+uniform float specular : hint_range(0.0, 1.0, 0.01) = 0.5;
+
 
 // Group: Extra Maps
 group_uniforms extra_maps;
@@ -20,7 +29,7 @@ uniform sampler2D roughnessTexture : hint_default_white;
 
 // Group: Dissolve
 group_uniforms dissolve;
-uniform float dissolveSlider : hint_range(-1.0, 1.5) = 0.0;
+uniform float dissolveSlider : hint_range(-1.0, 1.5) = -1.0;
 uniform float dissolveNoiseScale = 2.0;
 
 // Group: Edges
@@ -157,7 +166,12 @@ void fragment() {
     vec3 edgeEmission = edgeMask * edgeColor.rgb * edgeEmissionSlider;
 
     ALBEDO = albedoColor.rgb;
-    ALPHA = dissolveFactor;
+    //ALPHA = dissolveFactor;
+	ALPHA = baseColor.a * dissolveFactor;
+
     EMISSION = edgeEmission;
-    ALPHA_SCISSOR_THRESHOLD = 0.5;
+    //ALPHA_SCISSOR_THRESHOLD = 0.5;
+	// Metalness and Specular
+	METALLIC = metallic;
+	SPECULAR = specular;
 }
